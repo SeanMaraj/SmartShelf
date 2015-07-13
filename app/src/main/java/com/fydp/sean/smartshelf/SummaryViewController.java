@@ -12,13 +12,12 @@ import android.view.ViewGroup;
  */
 public class SummaryViewController extends Fragment{
 
-    View rootView;
+    View rootView = null;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        rootView = inflater.inflate()
-        return super.onCreateView(inflater, container, savedInstanceState);
+        rootView = inflater.inflate(R.layout.view_summary, container, false);
+        return rootView;
     }
 }

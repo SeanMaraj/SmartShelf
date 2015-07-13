@@ -56,7 +56,16 @@ public class MainActivity extends ActionBarActivity
         switch(position)
         {
             case 0:
-                fragment = new Test();
+                fragment = new SummaryViewController();
+                break;
+            case 1:
+                fragment = new ZonesViewController();
+                break;
+            case 2:
+                fragment = new EventsViewController();
+                break;
+            case 3:
+                fragment = new WeatherViewController();
                 break;
         }
 
