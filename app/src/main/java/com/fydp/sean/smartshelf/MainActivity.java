@@ -5,18 +5,18 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+
+import com.fydp.sean.smartshelf.Controllers.EventsViewController;
+import com.fydp.sean.smartshelf.Controllers.SummaryViewController;
+import com.fydp.sean.smartshelf.Controllers.WeatherViewController;
+import com.fydp.sean.smartshelf.Controllers.ZonesViewController;
 
 
 public class MainActivity extends ActionBarActivity
@@ -57,17 +57,23 @@ public class MainActivity extends ActionBarActivity
         {
             case 0:
                 fragment = new SummaryViewController();
+                mTitle = "Summary";
                 break;
             case 1:
                 fragment = new ZonesViewController();
+                mTitle = "Zones";
                 break;
             case 2:
                 fragment = new EventsViewController();
+                mTitle = "Events";
                 break;
             case 3:
                 fragment = new WeatherViewController();
+                mTitle = "Weather";
                 break;
         }
+
+        getSupportActionBar().setTitle(mTitle);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
