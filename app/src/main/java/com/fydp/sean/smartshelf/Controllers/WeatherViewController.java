@@ -33,13 +33,13 @@ public class WeatherViewController extends Fragment {
     private void getData() {
 
         TextView view = (TextView)rootView.findViewById(R.id.weatherText);
+        String url = "http://ip.jsontest.com/";
         String result = "";
-        String login_url = "http://10.0.2.2/webapp/login.php";
 
         DataFetcher df = new DataFetcher();
 
         try {
-            result = df.execute(login_url).get();
+            result = df.execute(url).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
