@@ -3,6 +3,7 @@ package com.fydp.sean.smartshelf.Controllers;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,20 +36,20 @@ public class ZonesViewController extends Fragment {
     ArrayList<Integer> percentages = new ArrayList<Integer>();
     ArrayList<Integer> initialWeights = new ArrayList<Integer>();
 
+    //FAKE DATA
+    int[] zoneNumberss = {1,2,3,4};
+    String[] itemNamess = {"Sugar", "Flour", "Bolts", "Nuts"};
+    int[] percentagess = {25,8,80,50};
+    int[] initialWeightss = {100, 200, 62, 400};
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         rootView = inflater.inflate(R.layout.view_zones, container, false);
         zoneListView = (ListView)rootView.findViewById(R.id.zoneList);
 
-/*
-        int[] zoneNumberss = {1,2,3,4};
-        String[] itemNames = {"Sugar", "Flour", "Bolts", "Nuts"};
-        int[] percentages = {25,8,80,50};
-        int[] initialWeights = {100, 200, 62, 400};
-*/
-
-        getData();
+        //getData();
 
         adaptor = new ZoneAdaptor(getActivity(), R.layout.row_zone);
         zoneListView.setAdapter(adaptor);
@@ -59,10 +60,10 @@ public class ZonesViewController extends Fragment {
     }
 
     private void populateList() {
-        for (int i=0; i<zoneNumbers.size(); i++)
+        for (int i=0; i<zoneNumberss.length; i++)
         {
-            //ZoneModel zone = new ZoneModel(zoneNumberss[i], itemNames[i], percentages[i], initialWeights[i]);
-            ZoneModel zone = new ZoneModel(zoneNumbers.get(i), itemNames.get(i), percentages.get(i), initialWeights.get(i));
+            ZoneModel zone = new ZoneModel(zoneNumberss[i], itemNamess[i], percentagess[i], initialWeightss[i]); //FAKE ZONE
+           // ZoneModel zone = new ZoneModel(zoneNumbers.get(i), itemNames.get(i), percentages.get(i), initialWeights.get(i));
             adaptor.add(zone);
         }
     }
@@ -71,6 +72,17 @@ public class ZonesViewController extends Fragment {
         zoneListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Fragment fragment = new ZoneEditController();
+
+                Bundle args = new Bundle();
+                args.putInt("position", position);
+                fragment.setArguments(args);
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, fragment)
+                        .commit();
 
             }
         });
