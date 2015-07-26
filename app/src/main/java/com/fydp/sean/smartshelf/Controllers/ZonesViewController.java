@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,12 +30,13 @@ public class ZonesViewController extends Fragment {
 
     View rootView = null;
     ListView zoneListView;
+    Button addZone;
     ZoneAdaptor adaptor;
 
     ArrayList<Integer> zoneNumbers = new ArrayList<Integer>();
     ArrayList<String> itemNames = new ArrayList<String>();
-    ArrayList<Integer> percentages = new ArrayList<Integer>();
-    ArrayList<Integer> initialWeights = new ArrayList<Integer>();
+    ArrayList<Float> initialWeights = new ArrayList<Float>();
+    ArrayList<Float> currentWeights = new ArrayList<Float>();
 
     //FAKE DATA
     int[] zoneNumberss = {1,2,3,4};
@@ -48,11 +50,13 @@ public class ZonesViewController extends Fragment {
 
         rootView = inflater.inflate(R.layout.view_zones, container, false);
         zoneListView = (ListView)rootView.findViewById(R.id.zoneList);
+        addZone = (Button)rootView.findViewById(R.id.addZoneBtn);
 
         getData();
 
         adaptor = new ZoneAdaptor(getActivity(), R.layout.row_zone);
         zoneListView.setAdapter(adaptor);
+
         setOnItemClick();
         populateList();
 
@@ -60,10 +64,14 @@ public class ZonesViewController extends Fragment {
     }
 
     private void populateList() {
+
+        adaptor.clear();
+        adaptor.notifyDataSetChanged();
+
         for (int i=0; i<zoneNumbers.size(); i++)
         {
             //ZoneModel zone = new ZoneModel(zoneNumberss[i], itemNamess[i], percentagess[i], initialWeightss[i]); //FAKE ZONE
-            ZoneModel zone = new ZoneModel(zoneNumbers.get(i), itemNames.get(i), percentages.get(i), initialWeights.get(i));
+            ZoneModel zone = new ZoneModel(zoneNumbers.get(i), itemNames.get(i), currentWeights.get(i), initialWeights.get(i));
             adaptor.add(zone);
         }
     }
@@ -78,13 +86,14 @@ public class ZonesViewController extends Fragment {
                 Bundle args = new Bundle();
                 args.putInt("position", position);
                 args.putString("itemName", itemNames.get(position));
-                args.putInt("initialWeight", initialWeights.get(position));
+                args.putFloat("initialWeight", initialWeights.get(position));
 
                 fragment.setArguments(args);
 
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, fragment)
+                        .addToBackStack(null)
                         .commit();
 
             }
@@ -108,37 +117,24 @@ public class ZonesViewController extends Fragment {
     }
 
     private void parseResult(String result) {
+        zoneNumbers.clear();
+        itemNames.clear();
+        currentWeights.clear();
+        initialWeights.clear();
+
         try{
             JSONArray zones = new JSONArray(result);
 
             for (int i=0; i<zones.length(); i++)
             {
-                int currentWeight = zones.getJSONObject(i).getInt("weight");
-                int initialWeight = zones.getJSONObject(i).getInt("initialweight");
-                int percentage = getPercentage(currentWeight, initialWeight);
-
                 zoneNumbers.add(zones.getJSONObject(i).getInt("id"));
                 itemNames.add(zones.getJSONObject(i).getString("desc"));
-                initialWeights.add(currentWeight);
-                percentages.add(percentage);
+                initialWeights.add((float)(zones.getJSONObject(i).getDouble("initialweight")));
+                currentWeights.add((float)zones.getJSONObject(i).getDouble("weight"));
             }
 
         }catch (JSONException e){
             e.printStackTrace();
-        }
-    }
-
-    private int getPercentage(int currentWeight, int initialWeight)
-    {
-        if (initialWeight == 0) { return 0; }
-
-        if (currentWeight >= initialWeight)
-        {
-            return 100;
-        }
-        else
-        {
-            return (int)(((float)currentWeight/(float)initialWeight)*100);
         }
     }
 }
