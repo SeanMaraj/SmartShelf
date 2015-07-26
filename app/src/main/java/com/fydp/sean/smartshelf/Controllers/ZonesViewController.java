@@ -49,7 +49,7 @@ public class ZonesViewController extends Fragment {
         rootView = inflater.inflate(R.layout.view_zones, container, false);
         zoneListView = (ListView)rootView.findViewById(R.id.zoneList);
 
-        //getData();
+        getData();
 
         adaptor = new ZoneAdaptor(getActivity(), R.layout.row_zone);
         zoneListView.setAdapter(adaptor);
@@ -60,10 +60,10 @@ public class ZonesViewController extends Fragment {
     }
 
     private void populateList() {
-        for (int i=0; i<zoneNumberss.length; i++)
+        for (int i=0; i<zoneNumbers.size(); i++)
         {
-            ZoneModel zone = new ZoneModel(zoneNumberss[i], itemNamess[i], percentagess[i], initialWeightss[i]); //FAKE ZONE
-           // ZoneModel zone = new ZoneModel(zoneNumbers.get(i), itemNames.get(i), percentages.get(i), initialWeights.get(i));
+            //ZoneModel zone = new ZoneModel(zoneNumberss[i], itemNamess[i], percentagess[i], initialWeightss[i]); //FAKE ZONE
+            ZoneModel zone = new ZoneModel(zoneNumbers.get(i), itemNames.get(i), percentages.get(i), initialWeights.get(i));
             adaptor.add(zone);
         }
     }
@@ -77,6 +77,9 @@ public class ZonesViewController extends Fragment {
 
                 Bundle args = new Bundle();
                 args.putInt("position", position);
+                args.putString("itemName", itemNames.get(position));
+                args.putInt("initialWeight", initialWeights.get(position));
+
                 fragment.setArguments(args);
 
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -138,5 +141,4 @@ public class ZonesViewController extends Fragment {
             return (int)(((float)currentWeight/(float)initialWeight)*100);
         }
     }
-
 }
