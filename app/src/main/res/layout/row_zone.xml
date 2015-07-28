@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="100%"
-                android:id="@+id/percentText"
+                android:id="@+id/currentWeightText"
                 android:layout_toLeftOf="@+id/weightDivider"/>
 
             <View
