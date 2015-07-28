@@ -1,6 +1,7 @@
 package com.fydp.sean.smartshelf;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.Toast;
 
 import com.fydp.sean.smartshelf.Controllers.EventsViewController;
 import com.fydp.sean.smartshelf.Controllers.SummaryViewController;
@@ -75,9 +77,14 @@ public class MainActivity extends ActionBarActivity
 
         getSupportActionBar().setTitle(mTitle);
 
+        setFragment(fragment);
+    }
+
+    private void setFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
+                .replace(R.id.container, fragment, "currentFragment")
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -128,7 +135,22 @@ public class MainActivity extends ActionBarActivity
             return true;
         }
 
+        if (id == R.id.action_refresh){
+            refreshFragment();
+        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    private void refreshFragment()
+    {
+        Fragment f = getSupportFragmentManager().findFragmentByTag("currentFragment");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.detach(f);
+        ft.attach(f);
+        ft.commit();
+
+        Toast.makeText(getApplicationContext(), "Refresh Complete", Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -168,6 +190,16 @@ public class MainActivity extends ActionBarActivity
             super.onAttach(activity);
             ((MainActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
+        }
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            this.finish();
+        } else {
+            getSupportFragmentManager().popBackStack();
         }
     }
 

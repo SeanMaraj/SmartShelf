@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.provider.Telephony;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +80,7 @@ public class ZoneEditController extends Fragment {
     private void populateView()
     {
         int zoneNumber = getArguments().getInt("position") + 1;
-        int initialWeight = getArguments().getInt("initialWeight");
+        float initialWeight = getArguments().getFloat("initialWeight");
         zoneNumberText.setText("Zone Number: " + zoneNumber);
         zoneNameEdit.setText(getArguments().getString("itemName"));
         weightEdit.setText("" + initialWeight);
@@ -102,7 +103,7 @@ public class ZoneEditController extends Fragment {
         String zoneName = zoneNameEdit.getText().toString();
         String initialWeight = weightEdit.getText().toString();
 
-        String sendWeightUrl = "http://99.236.1.225:5001/updateweight/"+baseId+"/"+zoneId+"/"+initialWeight+"/";
+        String sendWeightUrl = "http://99.236.1.225:5001/updateinitialweight/"+baseId+"/"+zoneId+"/"+initialWeight+"/";
         String sendNameUrl = "http://99.236.1.225:5001/updatedescription/"+baseId+"/"+zoneId+"/"+zoneName+"/";
 
         //DataSender ds = new DataSender();

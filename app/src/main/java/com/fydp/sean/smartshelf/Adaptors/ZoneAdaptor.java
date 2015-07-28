@@ -59,18 +59,18 @@ public class ZoneAdaptor extends ArrayAdapter {
         ZoneModel zone = (ZoneModel)list.get(position);
         ((TextView)row.findViewById(R.id.zoneNumberText)).setText(""+zone.getZoneNumber());
         ((TextView)row.findViewById(R.id.zoneNameText)).setText(zone.getZoneName());
-        ((TextView)row.findViewById(R.id.initialWeightText)).setText("" + zone.getInitialWeight() + "g");
-        TextView percentView = ((TextView)row.findViewById(R.id.percentText));
-        int percent = zone.getPercentage();
-        setPercentage(percentView, percent);
+        ((TextView)row.findViewById(R.id.initialWeightText)).setText("" + zone.getInitialWeight() + "kg");
+        TextView currentWeightText = ((TextView)row.findViewById(R.id.currentWeightText));
+        currentWeightText.setText(""+zone.getCurrentWeight() + "kg");
 
+        float percent = zone.getPercentage();
+        setCurrentWeightColor(currentWeightText, percent);
 
         return row;
     }
 
-    void setPercentage(TextView view, int percent)
+    void setCurrentWeightColor(TextView view, float percent)
     {
-        view.setText("" + percent + "%");
         if(percent <= 10)
         {
             view.setTextColor(Color.RED);
@@ -81,6 +81,5 @@ public class ZoneAdaptor extends ArrayAdapter {
         {
             view.setTextColor(Color.GREEN);
         }
-
     }
 }
