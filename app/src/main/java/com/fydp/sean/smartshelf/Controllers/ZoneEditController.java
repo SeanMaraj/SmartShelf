@@ -5,6 +5,7 @@ import android.provider.Telephony;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ public class ZoneEditController extends Fragment {
     View rootView = null;
     CheckBox stockCheck;
     RelativeLayout setWeightLayout;
-    EditText zoneNameEdit;
+    TextView zoneNameEdit;
     TextView zoneNumberText;
     TextView baseNumberText;
     EditText weightEdit;
@@ -42,7 +43,7 @@ public class ZoneEditController extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.view_zoneedit, container, false);
         setWeightLayout = (RelativeLayout)rootView.findViewById(R.id.setWeightLayout);
-        zoneNameEdit = (EditText)rootView.findViewById(R.id.zoneNameEdit);
+        zoneNameEdit = (TextView)rootView.findViewById(R.id.zoneNameText);
         zoneNumberText = (TextView)rootView.findViewById(R.id.zoneNumberText);
         baseNumberText = (TextView)rootView.findViewById(R.id.baseNumberText);
         weightEdit = (EditText)rootView.findViewById(R.id.initWeightEdit);
@@ -63,7 +64,7 @@ public class ZoneEditController extends Fragment {
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                applyButtonTapped(v);
+                onApplyButton(v);
             }
         });
 
@@ -93,7 +94,7 @@ public class ZoneEditController extends Fragment {
         }
     }
 
-    private void applyButtonTapped(View v)
+    private void onApplyButton(View v)
     {
         //TODO: handle spaces in zone names
 
@@ -125,6 +126,10 @@ public class ZoneEditController extends Fragment {
         }
 
         Toast.makeText(getActivity().getApplicationContext(), "Update Successful", Toast.LENGTH_SHORT).show();
+    }
 
+    private void editName(View v)
+    {
+       // Log.d("t", "here");
     }
 }

@@ -28,6 +28,8 @@ import java.util.concurrent.ExecutionException;
  */
 public class ZonesViewController extends Fragment {
 
+    boolean offline = true;
+
     View rootView = null;
     ListView zoneListView;
     Button addZone;
@@ -52,7 +54,7 @@ public class ZonesViewController extends Fragment {
         zoneListView = (ListView)rootView.findViewById(R.id.zoneList);
         addZone = (Button)rootView.findViewById(R.id.addZoneBtn);
 
-        getData();
+        //getData();
 
         adaptor = new ZoneAdaptor(getActivity(), R.layout.row_zone);
         zoneListView.setAdapter(adaptor);
@@ -68,11 +70,19 @@ public class ZonesViewController extends Fragment {
         adaptor.clear();
         adaptor.notifyDataSetChanged();
 
-        for (int i=0; i<zoneNumbers.size(); i++)
+        if (!offline)
         {
-            //ZoneModel zone = new ZoneModel(zoneNumberss[i], itemNamess[i], percentagess[i], initialWeightss[i]); //FAKE ZONE
-            ZoneModel zone = new ZoneModel(zoneNumbers.get(i), itemNames.get(i), currentWeights.get(i), initialWeights.get(i));
-            adaptor.add(zone);
+            for (int i=0; i<zoneNumberss.length; i++)
+            {
+                ZoneModel zone = new ZoneModel(zoneNumbers.get(i), itemNames.get(i), currentWeights.get(i), initialWeights.get(i));
+                adaptor.add(zone);
+            }
+        }else{
+            for (int i=0; i<zoneNumberss.length; i++)
+            {
+                ZoneModel zone = new ZoneModel(zoneNumberss[i], itemNamess[i], percentagess[i], initialWeightss[i]); //FAKE ZONE
+                adaptor.add(zone);
+            }
         }
     }
 
@@ -84,9 +94,17 @@ public class ZonesViewController extends Fragment {
                 Fragment fragment = new ZoneEditController();
 
                 Bundle args = new Bundle();
-                args.putInt("position", position);
-                args.putString("itemName", itemNames.get(position));
-                args.putFloat("initialWeight", initialWeights.get(position));
+                if (!offline)
+                {
+                    args.putInt("position", position);
+                    args.putString("itemName", itemNames.get(position));
+                    args.putFloat("initialWeight", initialWeights.get(position));
+                }else{
+                    args.putInt("position", position);
+                    args.putString("itemName", itemNamess[position]);
+                    args.putFloat("initialWeight", initialWeightss[position]);
+                }
+
 
                 fragment.setArguments(args);
 

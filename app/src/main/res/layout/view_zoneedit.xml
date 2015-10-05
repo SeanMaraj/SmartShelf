@@ -8,22 +8,31 @@
     android:paddingRight="20dp"
     android:paddingBottom="0dp">
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:paddingTop="5dp"
         android:paddingBottom="10dp"
-        android:layout_height="match_parent">
+        android:layout_height="50dp">
 
-        <EditText
+        <TextView
+            android:text="Zone Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/zoneNameEdit"
+            android:id="@+id/zoneNameText"
             android:layout_weight="1"
-            android:hint="&lt;Set Item Name>"
             android:textSize="30dp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:textStyle="bold"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/edit"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:onClick="editName"/>
+
+    </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -111,6 +120,6 @@
         android:text="APPLY"
         android:id="@+id/applyBtn"
         android:layout_gravity="right"
-        android:onClick="applyButtonTapped"/>
+        android:onClick="onApplyButton"/>
 
 </LinearLayout>

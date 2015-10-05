@@ -6,7 +6,7 @@
     android:id="@+id/zoneItemLayout">
 
     <TextView
-        android:layout_width="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="1"
@@ -26,13 +26,6 @@
         android:layout_toRightOf="@id/zoneNumberText" />
 
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="115dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:gravity="center_horizontal">
-
         <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -51,7 +44,7 @@
                 android:layout_height="20dp"
                 android:id="@+id/weightDivider"
                 android:background="#FFFFFF"
-                android:layout_centerHorizontal="true"
+                android:layout_toLeftOf="@+id/initialWeightText"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp" />
 
@@ -61,10 +54,10 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="5000g"
                 android:id="@+id/initialWeightText"
-                android:layout_toRightOf="@+id/weightDivider" />
+                android:layout_alignParentRight="true" />
 
         </RelativeLayout>
-    </LinearLayout>
+
 
 
 </RelativeLayout>
