@@ -13,11 +13,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fydp.sean.smartshelf.DataFetcher;
+import com.fydp.sean.smartshelf.Libraries.Utility;
 import com.fydp.sean.smartshelf.R;
 
 import org.w3c.dom.Text;
@@ -29,6 +31,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class ZoneEditController extends Fragment {
 
+    Utility u = new Utility();
     View rootView = null;
     CheckBox stockCheck;
     RelativeLayout setWeightLayout;
@@ -37,11 +40,13 @@ public class ZoneEditController extends Fragment {
     TextView baseNumberText;
     EditText weightEdit;
     Button applyButton;
+    ImageView editNameImage;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.view_zoneedit, container, false);
+
         setWeightLayout = (RelativeLayout)rootView.findViewById(R.id.setWeightLayout);
         zoneNameEdit = (TextView)rootView.findViewById(R.id.zoneNameText);
         zoneNumberText = (TextView)rootView.findViewById(R.id.zoneNumberText);
@@ -49,7 +54,16 @@ public class ZoneEditController extends Fragment {
         weightEdit = (EditText)rootView.findViewById(R.id.initWeightEdit);
         applyButton = (Button)rootView.findViewById((R.id.applyBtn));
         stockCheck = (CheckBox)rootView.findViewById(R.id.monitorStockCheck);
+        editNameImage = (ImageView)rootView.findViewById(R.id.editNameImage);
 
+        setListeners();
+        getData();
+
+        return rootView;
+    }
+
+    private void setListeners()
+    {
         stockCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -68,9 +82,12 @@ public class ZoneEditController extends Fragment {
             }
         });
 
-        getData();
-
-        return rootView;
+        editNameImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editName(v);
+            }
+        });
     }
 
     private void getData()
@@ -130,6 +147,6 @@ public class ZoneEditController extends Fragment {
 
     private void editName(View v)
     {
-       // Log.d("t", "here");
+       u.print("HELLO WORLD!");
     }
 }
