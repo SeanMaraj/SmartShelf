@@ -30,8 +30,7 @@
             android:layout_height="30dp"
             android:src="@drawable/edit"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:onClick="editName"/>
+            android:layout_centerVertical="true"/>
 
     </RelativeLayout>
 
@@ -120,7 +119,6 @@
         android:layout_height="wrap_content"
         android:text="APPLY"
         android:id="@+id/applyBtn"
-        android:layout_gravity="right"
-        android:onClick="onApplyButton"/>
+        android:layout_gravity="right"/>
 
 </LinearLayout>
