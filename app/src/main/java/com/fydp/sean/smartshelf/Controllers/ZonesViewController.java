@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.fydp.sean.smartshelf.Adaptors.ZoneAdaptor;
 import com.fydp.sean.smartshelf.DataFetcher;
+import com.fydp.sean.smartshelf.Libraries.Utility;
 import com.fydp.sean.smartshelf.Models.ZoneModel;
 import com.fydp.sean.smartshelf.R;
 
@@ -26,10 +28,8 @@ import java.util.concurrent.ExecutionException;
 /**
  * Created by Sean on 2015-07-12.
  */
-public class ZonesViewController extends Fragment {
-
-    boolean offline = true;
-
+public class ZonesViewController extends Fragment
+{
     View rootView = null;
     ListView zoneListView;
     Button addZone;
@@ -41,20 +41,20 @@ public class ZonesViewController extends Fragment {
     ArrayList<Float> currentWeights = new ArrayList<Float>();
 
     //FAKE DATA
-    int[] zoneNumberss = {1,2,3,4};
+    int[] zoneNumberss = {1, 2, 3, 4};
     String[] itemNamess = {"Sugar", "Flour", "Bolts", "Nuts"};
-    int[] percentagess = {25,8,80,50};
+    int[] percentagess = {25, 8, 80, 50};
     int[] initialWeightss = {100, 200, 62, 400};
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         rootView = inflater.inflate(R.layout.view_zones, container, false);
-        zoneListView = (ListView)rootView.findViewById(R.id.zoneList);
-        addZone = (Button)rootView.findViewById(R.id.addZoneBtn);
+        zoneListView = (ListView) rootView.findViewById(R.id.zoneList);
+        addZone = (Button) rootView.findViewById(R.id.addZoneBtn);
 
-        //getData();
+        getData();
 
         adaptor = new ZoneAdaptor(getActivity(), R.layout.row_zone);
         zoneListView.setAdapter(adaptor);
@@ -65,20 +65,22 @@ public class ZonesViewController extends Fragment {
         return rootView;
     }
 
-    private void populateList() {
-
+    private void populateList()
+    {
+        Log.d("Log", "Populating list");
         adaptor.clear();
         adaptor.notifyDataSetChanged();
 
-        if (!offline)
+        if (Utility.create().isOnline())
         {
-            for (int i=0; i<zoneNumberss.length; i++)
+            for (int i = 0; i < zoneNumberss.length; i++)
             {
                 ZoneModel zone = new ZoneModel(zoneNumbers.get(i), itemNames.get(i), currentWeights.get(i), initialWeights.get(i));
                 adaptor.add(zone);
             }
-        }else{
-            for (int i=0; i<zoneNumberss.length; i++)
+        } else
+        {
+            for (int i = 0; i < zoneNumberss.length; i++)
             {
                 ZoneModel zone = new ZoneModel(zoneNumberss[i], itemNamess[i], percentagess[i], initialWeightss[i]); //FAKE ZONE
                 adaptor.add(zone);
@@ -86,20 +88,25 @@ public class ZonesViewController extends Fragment {
         }
     }
 
-    private void setOnItemClick() {
-        zoneListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    private void setOnItemClick()
+    {
+        Log.d("Log", "Setting item clicks");
+        zoneListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
 
                 Fragment fragment = new ZoneEditController();
 
                 Bundle args = new Bundle();
-                if (!offline)
+                if (Utility.create().isOnline())
                 {
                     args.putInt("position", position);
                     args.putString("itemName", itemNames.get(position));
                     args.putFloat("initialWeight", initialWeights.get(position));
-                }else{
+                } else
+                {
                     args.putInt("position", position);
                     args.putString("itemName", itemNamess[position]);
                     args.putFloat("initialWeight", initialWeightss[position]);
@@ -118,40 +125,48 @@ public class ZonesViewController extends Fragment {
         });
     }
 
-    private void getData() {
-        String url = "http://99.236.1.225:5001/getzones/1";
+    private void getData()
+    {
+        Log.d("Log", "Getting data");
+        String url = "http://99.235.222.196:5001//getzones/1";
         String result = "";
         DataFetcher df = new DataFetcher();
 
-        try {
+        try
+        {
             result = df.execute(url).get();
-        } catch (InterruptedException e) {
+        } catch (InterruptedException e)
+        {
             e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (ExecutionException e)
+        {
             e.printStackTrace();
         }
 
         parseResult(result);
     }
 
-    private void parseResult(String result) {
+    private void parseResult(String result)
+    {
         zoneNumbers.clear();
         itemNames.clear();
         currentWeights.clear();
         initialWeights.clear();
 
-        try{
+        try
+        {
             JSONArray zones = new JSONArray(result);
 
-            for (int i=0; i<zones.length(); i++)
+            for (int i = 0; i < zones.length(); i++)
             {
                 zoneNumbers.add(zones.getJSONObject(i).getInt("id"));
                 itemNames.add(zones.getJSONObject(i).getString("desc"));
-                initialWeights.add((float)(zones.getJSONObject(i).getDouble("initialweight")));
-                currentWeights.add((float)zones.getJSONObject(i).getDouble("weight"));
+                initialWeights.add((float) (zones.getJSONObject(i).getDouble("initialweight")));
+                currentWeights.add((float) zones.getJSONObject(i).getDouble("weight"));
             }
 
-        }catch (JSONException e){
+        } catch (JSONException e)
+        {
             e.printStackTrace();
         }
     }

@@ -29,9 +29,8 @@ import java.util.concurrent.ExecutionException;
 /**
  * Created by Sean on 2015-07-23.
  */
-public class ZoneEditController extends Fragment {
-
-    Utility u = new Utility();
+public class ZoneEditController extends Fragment
+{
     View rootView = null;
     CheckBox stockCheck;
     RelativeLayout setWeightLayout;
@@ -44,17 +43,18 @@ public class ZoneEditController extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         rootView = inflater.inflate(R.layout.view_zoneedit, container, false);
 
-        setWeightLayout = (RelativeLayout)rootView.findViewById(R.id.setWeightLayout);
-        zoneNameEdit = (TextView)rootView.findViewById(R.id.zoneNameText);
-        zoneNumberText = (TextView)rootView.findViewById(R.id.zoneNumberText);
-        baseNumberText = (TextView)rootView.findViewById(R.id.baseNumberText);
-        weightEdit = (EditText)rootView.findViewById(R.id.initWeightEdit);
-        applyButton = (Button)rootView.findViewById((R.id.applyBtn));
-        stockCheck = (CheckBox)rootView.findViewById(R.id.monitorStockCheck);
-        editNameImage = (ImageView)rootView.findViewById(R.id.editNameImage);
+        setWeightLayout = (RelativeLayout) rootView.findViewById(R.id.setWeightLayout);
+        zoneNameEdit = (TextView) rootView.findViewById(R.id.zoneNameText);
+        zoneNumberText = (TextView) rootView.findViewById(R.id.zoneNumberText);
+        baseNumberText = (TextView) rootView.findViewById(R.id.baseNumberText);
+        weightEdit = (EditText) rootView.findViewById(R.id.initWeightEdit);
+        applyButton = (Button) rootView.findViewById((R.id.applyBtn));
+        stockCheck = (CheckBox) rootView.findViewById(R.id.monitorStockCheck);
+        editNameImage = (ImageView) rootView.findViewById(R.id.editNameImage);
 
         setListeners();
         getData();
@@ -64,27 +64,36 @@ public class ZoneEditController extends Fragment {
 
     private void setListeners()
     {
-        stockCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        stockCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!isChecked) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if (!isChecked)
+                {
                     setWeightLayout.setVisibility(View.GONE);
-                } else if (isChecked) {
+                } else if (isChecked)
+                {
                     setWeightLayout.setVisibility(View.VISIBLE);
                 }
             }
         });
 
-        applyButton.setOnClickListener(new View.OnClickListener() {
+        applyButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 onApplyButton(v);
+
             }
         });
 
-        editNameImage.setOnClickListener(new View.OnClickListener() {
+        editNameImage.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 editName(v);
             }
         });
@@ -103,10 +112,11 @@ public class ZoneEditController extends Fragment {
         zoneNameEdit.setText(getArguments().getString("itemName"));
         weightEdit.setText("" + initialWeight);
 
-        if (initialWeight>0)
+        if (initialWeight > 0)
         {
             stockCheck.setChecked(true);
-        }else{
+        } else
+        {
             stockCheck.setChecked(false);
         }
     }
@@ -117,28 +127,25 @@ public class ZoneEditController extends Fragment {
 
 
         String baseId = "1"; //TODO: get real value
-        String zoneId = ""+(getArguments().getInt("position") + 1);
+        String zoneId = "" + (getArguments().getInt("position") + 1);
         String zoneName = zoneNameEdit.getText().toString();
         String initialWeight = weightEdit.getText().toString();
 
-        String sendWeightUrl = "http://99.236.1.225:5001/updateinitialweight/"+baseId+"/"+zoneId+"/"+initialWeight+"/";
-        String sendNameUrl = "http://99.236.1.225:5001/updatedescription/"+baseId+"/"+zoneId+"/"+zoneName+"/";
+        String sendWeightUrl = "http://99.235.222.196:5001/updateinitialweight/" + baseId + "/" + zoneId + "/" + initialWeight + "/";
+        String sendNameUrl = "http://99.235.222.196:5001/updatedescription/" + baseId + "/" + zoneId + "/" + zoneName + "/";
 
-        //DataSender ds = new DataSender();
-        //ds.execute(sendNameUrl);
-
-
-        String s;
-        String s2;
         DataFetcher df1 = new DataFetcher();
         DataFetcher df2 = new DataFetcher();
 
-        try {
+        try
+        {
             df1.execute(sendNameUrl).get();
             df2.execute(sendWeightUrl).get();
-        } catch (InterruptedException e) {
+        } catch (InterruptedException e)
+        {
             e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (ExecutionException e)
+        {
             e.printStackTrace();
         }
 
@@ -147,6 +154,6 @@ public class ZoneEditController extends Fragment {
 
     private void editName(View v)
     {
-       u.print("HELLO WORLD!");
+
     }
 }

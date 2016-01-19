@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fydp.sean.smartshelf.Models.ZoneModel;
@@ -61,10 +62,13 @@ public class ZoneAdaptor extends ArrayAdapter {
         ((TextView)row.findViewById(R.id.zoneNameText)).setText(zone.getZoneName());
         ((TextView)row.findViewById(R.id.initialWeightText)).setText("" + zone.getInitialWeight() + "kg");
         TextView currentWeightText = ((TextView)row.findViewById(R.id.currentWeightText));
-        currentWeightText.setText(""+zone.getCurrentWeight() + "kg");
+        currentWeightText.setText("" + zone.getCurrentWeight() + "kg");
 
         float percent = zone.getPercentage();
         setCurrentWeightColor(currentWeightText, percent);
+
+        ViewGroup.LayoutParams layoutParams = ((RelativeLayout)row.findViewById(R.id.scheduleView)).getLayoutParams();
+        layoutParams.width = 100;
 
         return row;
     }
