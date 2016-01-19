@@ -1,23 +1,19 @@
 package com.fydp.sean.smartshelf.Libraries;
 
-import android.app.Application;
 import android.util.Log;
+
+import com.fydp.sean.smartshelf.DataFetcher;
 
 /**
  * Created by seanm on 2015-10-05.
  */
 public class Utility
 {
-
     private static Utility instance;
-    private static boolean online = false;
 
     // Constructor
-    private Utility()
-    {
-
-    }
-
+    private Utility(){}
+    // Singleton pattern
     public static Utility create()
     {
         if (instance == null)
@@ -27,44 +23,73 @@ public class Utility
         return instance;
     }
 
-    public static boolean isOnline()
+
+    //-- GLOBAL VARIABLES --//
+
+    private static boolean offlineMode = true;
+    private static String serverAddress = "http://99.235.222.196:5001//";
+
+
+    //-- GLOBAL METHODS --//
+
+    public static boolean offlineMode()
     {
-        return online;
+        return offlineMode;
     }
 
     public static void setOfflineMode(boolean value)
     {
-        online = value;
-    }
-}
-/*
-public class Controller
-{
-    private static final String TAG = "Controller";
-    private static sController sController;
-    private Dao mDao;
-
-    private Controller()
-    {
-        mDao = new Dao();
+        offlineMode = value;
     }
 
-    public static Controller create()
+    public static String fetchData(String command)
     {
-        if (sController == null)
+        Log.d("Log", "Fetching data: " + command);
+        String result = "";
+
+        if (!offlineMode)
         {
-            sController = new Controller();
+            String url = serverAddress + command;
+            DataFetcher df = new DataFetcher();
+
+            try
+            {
+                result = df.execute(url).get();
+                Log.d("Log", "Fetching online data successful");
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+                Log.d("Error", "Error fetching online data");
+            }
+
+        } else
+        {
+            Log.d("Log", "Offline Mode is on");
         }
-        return sController;
+
+        // If no result, fetch local data, otherwise return result
+        if (result == null || result.equals(""))
+        {
+            return fetchOfflineData(command);
+        }
+        else
+        {
+            return result;
+        }
+
+    }
+
+    public static String fetchOfflineData(String command)
+    {
+        Log.d("Log", "Fetching offline data");
+        return "";
     }
 }
-*/
 
 
-// How to USE
-/*
+/* How to Use:
 Utility utility = Utility.create();
 utility.setOfflineMode(false);
-boolean globalVarValue = utility.isOnline();
+boolean globalVarValue = utility.offlineMode();
 Toast.makeText(getActivity().getApplicationContext(), "Update Successful: " + globalVarValue, Toast.LENGTH_SHORT).show();
 */

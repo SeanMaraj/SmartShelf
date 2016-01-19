@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.fydp.sean.smartshelf.Adaptors.ZoneAdaptor;
 import com.fydp.sean.smartshelf.DataFetcher;
@@ -23,7 +22,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Sean on 2015-07-12.
@@ -53,12 +51,10 @@ public class ZonesViewController extends Fragment
         rootView = inflater.inflate(R.layout.view_zones, container, false);
         zoneListView = (ListView) rootView.findViewById(R.id.zoneList);
         addZone = (Button) rootView.findViewById(R.id.addZoneBtn);
-
-        getData();
-
         adaptor = new ZoneAdaptor(getActivity(), R.layout.row_zone);
         zoneListView.setAdapter(adaptor);
 
+        getData();
         setOnItemClick();
         populateList();
 
@@ -71,7 +67,7 @@ public class ZonesViewController extends Fragment
         adaptor.clear();
         adaptor.notifyDataSetChanged();
 
-        if (Utility.create().isOnline())
+        if (!Utility.offlineMode())
         {
             for (int i = 0; i < zoneNumberss.length; i++)
             {
@@ -90,7 +86,8 @@ public class ZonesViewController extends Fragment
 
     private void setOnItemClick()
     {
-        Log.d("Log", "Setting item clicks");
+        Log.d("Log", "Setting item click");
+
         zoneListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -100,7 +97,7 @@ public class ZonesViewController extends Fragment
                 Fragment fragment = new ZoneEditController();
 
                 Bundle args = new Bundle();
-                if (Utility.create().isOnline())
+                if (!Utility.offlineMode())
                 {
                     args.putInt("position", position);
                     args.putString("itemName", itemNames.get(position));
@@ -127,23 +124,30 @@ public class ZonesViewController extends Fragment
 
     private void getData()
     {
-        Log.d("Log", "Getting data");
-        String url = "http://99.235.222.196:5001//getzones/1";
-        String result = "";
-        DataFetcher df = new DataFetcher();
+        Utility.fetchData("getzones/1");
+        /*
+        if (!Utility.offlineMode())
+        {
+            Log.d("Log", "Getting data");
+            String url = "http://99.235.222.196:5001//getzones/1";
+            String result = "";
+            DataFetcher df = new DataFetcher();
 
-        try
+            try
+            {
+                result = df.execute(url).get();
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+                Log.d("Error", "Error fetching data");
+            }
+
+            parseResult(result);
+        } else
         {
-            result = df.execute(url).get();
-        } catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        } catch (ExecutionException e)
-        {
-            e.printStackTrace();
+            Log.d("Log", "Cannot fetch data since offline");
         }
-
-        parseResult(result);
+        */
     }
 
     private void parseResult(String result)
