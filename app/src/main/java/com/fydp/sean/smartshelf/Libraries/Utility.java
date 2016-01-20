@@ -1,6 +1,8 @@
 package com.fydp.sean.smartshelf.Libraries;
 
 import android.util.Log;
+import android.widget.Toast;
+
 import com.fydp.sean.smartshelf.DataFetcher;
 import com.fydp.sean.smartshelf.OfflineData;
 
@@ -10,6 +12,7 @@ import com.fydp.sean.smartshelf.OfflineData;
 public class Utility
 {
     private static Utility instance;
+
 
     // Constructor
     private Utility(){}
