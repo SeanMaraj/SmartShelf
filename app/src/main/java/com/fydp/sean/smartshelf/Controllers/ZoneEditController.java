@@ -125,29 +125,16 @@ public class ZoneEditController extends Fragment
     {
         //TODO: handle spaces in zone names
 
-
         String baseId = "1"; //TODO: get real value
         String zoneId = "" + (getArguments().getInt("position") + 1);
         String zoneName = zoneNameEdit.getText().toString();
         String initialWeight = weightEdit.getText().toString();
 
-        String sendWeightUrl = "http://99.235.222.196:5001/updateinitialweight/" + baseId + "/" + zoneId + "/" + initialWeight + "/";
-        String sendNameUrl = "http://99.235.222.196:5001/updatedescription/" + baseId + "/" + zoneId + "/" + zoneName + "/";
+        String sendWeightCommand = "updateinitialweight/" + baseId + "/" + zoneId + "/" + initialWeight + "/";
+        String sendNameCommand = "updatedescription/" + baseId + "/" + zoneId + "/" + zoneName + "/";
 
-        DataFetcher df1 = new DataFetcher();
-        DataFetcher df2 = new DataFetcher();
-
-        try
-        {
-            df1.execute(sendNameUrl).get();
-            df2.execute(sendWeightUrl).get();
-        } catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        } catch (ExecutionException e)
-        {
-            e.printStackTrace();
-        }
+        Utility.sendData(sendWeightCommand);
+        Utility.sendData(sendNameCommand);
 
         Toast.makeText(getActivity().getApplicationContext(), "Update Successful", Toast.LENGTH_SHORT).show();
     }

@@ -5,34 +5,34 @@ package com.fydp.sean.smartshelf.Models;
  */
 public class ZoneModel {
 
-    private int zoneNumber;
-    private String zoneName;
+    private int number;
+    private String name;
     private float percentage;
     private float initialWeight;
     private float currentWeight;
 
     public ZoneModel(int zoneNumber, String zoneName, float currentWeight, float initialWeight)
     {
-        setZoneNumber(zoneNumber);
-        setZoneName(zoneName);
+        setNumber(zoneNumber);
+        setName(zoneName);
         setCurrentWeight(currentWeight);
         setInitialWeight(initialWeight);
     }
 
-    public int getZoneNumber() {
-        return zoneNumber;
+    public int getNumber() {
+        return number;
     }
 
-    public void setZoneNumber(int zoneNumber) {
-        this.zoneNumber = zoneNumber;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
-    public String getZoneName() {
-        return zoneName;
+    public String getName() {
+        return name;
     }
 
-    public void setZoneName(String zoneName) {
-        this.zoneName = zoneName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public float getInitialWeight() {

@@ -20,6 +20,7 @@ import com.fydp.sean.smartshelf.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -32,17 +33,8 @@ public class ZonesViewController extends Fragment
     ListView zoneListView;
     Button addZone;
     ZoneAdaptor adaptor;
+    ArrayList<ZoneModel> zones = new ArrayList<ZoneModel>();
 
-    ArrayList<Integer> zoneNumbers = new ArrayList<Integer>();
-    ArrayList<String> itemNames = new ArrayList<String>();
-    ArrayList<Float> initialWeights = new ArrayList<Float>();
-    ArrayList<Float> currentWeights = new ArrayList<Float>();
-
-    //FAKE DATA
-    int[] zoneNumberss = {1, 2, 3, 4};
-    String[] itemNamess = {"Sugar", "Flour", "Bolts", "Nuts"};
-    int[] percentagess = {25, 8, 80, 50};
-    int[] initialWeightss = {100, 200, 62, 400};
 
     @Nullable
     @Override
@@ -54,6 +46,7 @@ public class ZonesViewController extends Fragment
         adaptor = new ZoneAdaptor(getActivity(), R.layout.row_zone);
         zoneListView.setAdapter(adaptor);
 
+        zones.clear();
         getData();
         setOnItemClick();
         populateList();
@@ -67,20 +60,9 @@ public class ZonesViewController extends Fragment
         adaptor.clear();
         adaptor.notifyDataSetChanged();
 
-        if (!Utility.offlineMode())
+        for (int i = 0; i < zones.size(); i++)
         {
-            for (int i = 0; i < zoneNumberss.length; i++)
-            {
-                ZoneModel zone = new ZoneModel(zoneNumbers.get(i), itemNames.get(i), currentWeights.get(i), initialWeights.get(i));
-                adaptor.add(zone);
-            }
-        } else
-        {
-            for (int i = 0; i < zoneNumberss.length; i++)
-            {
-                ZoneModel zone = new ZoneModel(zoneNumberss[i], itemNamess[i], percentagess[i], initialWeightss[i]); //FAKE ZONE
-                adaptor.add(zone);
-            }
+            adaptor.add(zones.get(i));
         }
     }
 
@@ -95,78 +77,38 @@ public class ZonesViewController extends Fragment
             {
 
                 Fragment fragment = new ZoneEditController();
-
                 Bundle args = new Bundle();
-                if (!Utility.offlineMode())
-                {
-                    args.putInt("position", position);
-                    args.putString("itemName", itemNames.get(position));
-                    args.putFloat("initialWeight", initialWeights.get(position));
-                } else
-                {
-                    args.putInt("position", position);
-                    args.putString("itemName", itemNamess[position]);
-                    args.putFloat("initialWeight", initialWeightss[position]);
-                }
 
+                args.putInt("position", position);
+                args.putString("itemName", zones.get(position).getName());
+                args.putFloat("initialWeight", zones.get(position).getInitialWeight());
 
                 fragment.setArguments(args);
-
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, fragment)
                         .addToBackStack(null)
                         .commit();
-
             }
         });
     }
 
     private void getData()
     {
-        Utility.fetchData("getzones/1");
-        /*
-        if (!Utility.offlineMode())
-        {
-            Log.d("Log", "Getting data");
-            String url = "http://99.235.222.196:5001//getzones/1";
-            String result = "";
-            DataFetcher df = new DataFetcher();
-
-            try
-            {
-                result = df.execute(url).get();
-            } catch (Exception e)
-            {
-                e.printStackTrace();
-                Log.d("Error", "Error fetching data");
-            }
-
-            parseResult(result);
-        } else
-        {
-            Log.d("Log", "Cannot fetch data since offline");
-        }
-        */
+        parseResult(Utility.fetchData("getzones/1"));
     }
 
     private void parseResult(String result)
     {
-        zoneNumbers.clear();
-        itemNames.clear();
-        currentWeights.clear();
-        initialWeights.clear();
-
         try
         {
-            JSONArray zones = new JSONArray(result);
+            JSONArray JSONZones = new JSONArray(result);
 
-            for (int i = 0; i < zones.length(); i++)
+            for (int i = 0; i < JSONZones.length(); i++)
             {
-                zoneNumbers.add(zones.getJSONObject(i).getInt("id"));
-                itemNames.add(zones.getJSONObject(i).getString("desc"));
-                initialWeights.add((float) (zones.getJSONObject(i).getDouble("initialweight")));
-                currentWeights.add((float) zones.getJSONObject(i).getDouble("weight"));
+                JSONObject JSONZone = JSONZones.getJSONObject(i);
+                ZoneModel zone = new ZoneModel(JSONZone.getInt("id"), JSONZone.getString("desc"), (float)(JSONZone.getDouble("weight")), (float)(JSONZone.getDouble("initialweight")));
+                zones.add(zone);
             }
 
         } catch (JSONException e)
