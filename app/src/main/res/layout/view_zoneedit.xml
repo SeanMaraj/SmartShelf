@@ -111,12 +111,121 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:paddingTop="30dp"
-        android:layout_height="match_parent"></LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#ff434343">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Event"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/monitorStockfCheck"
+            android:checked="false" />
+
+        <RelativeLayout
+            android:id="@+id/setWeightLfayout"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="32dp"
+            android:paddingRight="20dp"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Initial Weight: "
+                android:id="@+id/initWefightText"
+                android:layout_centerVertical="true" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/initWeigfhtEdit"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_toLeftOf="@+id/weightEdit"
+                    android:textAlignment="gravity"
+                    android:text="200" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/gramfsText"
+                    android:text="kg"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#ff434343">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weather Notifications"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/monitorStfockCheck"
+            android:checked="false" />
+
+        <RelativeLayout
+            android:id="@+id/setWeifghtLayout"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="32dp"
+            android:paddingRight="20dp"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Initial Weight: "
+                android:id="@+id/initWeigjhtText"
+                android:layout_centerVertical="true" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/initWeigjhtEdit"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_toLeftOf="@+id/weightEdit"
+                    android:textAlignment="gravity"
+                    android:text="200" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/gramsjText"
+                    android:text="kg"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="APPLY"
         android:id="@+id/applyBtn"
         android:layout_gravity="right"/>
