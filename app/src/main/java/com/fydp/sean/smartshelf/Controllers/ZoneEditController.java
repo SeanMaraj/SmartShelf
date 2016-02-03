@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +34,7 @@ public class ZoneEditController extends Fragment
 {
     View rootView = null;
     CheckBox stockCheck;
-    RelativeLayout setWeightLayout;
+    LinearLayout setWeightLayout;
     TextView zoneNameEdit;
     TextView zoneNumberText;
     TextView baseNumberText;
@@ -47,7 +48,7 @@ public class ZoneEditController extends Fragment
     {
         rootView = inflater.inflate(R.layout.view_zoneedit, container, false);
 
-        setWeightLayout = (RelativeLayout) rootView.findViewById(R.id.setWeightLayout);
+        setWeightLayout = (LinearLayout) rootView.findViewById(R.id.monitorStockOptionsLayout);
         zoneNameEdit = (TextView) rootView.findViewById(R.id.zoneNameText);
         zoneNumberText = (TextView) rootView.findViewById(R.id.zoneNumberText);
         baseNumberText = (TextView) rootView.findViewById(R.id.baseNumberText);

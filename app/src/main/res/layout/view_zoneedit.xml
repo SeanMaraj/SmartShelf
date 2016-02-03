@@ -53,325 +53,335 @@
         android:paddingTop="10dp"
         android:paddingBottom="30dp" />
 
-    <!-- MONITOR STOCK LEVELS CARD -->
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ff434343">
-
-        <CheckBox
-            android:id="@+id/monitorStockCheck"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Monitor Stock Levels"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:checked="false" />
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/monitorStockOptionsLayout"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="32dp"
-            android:paddingRight="20dp"
-            android:visibility="gone">
+            android:orientation="vertical">
 
-            <RelativeLayout
+            <!-- MONITOR STOCK LEVELS CARD -->
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:background="#ff434343">
 
-                <TextView
-                    android:id="@+id/initWeightText"
+                <CheckBox
+                    android:id="@+id/monitorStockCheck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
+                    android:text="Monitor Stock Levels"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Initial Weight: "/>
+                    android:checked="false" />
+
+                <LinearLayout
+                    android:id="@+id/monitorStockOptionsLayout"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="32dp"
+                    android:paddingRight="20dp"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/initWeightText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Initial Weight: "/>
+
+                            <EditText
+                                android:id="@+id/initWeightEdit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toLeftOf="@+id/initWeightGramsText"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="200" />
+
+                            <TextView
+                                android:id="@+id/initWeightGramsText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentRight="true"
+                                android:text="kg"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/threshholdText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Notification Threshold: "/>
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toLeftOf="@+id/percentText"
+                            android:id="@+id/thresholdEdit"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="90" />
+
+                        <TextView
+                            android:id="@+id/percentText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:text="%"/>
+
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+            <!-- WEATHER CARD -->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#ff434343">
+
+                <CheckBox
+                    android:id="@+id/customEventCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Custom Event"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:checked="false" />
+
+                <LinearLayout
+                    android:id="@+id/eventOptionsLayout"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="32dp"
+                    android:paddingRight="20dp"
+                    android:visibility="visible">
 
                     <EditText
-                        android:id="@+id/initWeightEdit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@id/initWeightGramsText"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="200" />
+                        android:hint="description"/>
 
-                    <TextView
-                        android:id="@+id/initWeightGramsText"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:text="kg"/>
+                        android:orientation="horizontal">
 
-            </RelativeLayout>
+                        <TextView
+                            android:id="@+id/eventTimeText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Event Time: "/>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                        <EditText
+                            android:id="@+id/eventTimeEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="09:00" />
 
-                <TextView
-                    android:id="@+id/threshholdText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Notification Threshold: "/>
+                    </RelativeLayout>
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/percentText"
-                    android:id="@+id/thresholdEdit"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="90" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/percentText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:text="%"/>
+                        <TextView
+                            android:id="@+id/eventDateText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Event Date: "/>
 
-            </RelativeLayout>
-        </LinearLayout>
-    </LinearLayout>
+                        <EditText
+                            android:id="@+id/eventDateEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Jan 1, 2016" />
 
+                    </RelativeLayout>
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-    <!-- WEATHER CARD -->
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="#ff434343">
+                        <TextView
+                            android:id="@+id/eventRepeatText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Repeat: "/>
 
-        <CheckBox
-            android:id="@+id/customEventCheck"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Custom Event"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:checked="false" />
+                        <Spinner
+                            android:id="@+id/eventRepeatSpinner"
+                            android:layout_width="100dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"/>
 
-        <LinearLayout
-            android:id="@+id/eventOptionsLayout"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="32dp"
-            android:paddingRight="20dp"
-            android:visibility="visible">
+                    </RelativeLayout>
 
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="description"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                        <Button
+                            android:id="@+id/sunBtn"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:textAllCaps="false"
+                            android:text="S"/>
+                        <Button
+                            android:id="@+id/monBtn"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:textAllCaps="false"
+                            android:text="M"/>
+                        <Button
+                            android:id="@+id/tuesBtn"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:textAllCaps="false"
+                            android:text="T"/>
+                        <Button
+                            android:id="@+id/wedBtn"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:textAllCaps="false"
+                            android:text="W"/>
+                        <Button
+                            android:id="@+id/thrusBtn"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:textAllCaps="false"
+                            android:text="T"/>
+                        <Button
+                            android:id="@+id/friBtn"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:textAllCaps="false"
+                            android:text="F"/>
+                        <Button
+                            android:id="@+id/satBtn"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:textAllCaps="false"
+                            android:text="S"/>
 
-                <TextView
-                    android:id="@+id/eventTimeText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Event Time: "/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
 
-                <EditText
-                    android:id="@+id/eventTimeEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="09:00" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/eventDateText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Event Date: "/>
-
-                <EditText
-                    android:id="@+id/eventDateEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Jan 1, 2016" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/eventRepeatText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Repeat: "/>
-
-                <Spinner
-                    android:id="@+id/eventRepeatSpinner"
-                    android:layout_width="100dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentRight="true"/>
-
-            </RelativeLayout>
-
+            <!-- WEATHER CARD -->
             <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                android:layout_marginTop="20dp"
+                android:background="#ff434343">
 
-                <Button
-                    android:id="@+id/sunBtn"
-                    android:layout_width="40dp"
+                <CheckBox
+                    android:id="@+id/weatherCheck"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAllCaps="false"
-                    android:text="S"/>
-                <Button
-                    android:id="@+id/monBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:textAllCaps="false"
-                    android:text="M"/>
-                <Button
-                    android:id="@+id/tuesBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:textAllCaps="false"
-                    android:text="T"/>
-                <Button
-                    android:id="@+id/wedBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:textAllCaps="false"
-                    android:text="W"/>
-                <Button
-                    android:id="@+id/thrusBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:textAllCaps="false"
-                    android:text="T"/>
-                <Button
-                    android:id="@+id/friBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:textAllCaps="false"
-                    android:text="F"/>
-                <Button
-                    android:id="@+id/satBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:textAllCaps="false"
-                    android:text="S"/>
+                    android:text="Weather Notifications"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:checked="false" />
 
+                <LinearLayout
+                    android:id="@+id/weatherOptionsLayout"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="32dp"
+                    android:paddingRight="20dp"
+                    android:visibility="visible">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/weatherTypeText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Weather Type: "/>
+
+                        <Spinner
+                            android:id="@+id/weatherTypeSpinner"
+                            android:layout_width="100dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentRight="true"/>
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/notifTimeText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Notification Time: "/>
+
+                        <EditText
+                            android:id="@+id/notifTimeEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="09:00" />
+
+                    </RelativeLayout>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-    <!-- WEATHER CARD -->
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="#ff434343">
-
-        <CheckBox
-            android:id="@+id/weatherCheck"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Weather Notifications"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:checked="false" />
-
-        <LinearLayout
-            android:id="@+id/weatherOptionsLayout"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="32dp"
-            android:paddingRight="20dp"
-            android:visibility="gone">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/weatherTypeText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Weather Type: "/>
-
-                <Spinner
-                    android:id="@+id/weatherTypeSpinner"
-                    android:layout_width="100dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentRight="true"/>
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/notifTimeText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Notification Time: "/>
-
-                <EditText
-                    android:id="@+id/notifTimeEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="09:00" />
-
-            </RelativeLayout>
-        </LinearLayout>
-    </LinearLayout>
-
+    </ScrollView>
 
 
 
