@@ -1,0 +1,18 @@
+Index: app/app.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/app.iml	(revision 1a3c39674081d363ca76e290d7aa358185f9fd41)
++++ app/app.iml	(revision )
+@@ -90,8 +90,8 @@
+     </content>
+     <orderEntry type="jdk" jdkName="Android API 22 Platform" jdkType="Android SDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+-    <orderEntry type="library" exported="" name="support-annotations-22.2.0" level="project" />
+     <orderEntry type="library" exported="" name="support-v4-22.2.0" level="project" />
++    <orderEntry type="library" exported="" name="support-annotations-22.2.0" level="project" />
+     <orderEntry type="library" exported="" name="appcompat-v7-22.2.0" level="project" />
+   </component>
+ </module>
+\ No newline at end of file
