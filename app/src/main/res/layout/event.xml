@@ -2,30 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:background="#ff434343"
-              android:layout_height="70dp">
+              android:layout_height="100dp"
+               android:padding="10dp">
 
     <LinearLayout
         android:id="@+id/dateLayout"
-        android:layout_width="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:orientation="vertical"
         android:gravity="center_vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:textSize="25dp"
-            android:text="July"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textSize="25dp"
-            android:text="2"/>
+            android:text="July 2"
+            android:gravity="center"
+            android:id="@+id/eventDate"/>
 
     </LinearLayout>
 
@@ -50,7 +45,8 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="5dp"
             android:textSize="20dp"
-            android:text="9:30 A.M."/>
+            android:text="9:30 A.M."
+            android:id="@+id/eventTime"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -58,7 +54,8 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="10dp"
             android:textSize="20dp"
-            android:text="Catch up on reading"/>
+            android:text="Catch up on reading"
+            android:id="@+id/eventDescription"/>
 
 
     </RelativeLayout>
@@ -73,14 +70,16 @@
             android:layout_height="35dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="5dp"
-            android:text="E"/>
+            android:text="E"
+            android:id="@+id/eventEditBtn"/>
 
         <Button
             android:layout_width="30dp"
             android:layout_height="35dp"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="10dp"
-            android:text="D"/>
+            android:text="D"
+            android:id="@+id/eventDelBtn"/>
 
 
     </RelativeLayout>

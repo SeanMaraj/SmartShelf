@@ -16,6 +16,7 @@ public class OfflineData
 {
     private static OfflineData instance;
     private static String offlineZones;
+    private static String offlineEvents;
 
     // Constructor
     private OfflineData(){}
@@ -63,22 +64,174 @@ public class OfflineData
         offlineZones = JSONZones.toString();
         //
         ////////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////
+        // CREATE  EVENT DATA
+        JSONArray JSONEvents = new JSONArray();
+        try
+        {
+
+            // Event 1
+            JSONObject JSONEvent1 = new JSONObject();
+            JSONEvent1.put("id", 100);
+            JSONEvent1.put("notifId", 101);
+            JSONEvent1.put("zoneId", 102);
+            JSONEvent1.put("baseId", 103);
+            JSONEvent1.put("date", "Jan 5");
+            JSONEvent1.put("time", "19:00");
+            JSONEvent1.put("repeatWeekly", true);
+            JSONEvent1.put("repeatMonthly", false);
+            JSONEvent1.put("repeatDaily", false);
+            JSONEvents.put(JSONEvent1);
+
+            // Event 2
+            JSONObject JSONEvent2 = new JSONObject();
+            JSONEvent2.put("id", 200);
+            JSONEvent2.put("notifId", 201);
+            JSONEvent2.put("zoneId", 102);
+            JSONEvent2.put("baseId", 103);
+            JSONEvent2.put("date", "Jan 9");
+            JSONEvent2.put("time", "13:00");
+            JSONEvent2.put("repeatWeekly", true);
+            JSONEvent2.put("repeatMonthly", false);
+            JSONEvent2.put("repeatDaily", false);
+            JSONEvents.put(JSONEvent2);
+
+            // Event 2
+            JSONEvent2 = new JSONObject();
+            JSONEvent2.put("id", 200);
+            JSONEvent2.put("notifId", 201);
+            JSONEvent2.put("zoneId", 102);
+            JSONEvent2.put("baseId", 103);
+            JSONEvent2.put("date", "Jan 9");
+            JSONEvent2.put("time", "13:00");
+            JSONEvent2.put("repeatWeekly", true);
+            JSONEvent2.put("repeatMonthly", false);
+            JSONEvent2.put("repeatDaily", false);
+            JSONEvents.put(JSONEvent2);
+
+            // Event 2
+            JSONEvent2 = new JSONObject();
+            JSONEvent2.put("id", 200);
+            JSONEvent2.put("notifId", 201);
+            JSONEvent2.put("zoneId", 102);
+            JSONEvent2.put("baseId", 103);
+            JSONEvent2.put("date", "Jan 9");
+            JSONEvent2.put("time", "13:00");
+            JSONEvent2.put("repeatWeekly", true);
+            JSONEvent2.put("repeatMonthly", false);
+            JSONEvent2.put("repeatDaily", false);
+            JSONEvents.put(JSONEvent2);
+
+            // Event 2
+            JSONEvent2 = new JSONObject();
+            JSONEvent2.put("id", 200);
+            JSONEvent2.put("notifId", 201);
+            JSONEvent2.put("zoneId", 102);
+            JSONEvent2.put("baseId", 103);
+            JSONEvent2.put("date", "Jan 9");
+            JSONEvent2.put("time", "13:00");
+            JSONEvent2.put("repeatWeekly", true);
+            JSONEvent2.put("repeatMonthly", false);
+            JSONEvent2.put("repeatDaily", false);
+            JSONEvents.put(JSONEvent2);
+
+            // Event 2
+            JSONEvent2 = new JSONObject();
+            JSONEvent2.put("id", 200);
+            JSONEvent2.put("notifId", 201);
+            JSONEvent2.put("zoneId", 102);
+            JSONEvent2.put("baseId", 103);
+            JSONEvent2.put("date", "Jan 9");
+            JSONEvent2.put("time", "13:00");
+            JSONEvent2.put("repeatWeekly", true);
+            JSONEvent2.put("repeatMonthly", false);
+            JSONEvent2.put("repeatDaily", false);
+            JSONEvents.put(JSONEvent2);
+
+            // Event 2
+            JSONEvent2 = new JSONObject();
+            JSONEvent2.put("id", 200);
+            JSONEvent2.put("notifId", 201);
+            JSONEvent2.put("zoneId", 102);
+            JSONEvent2.put("baseId", 103);
+            JSONEvent2.put("date", "Jan 9");
+            JSONEvent2.put("time", "13:00");
+            JSONEvent2.put("repeatWeekly", true);
+            JSONEvent2.put("repeatMonthly", false);
+            JSONEvent2.put("repeatDaily", false);
+            JSONEvents.put(JSONEvent2);
+
+            // Event 2
+            JSONEvent2 = new JSONObject();
+            JSONEvent2.put("id", 200);
+            JSONEvent2.put("notifId", 201);
+            JSONEvent2.put("zoneId", 102);
+            JSONEvent2.put("baseId", 103);
+            JSONEvent2.put("date", "Jan 9");
+            JSONEvent2.put("time", "13:00");
+            JSONEvent2.put("repeatWeekly", true);
+            JSONEvent2.put("repeatMonthly", false);
+            JSONEvent2.put("repeatDaily", false);
+            JSONEvents.put(JSONEvent2);
+
+            // Event 2
+            JSONEvent2 = new JSONObject();
+            JSONEvent2.put("id", 200);
+            JSONEvent2.put("notifId", 201);
+            JSONEvent2.put("zoneId", 102);
+            JSONEvent2.put("baseId", 103);
+            JSONEvent2.put("date", "Jan 9");
+            JSONEvent2.put("time", "13:00");
+            JSONEvent2.put("repeatWeekly", true);
+            JSONEvent2.put("repeatMonthly", false);
+            JSONEvent2.put("repeatDaily", false);
+            JSONEvents.put(JSONEvent2);
+
+            // Event 2
+            JSONEvent2 = new JSONObject();
+            JSONEvent2.put("id", 200);
+            JSONEvent2.put("notifId", 201);
+            JSONEvent2.put("zoneId", 102);
+            JSONEvent2.put("baseId", 103);
+            JSONEvent2.put("date", "Jan 9");
+            JSONEvent2.put("time", "13:00");
+            JSONEvent2.put("repeatWeekly", true);
+            JSONEvent2.put("repeatMonthly", false);
+            JSONEvent2.put("repeatDaily", false);
+            JSONEvents.put(JSONEvent2);
+
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        offlineEvents = JSONEvents.toString();
+        //
+        ////////////////////////////////////////////////////
     }
 
     // Matches command with corresponding data
     public static String getData(String command)
     {
         String result = "";
+
         if (command.equals("getzones/1"))
         {
-            if (offlineZones != null)
-            {
-                return offlineZones;
-            }
-            else
-            {
-                return getZones();
-            }
+            result =  offlineZones;
+        }
+        else if (command.equals("getevents/1"))
+        {
+            result =  offlineEvents;
+        }
+
+        if (result != "")
+        {
+            Log.d("Log", "Offline result is not null");
+        }
+        else
+        {
+            Log.d("Log", "Offline result is null");
         }
 
         return result;

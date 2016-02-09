@@ -55,8 +55,9 @@ public class EventAdaptor extends ArrayAdapter
             row = convertView;
         }
 
-        // Set content of row item
-        EventModel zone = (EventModel)list.get(position);
+        // Set content of event item
+        EventModel event = (EventModel)list.get(position);
+        ((TextView)row.findViewById(R.id.eventDate)).setText(event.getDate());
         /*((TextView)row.findViewById(R.id.zoneNumberText)).setText("" + zone.getNumber());
         ((TextView)row.findViewById(R.id.zoneNameText)).setText(zone.getName());
         ((TextView)row.findViewById(R.id.initialWeightText)).setText("" + zone.getInitialWeight() + "kg");
