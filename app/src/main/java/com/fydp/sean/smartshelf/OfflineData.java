@@ -42,19 +42,27 @@ public class OfflineData
         {
             // Zone 1
             JSONObject JSONZone = new JSONObject();
-            JSONZone.put("id", "100");
-            JSONZone.put("desc", "Zone100");
-            JSONZone.put("weight", 0.5);
-            JSONZone.put("initialweight", 1.2);
+            JSONZone.put("id", "2");
+            JSONZone.put("desc", "Sugar");
+            JSONZone.put("weight", 0.23);
+            JSONZone.put("initialweight", 1.0);
             JSONZones.put(JSONZone);
 
             // Zone 2
-            JSONObject JSONZone1 = new JSONObject();
-            JSONZone1.put("id", "200");
-            JSONZone1.put("desc", "Zone200");
-            JSONZone1.put("weight", 70);
-            JSONZone1.put("initialweight", 150);
-            JSONZones.put(JSONZone1);
+            JSONZone = new JSONObject();
+            JSONZone.put("id", "5");
+            JSONZone.put("desc", "Flowers");
+            JSONZone.put("weight", 10.6);
+            JSONZone.put("initialweight", 14);
+            JSONZones.put(JSONZone);
+
+            // Zone 3
+            JSONZone = new JSONObject();
+            JSONZone.put("id", "7");
+            JSONZone.put("desc", "Nutella");
+            JSONZone.put("weight", 0.1);
+            JSONZone.put("initialweight", 156);
+            JSONZones.put(JSONZone);
 
         } catch (JSONException e)
         {
@@ -72,134 +80,76 @@ public class OfflineData
         {
 
             // Event 1
-            JSONObject JSONEvent1 = new JSONObject();
-            JSONEvent1.put("id", 100);
-            JSONEvent1.put("notifId", 101);
-            JSONEvent1.put("zoneId", 102);
-            JSONEvent1.put("baseId", 103);
-            JSONEvent1.put("date", "Jan 5");
-            JSONEvent1.put("time", "19:00");
-            JSONEvent1.put("repeatWeekly", true);
-            JSONEvent1.put("repeatMonthly", false);
-            JSONEvent1.put("repeatDaily", false);
-            JSONEvents.put(JSONEvent1);
+            JSONObject JSONEvent = new JSONObject();
+            JSONEvent.put("id", 100);
+            JSONEvent.put("notifId", 101);
+            JSONEvent.put("zoneId", 102);
+            JSONEvent.put("baseId", 103);
+            JSONEvent.put("date", "Jan 5");
+            JSONEvent.put("time", "19:00");
+            JSONEvent.put("desc", "Finish reading textbook");
+            JSONEvent.put("repeatWeekly", true);
+            JSONEvent.put("repeatMonthly", false);
+            JSONEvent.put("repeatDaily", false);
+            JSONEvents.put(JSONEvent);
 
             // Event 2
-            JSONObject JSONEvent2 = new JSONObject();
-            JSONEvent2.put("id", 200);
-            JSONEvent2.put("notifId", 201);
-            JSONEvent2.put("zoneId", 102);
-            JSONEvent2.put("baseId", 103);
-            JSONEvent2.put("date", "Jan 9");
-            JSONEvent2.put("time", "13:00");
-            JSONEvent2.put("repeatWeekly", true);
-            JSONEvent2.put("repeatMonthly", false);
-            JSONEvent2.put("repeatDaily", false);
-            JSONEvents.put(JSONEvent2);
+            JSONEvent = new JSONObject();
+            JSONEvent.put("id", 200);
+            JSONEvent.put("notifId", 201);
+            JSONEvent.put("zoneId", 102);
+            JSONEvent.put("baseId", 103);
+            JSONEvent.put("date", "Feb 12");
+            JSONEvent.put("time", "16:00");
+            JSONEvent.put("desc", "Hand in report");
+            JSONEvent.put("repeatWeekly", false);
+            JSONEvent.put("repeatMonthly", false);
+            JSONEvent.put("repeatDaily", false);
+            JSONEvents.put(JSONEvent);
 
-            // Event 2
-            JSONEvent2 = new JSONObject();
-            JSONEvent2.put("id", 200);
-            JSONEvent2.put("notifId", 201);
-            JSONEvent2.put("zoneId", 102);
-            JSONEvent2.put("baseId", 103);
-            JSONEvent2.put("date", "Jan 9");
-            JSONEvent2.put("time", "13:00");
-            JSONEvent2.put("repeatWeekly", true);
-            JSONEvent2.put("repeatMonthly", false);
-            JSONEvent2.put("repeatDaily", false);
-            JSONEvents.put(JSONEvent2);
+            // Event 3
+            JSONEvent = new JSONObject();
+            JSONEvent.put("id", 200);
+            JSONEvent.put("notifId", 201);
+            JSONEvent.put("zoneId", 102);
+            JSONEvent.put("baseId", 103);
+            JSONEvent.put("date", "Feb 19");
+            JSONEvent.put("time", "05:00");
+            JSONEvent.put("desc", "Go back home");
+            JSONEvent.put("repeatWeekly", true);
+            JSONEvent.put("repeatMonthly", false);
+            JSONEvent.put("repeatDaily", false);
+            JSONEvents.put(JSONEvent);
 
-            // Event 2
-            JSONEvent2 = new JSONObject();
-            JSONEvent2.put("id", 200);
-            JSONEvent2.put("notifId", 201);
-            JSONEvent2.put("zoneId", 102);
-            JSONEvent2.put("baseId", 103);
-            JSONEvent2.put("date", "Jan 9");
-            JSONEvent2.put("time", "13:00");
-            JSONEvent2.put("repeatWeekly", true);
-            JSONEvent2.put("repeatMonthly", false);
-            JSONEvent2.put("repeatDaily", false);
-            JSONEvents.put(JSONEvent2);
+            // Event 4
+            JSONEvent = new JSONObject();
+            JSONEvent.put("id", 200);
+            JSONEvent.put("notifId", 201);
+            JSONEvent.put("zoneId", 102);
+            JSONEvent.put("baseId", 103);
+            JSONEvent.put("date", "Mar 1");
+            JSONEvent.put("time", "22:40");
+            JSONEvent.put("desc", "Pack for vacation");
+            JSONEvent.put("repeatWeekly", true);
+            JSONEvent.put("repeatMonthly", false);
+            JSONEvent.put("repeatDaily", false);
+            JSONEvents.put(JSONEvent);
 
-            // Event 2
-            JSONEvent2 = new JSONObject();
-            JSONEvent2.put("id", 200);
-            JSONEvent2.put("notifId", 201);
-            JSONEvent2.put("zoneId", 102);
-            JSONEvent2.put("baseId", 103);
-            JSONEvent2.put("date", "Jan 9");
-            JSONEvent2.put("time", "13:00");
-            JSONEvent2.put("repeatWeekly", true);
-            JSONEvent2.put("repeatMonthly", false);
-            JSONEvent2.put("repeatDaily", false);
-            JSONEvents.put(JSONEvent2);
+            // Event 4
+            JSONEvent = new JSONObject();
+            JSONEvent.put("id", 200);
+            JSONEvent.put("notifId", 201);
+            JSONEvent.put("zoneId", 102);
+            JSONEvent.put("baseId", 103);
+            JSONEvent.put("date", "Apr 1");
+            JSONEvent.put("time", "22:40");
+            JSONEvent.put("desc", "Pull a prank");
+            JSONEvent.put("repeatWeekly", true);
+            JSONEvent.put("repeatMonthly", false);
+            JSONEvent.put("repeatDaily", false);
+            JSONEvents.put(JSONEvent);
 
-            // Event 2
-            JSONEvent2 = new JSONObject();
-            JSONEvent2.put("id", 200);
-            JSONEvent2.put("notifId", 201);
-            JSONEvent2.put("zoneId", 102);
-            JSONEvent2.put("baseId", 103);
-            JSONEvent2.put("date", "Jan 9");
-            JSONEvent2.put("time", "13:00");
-            JSONEvent2.put("repeatWeekly", true);
-            JSONEvent2.put("repeatMonthly", false);
-            JSONEvent2.put("repeatDaily", false);
-            JSONEvents.put(JSONEvent2);
 
-            // Event 2
-            JSONEvent2 = new JSONObject();
-            JSONEvent2.put("id", 200);
-            JSONEvent2.put("notifId", 201);
-            JSONEvent2.put("zoneId", 102);
-            JSONEvent2.put("baseId", 103);
-            JSONEvent2.put("date", "Jan 9");
-            JSONEvent2.put("time", "13:00");
-            JSONEvent2.put("repeatWeekly", true);
-            JSONEvent2.put("repeatMonthly", false);
-            JSONEvent2.put("repeatDaily", false);
-            JSONEvents.put(JSONEvent2);
-
-            // Event 2
-            JSONEvent2 = new JSONObject();
-            JSONEvent2.put("id", 200);
-            JSONEvent2.put("notifId", 201);
-            JSONEvent2.put("zoneId", 102);
-            JSONEvent2.put("baseId", 103);
-            JSONEvent2.put("date", "Jan 9");
-            JSONEvent2.put("time", "13:00");
-            JSONEvent2.put("repeatWeekly", true);
-            JSONEvent2.put("repeatMonthly", false);
-            JSONEvent2.put("repeatDaily", false);
-            JSONEvents.put(JSONEvent2);
-
-            // Event 2
-            JSONEvent2 = new JSONObject();
-            JSONEvent2.put("id", 200);
-            JSONEvent2.put("notifId", 201);
-            JSONEvent2.put("zoneId", 102);
-            JSONEvent2.put("baseId", 103);
-            JSONEvent2.put("date", "Jan 9");
-            JSONEvent2.put("time", "13:00");
-            JSONEvent2.put("repeatWeekly", true);
-            JSONEvent2.put("repeatMonthly", false);
-            JSONEvent2.put("repeatDaily", false);
-            JSONEvents.put(JSONEvent2);
-
-            // Event 2
-            JSONEvent2 = new JSONObject();
-            JSONEvent2.put("id", 200);
-            JSONEvent2.put("notifId", 201);
-            JSONEvent2.put("zoneId", 102);
-            JSONEvent2.put("baseId", 103);
-            JSONEvent2.put("date", "Jan 9");
-            JSONEvent2.put("time", "13:00");
-            JSONEvent2.put("repeatWeekly", true);
-            JSONEvent2.put("repeatMonthly", false);
-            JSONEvent2.put("repeatDaily", false);
-            JSONEvents.put(JSONEvent2);
 
         } catch (JSONException e)
         {

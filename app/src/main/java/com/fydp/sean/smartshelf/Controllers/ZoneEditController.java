@@ -34,7 +34,11 @@ public class ZoneEditController extends Fragment
 {
     View rootView = null;
     CheckBox stockCheck;
+    CheckBox customEventCheck;
+    CheckBox weatherCheck;
     LinearLayout setWeightLayout;
+    LinearLayout eventOptionsLayout;
+    LinearLayout weatherOptionsLayout;
     TextView zoneNameEdit;
     TextView zoneNumberText;
     TextView baseNumberText;
@@ -49,12 +53,17 @@ public class ZoneEditController extends Fragment
         rootView = inflater.inflate(R.layout.view_zoneedit, container, false);
 
         setWeightLayout = (LinearLayout) rootView.findViewById(R.id.monitorStockOptionsLayout);
+        eventOptionsLayout = (LinearLayout) rootView.findViewById(R.id.eventOptionsLayout);
+        weatherOptionsLayout = (LinearLayout) rootView.findViewById(R.id.weatherOptionsLayout);
         zoneNameEdit = (TextView) rootView.findViewById(R.id.zoneNameText);
         zoneNumberText = (TextView) rootView.findViewById(R.id.zoneNumberText);
         baseNumberText = (TextView) rootView.findViewById(R.id.baseNumberText);
         weightEdit = (EditText) rootView.findViewById(R.id.initWeightEdit);
         applyButton = (Button) rootView.findViewById((R.id.applyBtn));
         stockCheck = (CheckBox) rootView.findViewById(R.id.monitorStockCheck);
+        customEventCheck = (CheckBox) rootView.findViewById(R.id.customEventCheck);
+        stockCheck = (CheckBox) rootView.findViewById(R.id.monitorStockCheck);
+        weatherCheck = (CheckBox) rootView.findViewById(R.id.weatherCheck);
         editNameImage = (ImageView) rootView.findViewById(R.id.editNameImage);
 
         setListeners();
@@ -76,6 +85,36 @@ public class ZoneEditController extends Fragment
                 } else if (isChecked)
                 {
                     setWeightLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        customEventCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if (!isChecked)
+                {
+                    eventOptionsLayout.setVisibility(View.GONE);
+                } else if (isChecked)
+                {
+                    eventOptionsLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        weatherCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if (!isChecked)
+                {
+                    weatherOptionsLayout.setVisibility(View.GONE);
+                } else if (isChecked)
+                {
+                    weatherOptionsLayout.setVisibility(View.VISIBLE);
                 }
             }
         });

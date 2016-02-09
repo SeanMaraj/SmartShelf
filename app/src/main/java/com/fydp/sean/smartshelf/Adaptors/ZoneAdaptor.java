@@ -58,14 +58,14 @@ public class ZoneAdaptor extends ArrayAdapter {
 
         // Set content of row item
         ZoneModel zone = (ZoneModel)list.get(position);
+        float percent = Math.round(100.0 * zone.getPercentage()) / 100;
         ((TextView)row.findViewById(R.id.zoneNumberText)).setText("" + zone.getNumber());
         ((TextView)row.findViewById(R.id.zoneNameText)).setText(zone.getName());
-        ((TextView)row.findViewById(R.id.initialWeightText)).setText("" + zone.getInitialWeight() + "kg");
-        TextView currentWeightText = ((TextView)row.findViewById(R.id.currentWeightText));
-        currentWeightText.setText("" + zone.getCurrentWeight() + "kg");
+        ((TextView)row.findViewById(R.id.initialWeightText)).setText("" + zone.getInitialWeight() + " kg");
+        TextView percentTextView = ((TextView)row.findViewById(R.id.percentageText));
+        percentTextView.setText("" + percent + " %");
 
-        float percent = zone.getPercentage();
-        setCurrentWeightColor(currentWeightText, percent);
+        setCurrentWeightColor(percentTextView, percent);
 
         //ViewGroup.LayoutParams layoutParams = ((RelativeLayout)row.findViewById(R.id.scheduleView)).getLayoutParams();
         //layoutParams.width = 100;

@@ -31,11 +31,11 @@
         android:layout_toRightOf="@+id/dateLayout"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@android:color/black"/>
+        android:background="#FF777777"/>
 
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_toRightOf="@id/separator">
 
@@ -57,31 +57,25 @@
             android:text="Catch up on reading"
             android:id="@+id/eventDescription"/>
 
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true">
-
-        <Button
-            android:layout_width="30dp"
-            android:layout_height="35dp"
-            android:layout_alignParentTop="true"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="E"
-            android:id="@+id/eventEditBtn"/>
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:textSize="20dp"
+            android:text="Z: 1"/>
 
-        <Button
-            android:layout_width="30dp"
-            android:layout_height="35dp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="10dp"
-            android:text="D"
-            android:id="@+id/eventDelBtn"/>
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:textSize="20dp"
+            android:text="B: 2"
+            android:id="@+id/eventBaseId"/>
 
 
     </RelativeLayout>
-
 </RelativeLayout>

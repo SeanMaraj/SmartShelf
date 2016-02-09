@@ -10,9 +10,14 @@ public class EventModel
     private int zoneId;
     private int baseId;
     private String date;
+    private String time;
+    private String desc;
+    private boolean repeatWeekly;
+    private boolean reapeatMonthly;
+    private boolean reapeatDaily;
 
     // Constructor
-    public EventModel(int id, int notifId, int zoneId, int baseId, String date, String time, boolean repeatWeekly, boolean reapeatMonthly, boolean reapeatDaily)
+    public EventModel(int id, int notifId, int zoneId, int baseId, String date, String time, String desc, boolean repeatWeekly, boolean reapeatMonthly, boolean reapeatDaily)
     {
         this.id = id;
         this.notifId = notifId;
@@ -20,15 +25,12 @@ public class EventModel
         this.baseId = baseId;
         this.date = date;
         this.time = time;
+        this.desc = desc;
         this.repeatWeekly = repeatWeekly;
         this.reapeatMonthly = reapeatMonthly;
         this.reapeatDaily = reapeatDaily;
     }
 
-    private String time;
-    private boolean repeatWeekly;
-    private boolean reapeatMonthly;
-    private boolean reapeatDaily;
 
 
     public int getId()
@@ -119,5 +121,15 @@ public class EventModel
     public void setReapeatDaily(boolean reapeatDaily)
     {
         this.reapeatDaily = reapeatDaily;
+    }
+
+    public String getDesc()
+    {
+        return desc;
+    }
+
+    public void setDesc(String desc)
+    {
+        this.desc = desc;
     }
 }
