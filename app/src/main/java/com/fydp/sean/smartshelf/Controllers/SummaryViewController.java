@@ -7,10 +7,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.fydp.sean.smartshelf.Adaptors.EventAdaptor;
+import com.fydp.sean.smartshelf.Adaptors.ZoneAdaptor;
 import com.fydp.sean.smartshelf.Libraries.Utility;
+import com.fydp.sean.smartshelf.Models.EventModel;
+import com.fydp.sean.smartshelf.Models.ZoneModel;
 import com.fydp.sean.smartshelf.OfflineData;
 import com.fydp.sean.smartshelf.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Sean on 2015-07-12.
@@ -18,13 +29,39 @@ import com.fydp.sean.smartshelf.R;
 public class SummaryViewController extends Fragment{
 
     View rootView = null;
+    ListView zoneListView;
+    ZoneAdaptor zoneAdaptor;
+    ArrayList<ZoneModel> zones = new ArrayList<ZoneModel>();
+    ListView eventListView;
+    EventAdaptor eventAdaptor;
+    ArrayList<EventModel> events = new ArrayList<EventModel>();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.view_summary, container, false);
 
+        // Inital setup
         setup();
+
+        // Setup zones list
+        zoneListView = (ListView) rootView.findViewById(R.id.lowStockList);
+        zoneAdaptor = new ZoneAdaptor(getActivity(), R.layout.row_zone);
+        zoneListView.setAdapter(zoneAdaptor);
+        zones.clear();
+
+        eventListView = (ListView) rootView.findViewById(R.id.eventsSummaryList);
+        eventAdaptor = new EventAdaptor(getActivity(), R.layout.event);
+        eventListView.setAdapter(eventAdaptor);
+        events.clear();
+
+
+        getData();
+        //setOnItemClick();
+        populateZonesList();
+        populateEventsList();
+
+
         return rootView;
     }
 
@@ -34,6 +71,74 @@ public class SummaryViewController extends Fragment{
         {
             Log.d("Log", "Creating offline data");
             OfflineData.create();
+        }
+    }
+
+    public void getData()
+    {
+        parseZonesResult(Utility.fetchData("getzones/1"));
+        parseEventsResult(Utility.fetchData("getevents/1"));
+    }
+
+    private void parseZonesResult(String result)
+    {
+        try
+        {
+            JSONArray JSONZones = new JSONArray(result);
+
+            for (int i = 0; i < JSONZones.length(); i++)
+            {
+                JSONObject JSONZone = JSONZones.getJSONObject(i);
+                ZoneModel zone = new ZoneModel(JSONZone.getInt("id"), JSONZone.getString("desc"), (float)(JSONZone.getDouble("weight")), (float)(JSONZone.getDouble("initialweight")));
+                zones.add(zone);
+            }
+
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void parseEventsResult(String result)
+    {
+        try
+        {
+            JSONArray JSONEvents = new JSONArray(result);
+
+            for (int i = 0; i < JSONEvents.length(); i++)
+            {
+                JSONObject JSONEvent = JSONEvents.getJSONObject(i);
+                EventModel event = new EventModel(JSONEvent.getInt("id"), JSONEvent.getInt("notifId"), JSONEvent.getInt("zoneId"), JSONEvent.getInt("baseId"), JSONEvent.getString("date"), JSONEvent.getString("time"), JSONEvent.getBoolean("repeatWeekly"), JSONEvent.getBoolean("repeatMonthly"), JSONEvent.getBoolean("repeatDaily"));
+                events.add(event);
+            }
+
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void populateZonesList()
+    {
+        Log.d("Log", "Populating list");
+        zoneAdaptor.clear();
+        zoneAdaptor.notifyDataSetChanged();
+
+        for (int i = 0; i < zones.size(); i++)
+        {
+            zoneAdaptor.add(zones.get(i));
+        }
+    }
+
+    private void populateEventsList()
+    {
+        Log.d("Log", "Populating list");
+        eventAdaptor.clear();
+        eventAdaptor.notifyDataSetChanged();
+
+        for (int i = 0; i < events.size(); i++)
+        {
+            eventAdaptor.add(events.get(i));
         }
     }
 }
