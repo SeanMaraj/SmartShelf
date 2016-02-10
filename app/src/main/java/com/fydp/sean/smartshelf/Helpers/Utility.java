@@ -1,10 +1,6 @@
-package com.fydp.sean.smartshelf.Libraries;
+package com.fydp.sean.smartshelf.Helpers;
 
 import android.util.Log;
-import android.widget.Toast;
-
-import com.fydp.sean.smartshelf.DataFetcher;
-import com.fydp.sean.smartshelf.OfflineData;
 
 /**
  * Created by seanm on 2015-10-05.

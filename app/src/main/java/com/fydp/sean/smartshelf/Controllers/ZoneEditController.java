@@ -1,11 +1,8 @@
 package com.fydp.sean.smartshelf.Controllers;
 
 import android.os.Bundle;
-import android.provider.Telephony;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,19 +10,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fydp.sean.smartshelf.DataFetcher;
-import com.fydp.sean.smartshelf.Libraries.Utility;
+import com.fydp.sean.smartshelf.Helpers.Utility;
 import com.fydp.sean.smartshelf.R;
-
-import org.w3c.dom.Text;
-
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Sean on 2015-07-23.

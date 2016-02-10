@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.fydp.sean.smartshelf.Controllers.EventsViewController;
 import com.fydp.sean.smartshelf.Controllers.SummaryViewController;
-import com.fydp.sean.smartshelf.Controllers.WeatherViewController;
 import com.fydp.sean.smartshelf.Controllers.ZonesViewController;
 
 
@@ -68,10 +67,6 @@ public class MainActivity extends ActionBarActivity
             case 2:
                 fragment = new EventsViewController();
                 mTitle = "Events";
-                break;
-            case 3:
-                fragment = new WeatherViewController();
-                mTitle = "Weather";
                 break;
         }
 

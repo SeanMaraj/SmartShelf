@@ -1,9 +1,6 @@
-package com.fydp.sean.smartshelf;
+package com.fydp.sean.smartshelf.Helpers;
 
 import android.util.Log;
-import android.widget.Toast;
-
-import com.fydp.sean.smartshelf.Libraries.Utility;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -13,10 +13,10 @@ import android.widget.ListView;
 
 import com.fydp.sean.smartshelf.Adaptors.EventAdaptor;
 import com.fydp.sean.smartshelf.Adaptors.ZoneAdaptor;
-import com.fydp.sean.smartshelf.Libraries.Utility;
+import com.fydp.sean.smartshelf.Helpers.Utility;
 import com.fydp.sean.smartshelf.Models.EventModel;
 import com.fydp.sean.smartshelf.Models.ZoneModel;
-import com.fydp.sean.smartshelf.OfflineData;
+import com.fydp.sean.smartshelf.Helpers.OfflineData;
 import com.fydp.sean.smartshelf.R;
 
 import org.json.JSONArray;

@@ -13,8 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.fydp.sean.smartshelf.Adaptors.ZoneAdaptor;
-import com.fydp.sean.smartshelf.DataFetcher;
-import com.fydp.sean.smartshelf.Libraries.Utility;
+import com.fydp.sean.smartshelf.Helpers.Utility;
 import com.fydp.sean.smartshelf.Models.ZoneModel;
 import com.fydp.sean.smartshelf.R;
 

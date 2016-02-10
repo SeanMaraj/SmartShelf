@@ -12,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.fydp.sean.smartshelf.Adaptors.EventAdaptor;
-import com.fydp.sean.smartshelf.Libraries.Utility;
+import com.fydp.sean.smartshelf.Helpers.Utility;
 import com.fydp.sean.smartshelf.Models.EventModel;
 import com.fydp.sean.smartshelf.R;
 
