@@ -3,10 +3,12 @@ package com.fydp.sean.smartshelf.Controllers;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.fydp.sean.smartshelf.Adaptors.EventAdaptor;
@@ -41,7 +43,7 @@ public class EventsViewController extends Fragment{
 
         events.clear();
         getData();
-        //setOnItemClick();
+        setOnItemClick();
         populateList();
 
 
@@ -82,5 +84,32 @@ public class EventsViewController extends Fragment{
         {
             adaptor.add(events.get(i));
         }
+    }
+
+    private void setOnItemClick()
+    {
+        Log.d("Log", "Setting item click");
+
+        eventListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+
+                Fragment fragment = new EventEditController();
+                Bundle args = new Bundle();
+
+                //args.putInt("position", position);
+                //args.putString("itemName", zones.get(position).getName());
+                //args.putFloat("initialWeight", zones.get(position).getInitialWeight());
+
+                fragment.setArguments(args);
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, fragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
     }
 }

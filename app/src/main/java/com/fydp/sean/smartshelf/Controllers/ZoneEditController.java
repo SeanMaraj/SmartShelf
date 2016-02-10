@@ -44,7 +44,6 @@ public class ZoneEditController extends Fragment
     TextView baseNumberText;
     EditText weightEdit;
     Button applyButton;
-    ImageView editNameImage;
 
     @Nullable
     @Override
@@ -64,7 +63,6 @@ public class ZoneEditController extends Fragment
         customEventCheck = (CheckBox) rootView.findViewById(R.id.customEventCheck);
         stockCheck = (CheckBox) rootView.findViewById(R.id.monitorStockCheck);
         weatherCheck = (CheckBox) rootView.findViewById(R.id.weatherCheck);
-        editNameImage = (ImageView) rootView.findViewById(R.id.editNameImage);
 
         setListeners();
         getData();
@@ -126,15 +124,6 @@ public class ZoneEditController extends Fragment
             {
                 onApplyButton(v);
 
-            }
-        });
-
-        editNameImage.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                editName(v);
             }
         });
     }
