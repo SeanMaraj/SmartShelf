@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.fydp.sean.smartshelf.Adaptors.EventAdaptor;
 import com.fydp.sean.smartshelf.Helpers.Utility;
+import com.fydp.sean.smartshelf.MainActivity;
 import com.fydp.sean.smartshelf.Models.EventModel;
 import com.fydp.sean.smartshelf.R;
 
@@ -35,6 +36,8 @@ public class EventsViewController extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        ((MainActivity) getActivity()).setActionBarTitle("Events");
 
         rootView = inflater.inflate(R.layout.view_events, container, false);
         eventListView = (ListView) rootView.findViewById(R.id.eventList);
@@ -109,6 +112,8 @@ public class EventsViewController extends Fragment{
                         .replace(R.id.container, fragment)
                         .addToBackStack(null)
                         .commit();
+
+                ((MainActivity) getActivity()).setActionBarTitle("Edit Event");
             }
         });
     }

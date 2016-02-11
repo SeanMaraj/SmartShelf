@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.fydp.sean.smartshelf.Controllers.EventsViewController;
 import com.fydp.sean.smartshelf.Controllers.SummaryViewController;
 import com.fydp.sean.smartshelf.Controllers.ZonesViewController;
+import com.fydp.sean.smartshelf.Helpers.Utility;
 
 
 public class MainActivity extends ActionBarActivity
@@ -46,6 +47,9 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        // Network test
+        //Utility.create().testNetwork();
     }
 
     @Override
@@ -93,6 +97,9 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
+                break;
+            case 4:
+                mTitle = "HERE";
                 break;
         }
     }
@@ -196,6 +203,10 @@ public class MainActivity extends ActionBarActivity
         } else {
             getSupportFragmentManager().popBackStack();
         }
+    }
+
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 
 }

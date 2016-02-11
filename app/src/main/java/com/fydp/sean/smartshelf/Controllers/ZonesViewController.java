@@ -14,6 +14,7 @@ import android.widget.ListView;
 
 import com.fydp.sean.smartshelf.Adaptors.ZoneAdaptor;
 import com.fydp.sean.smartshelf.Helpers.Utility;
+import com.fydp.sean.smartshelf.MainActivity;
 import com.fydp.sean.smartshelf.Models.ZoneModel;
 import com.fydp.sean.smartshelf.R;
 
@@ -39,7 +40,9 @@ public class ZonesViewController extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        ((MainActivity) getActivity()).setActionBarTitle("Zones");
         rootView = inflater.inflate(R.layout.view_zones, container, false);
+
         zoneListView = (ListView) rootView.findViewById(R.id.zoneList);
         addZone = (Button) rootView.findViewById(R.id.addZoneBtn);
         adaptor = new ZoneAdaptor(getActivity(), R.layout.row_zone);

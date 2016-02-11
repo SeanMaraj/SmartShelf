@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.fydp.sean.smartshelf.MainActivity;
 import com.fydp.sean.smartshelf.R;
 
 /**
@@ -18,6 +19,7 @@ public class EventEditController extends Fragment
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        ((MainActivity) getActivity()).setActionBarTitle("Edit Event");
         rootView = inflater.inflate(R.layout.view_eventedit, container, false);
 
         return rootView;

@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.fydp.sean.smartshelf.Adaptors.EventAdaptor;
 import com.fydp.sean.smartshelf.Adaptors.ZoneAdaptor;
 import com.fydp.sean.smartshelf.Helpers.Utility;
+import com.fydp.sean.smartshelf.MainActivity;
 import com.fydp.sean.smartshelf.Models.EventModel;
 import com.fydp.sean.smartshelf.Models.ZoneModel;
 import com.fydp.sean.smartshelf.Helpers.OfflineData;
@@ -41,6 +42,8 @@ public class SummaryViewController extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        ((MainActivity) getActivity()).setActionBarTitle("Summary");
         rootView = inflater.inflate(R.layout.view_summary, container, false);
 
         // Inital setup

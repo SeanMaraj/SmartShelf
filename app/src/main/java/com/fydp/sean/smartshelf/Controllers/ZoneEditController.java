@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fydp.sean.smartshelf.Helpers.Utility;
+import com.fydp.sean.smartshelf.MainActivity;
 import com.fydp.sean.smartshelf.R;
 
 /**
@@ -39,6 +40,7 @@ public class ZoneEditController extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        ((MainActivity) getActivity()).setActionBarTitle("Edit Zone");
         rootView = inflater.inflate(R.layout.view_zoneedit, container, false);
 
         setWeightLayout = (LinearLayout) rootView.findViewById(R.id.monitorStockOptionsLayout);
