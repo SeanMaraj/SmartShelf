@@ -1,9 +1,6 @@
-package com.fydp.sean.smartshelf;
+package com.fydp.sean.smartshelf.Helpers;
 
 import android.util.Log;
-import android.widget.Toast;
-
-import com.fydp.sean.smartshelf.Libraries.Utility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,7 +48,7 @@ public class OfflineData
             // Zone 2
             JSONZone = new JSONObject();
             JSONZone.put("id", "5");
-            JSONZone.put("desc", "Flowers");
+            JSONZone.put("desc", "Flour");
             JSONZone.put("weight", 10.6);
             JSONZone.put("initialweight", 14);
             JSONZones.put(JSONZone);
@@ -83,11 +80,11 @@ public class OfflineData
             JSONObject JSONEvent = new JSONObject();
             JSONEvent.put("id", 100);
             JSONEvent.put("notifId", 101);
-            JSONEvent.put("zoneId", 102);
-            JSONEvent.put("baseId", 103);
+            JSONEvent.put("zoneId", 1);
+            JSONEvent.put("baseId", 1);
             JSONEvent.put("date", "Jan 5");
             JSONEvent.put("time", "19:00");
-            JSONEvent.put("desc", "Finish reading textbook");
+            JSONEvent.put("desc", "Pack for vacation");
             JSONEvent.put("repeatWeekly", true);
             JSONEvent.put("repeatMonthly", false);
             JSONEvent.put("repeatDaily", false);
@@ -97,8 +94,8 @@ public class OfflineData
             JSONEvent = new JSONObject();
             JSONEvent.put("id", 200);
             JSONEvent.put("notifId", 201);
-            JSONEvent.put("zoneId", 102);
-            JSONEvent.put("baseId", 103);
+            JSONEvent.put("zoneId", 3);
+            JSONEvent.put("baseId", 1);
             JSONEvent.put("date", "Feb 12");
             JSONEvent.put("time", "16:00");
             JSONEvent.put("desc", "Hand in report");
@@ -111,8 +108,8 @@ public class OfflineData
             JSONEvent = new JSONObject();
             JSONEvent.put("id", 200);
             JSONEvent.put("notifId", 201);
-            JSONEvent.put("zoneId", 102);
-            JSONEvent.put("baseId", 103);
+            JSONEvent.put("zoneId", 5);
+            JSONEvent.put("baseId", 2);
             JSONEvent.put("date", "Feb 19");
             JSONEvent.put("time", "05:00");
             JSONEvent.put("desc", "Go back home");
@@ -125,11 +122,11 @@ public class OfflineData
             JSONEvent = new JSONObject();
             JSONEvent.put("id", 200);
             JSONEvent.put("notifId", 201);
-            JSONEvent.put("zoneId", 102);
-            JSONEvent.put("baseId", 103);
+            JSONEvent.put("zoneId", 6);
+            JSONEvent.put("baseId", 2);
             JSONEvent.put("date", "Mar 1");
             JSONEvent.put("time", "22:40");
-            JSONEvent.put("desc", "Pack for vacation");
+            JSONEvent.put("desc", "Hand in report");
             JSONEvent.put("repeatWeekly", true);
             JSONEvent.put("repeatMonthly", false);
             JSONEvent.put("repeatDaily", false);
@@ -139,11 +136,11 @@ public class OfflineData
             JSONEvent = new JSONObject();
             JSONEvent.put("id", 200);
             JSONEvent.put("notifId", 201);
-            JSONEvent.put("zoneId", 102);
-            JSONEvent.put("baseId", 103);
+            JSONEvent.put("zoneId", 8);
+            JSONEvent.put("baseId", 2);
             JSONEvent.put("date", "Apr 1");
             JSONEvent.put("time", "22:40");
-            JSONEvent.put("desc", "Pull a prank");
+            JSONEvent.put("desc", "Study for quiz");
             JSONEvent.put("repeatWeekly", true);
             JSONEvent.put("repeatMonthly", false);
             JSONEvent.put("repeatDaily", false);

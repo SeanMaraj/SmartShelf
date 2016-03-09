@@ -59,6 +59,8 @@ public class EventAdaptor extends ArrayAdapter
         EventModel event = (EventModel)list.get(position);
         ((TextView)row.findViewById(R.id.eventDate)).setText(event.getDate());
         ((TextView)row.findViewById(R.id.eventDescription)).setText(event.getDesc());
+        ((TextView)row.findViewById(R.id.eventZoneIdText)).setText("Zone: " + event.getZoneId());
+        ((TextView)row.findViewById(R.id.eventTime)).setText(event.getTime());
         /*((TextView)row.findViewById(R.id.zoneNumberText)).setText("" + zone.getNumber());
         ((TextView)row.findViewById(R.id.zoneNameText)).setText(zone.getName());
         ((TextView)row.findViewById(R.id.initialWeightText)).setText("" + zone.getInitialWeight() + "kg");

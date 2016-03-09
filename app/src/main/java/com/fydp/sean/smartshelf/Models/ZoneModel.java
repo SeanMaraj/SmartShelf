@@ -10,6 +10,7 @@ public class ZoneModel {
     private float percentage;
     private float initialWeight;
     private float currentWeight;
+    private String date;
 
     public ZoneModel(int zoneNumber, String zoneName, float currentWeight, float initialWeight)
     {
@@ -65,5 +66,15 @@ public class ZoneModel {
         }
 
         return percentage;
+    }
+
+    public String getDate()
+    {
+        return date;
+    }
+
+    public void setDate(String date)
+    {
+        this.date = date;
     }
 }

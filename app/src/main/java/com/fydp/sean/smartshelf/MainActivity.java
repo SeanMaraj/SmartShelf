@@ -25,10 +25,10 @@ import android.widget.Toast;
 
 import com.fydp.sean.smartshelf.Controllers.EventsViewController;
 import com.fydp.sean.smartshelf.Controllers.SummaryViewController;
-import com.fydp.sean.smartshelf.Controllers.WeatherViewController;
 import com.fydp.sean.smartshelf.Controllers.ZonesViewController;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.fydp.sean.smartshelf.Helpers.Utility;
 
 
 public class MainActivity extends ActionBarActivity
@@ -79,8 +79,6 @@ public class MainActivity extends ActionBarActivity
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
         }
-
-
         //
         ////
 
@@ -92,6 +90,9 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        // Network test
+        //Utility.create().testNetwork();
     }
 
     @Override
@@ -127,6 +128,8 @@ public class MainActivity extends ActionBarActivity
         }
         return true;
     }
+    
+    
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
@@ -147,10 +150,6 @@ public class MainActivity extends ActionBarActivity
             case 2:
                 fragment = new EventsViewController();
                 mTitle = "Events";
-                break;
-            case 3:
-                fragment = new WeatherViewController();
-                mTitle = "Weather";
                 break;
         }
 
@@ -177,6 +176,9 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
+                break;
+            case 4:
+                mTitle = "HERE";
                 break;
         }
     }
@@ -280,6 +282,10 @@ public class MainActivity extends ActionBarActivity
         } else {
             getSupportFragmentManager().popBackStack();
         }
+    }
+
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 
 }

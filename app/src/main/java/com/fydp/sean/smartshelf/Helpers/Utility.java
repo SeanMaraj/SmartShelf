@@ -1,10 +1,6 @@
-package com.fydp.sean.smartshelf.Libraries;
+package com.fydp.sean.smartshelf.Helpers;
 
 import android.util.Log;
-import android.widget.Toast;
-
-import com.fydp.sean.smartshelf.DataFetcher;
-import com.fydp.sean.smartshelf.OfflineData;
 
 /**
  * Created by seanm on 2015-10-05.
@@ -72,7 +68,6 @@ public class Utility
 
     public static String fetchData(String command)
     {
-        Log.d("Log", "Fetching data: " + command);
         String result = "";
 
         if (!offlineMode)
@@ -98,8 +93,7 @@ public class Utility
         if (result == null || result.equals(""))
         {
             return fetchOfflineData(command);
-        }
-        else
+        } else
         {
             Log.d("Log", "Fetching online data successful");
             return result;
@@ -122,6 +116,65 @@ public class Utility
     public static void log(String message)
     {
         Log.d("Log", message);
+    }
+
+    public static void testNetwork()
+    {
+        log("Testing Network");
+
+        long startTime = System.nanoTime();
+        log("Start: " + startTime);
+        Utility.fetchData("getzones/1");
+        long endTime = System.nanoTime();
+        log("Endtime: " + endTime);
+        long estimatedTime = endTime - startTime;
+        log(""+ estimatedTime);
+
+
+        startTime = System.nanoTime();
+        log("Start: " + startTime);
+        Utility.fetchData("getzones/1");
+        endTime = System.nanoTime();
+        log("Endtime: " + endTime);
+        estimatedTime = endTime - startTime;
+        log(""+ estimatedTime);
+
+        startTime = System.nanoTime();
+        log("Start: " + startTime);
+        Utility.fetchData("getzones/1");
+        endTime = System.nanoTime();
+        log("Endtime: " + endTime);
+        estimatedTime = endTime - startTime;
+        log(""+ estimatedTime);
+
+        startTime = System.nanoTime();
+        log("Start: " + startTime);
+        Utility.fetchData("getzones/1");
+        endTime = System.nanoTime();
+        log("Endtime: " + endTime);
+        estimatedTime = endTime - startTime;
+        log(""+ estimatedTime);
+
+        startTime = System.nanoTime();
+        log("Start: " + startTime);
+        Utility.fetchData("getzones/1");
+        endTime = System.nanoTime();
+        log("Endtime: " + endTime);
+        estimatedTime = endTime - startTime;
+        log(""+ estimatedTime);
+
+        startTime = System.nanoTime();
+        log("Start: " + startTime);
+        Utility.fetchData("getzones/1");
+        endTime = System.nanoTime();
+        log("Endtime: " + endTime);
+        estimatedTime = endTime - startTime;
+        log(""+ estimatedTime);
+
+
+
+
+
     }
 }
 

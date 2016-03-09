@@ -3,18 +3,21 @@ package com.fydp.sean.smartshelf.Controllers;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.fydp.sean.smartshelf.Adaptors.EventAdaptor;
 import com.fydp.sean.smartshelf.Adaptors.ZoneAdaptor;
-import com.fydp.sean.smartshelf.Libraries.Utility;
+import com.fydp.sean.smartshelf.Helpers.Utility;
+import com.fydp.sean.smartshelf.MainActivity;
 import com.fydp.sean.smartshelf.Models.EventModel;
 import com.fydp.sean.smartshelf.Models.ZoneModel;
-import com.fydp.sean.smartshelf.OfflineData;
+import com.fydp.sean.smartshelf.Helpers.OfflineData;
 import com.fydp.sean.smartshelf.R;
 
 import org.json.JSONArray;
@@ -39,6 +42,8 @@ public class SummaryViewController extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        ((MainActivity) getActivity()).setActionBarTitle("Summary");
         rootView = inflater.inflate(R.layout.view_summary, container, false);
 
         // Inital setup
@@ -57,7 +62,7 @@ public class SummaryViewController extends Fragment{
 
 
         getData();
-        //setOnItemClick();
+        setOnItemClick();
         populateZonesList();
         populateEventsList();
 
@@ -140,5 +145,55 @@ public class SummaryViewController extends Fragment{
         {
             eventAdaptor.add(events.get(i));
         }
+    }
+
+    private void setOnItemClick()
+    {
+        Log.d("Log", "Setting item click");
+
+        zoneListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+
+                Fragment fragment = new ZoneEditController();
+                Bundle args = new Bundle();
+
+                args.putInt("position", position);
+                args.putString("itemName", zones.get(position).getName());
+                args.putFloat("initialWeight", zones.get(position).getInitialWeight());
+
+                fragment.setArguments(args);
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, fragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+        eventListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+
+                Fragment fragment = new EventEditController();
+                Bundle args = new Bundle();
+
+                //args.putInt("position", position);
+                //args.putString("itemName", zones.get(position).getName());
+                //args.putFloat("initialWeight", zones.get(position).getInitialWeight());
+
+                fragment.setArguments(args);
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, fragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
     }
 }
