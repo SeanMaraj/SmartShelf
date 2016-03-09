@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_id": "shelf-m8-e1e62",
+    "project_number": "754216847569",
+    "name": "SHELF-M8"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754216847569:android:fe3787ae535f2cfc",
+        "client_id": "android:com.fydp.sean.smartshelf",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.fydp.sean.smartshelf",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 2,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 1
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
