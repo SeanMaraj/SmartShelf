@@ -37,7 +37,7 @@ public class EventsViewController extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        ((MainActivity) getActivity()).setActionBarTitle("Events");
+        ((MainActivity) getActivity()).setActionBarTitle("Reminders");
 
         rootView = inflater.inflate(R.layout.view_events, container, false);
         eventListView = (ListView) rootView.findViewById(R.id.eventList);

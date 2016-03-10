@@ -1,6 +1,7 @@
 package com.fydp.sean.smartshelf.Helpers;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -19,7 +20,9 @@ public class DataFetcher extends AsyncTask<String, Void, String> {
         BufferedReader reader = null;
 
         try{
+            Log.d("LOG", "In data fetcher");
             URL url = new URL(params[0]);
+
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
             StringBuilder sb = new StringBuilder();

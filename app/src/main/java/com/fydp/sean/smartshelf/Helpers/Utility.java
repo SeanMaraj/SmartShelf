@@ -73,6 +73,7 @@ public class Utility
         if (!offlineMode)
         {
             String url = serverAddress + command;
+            Log.d("Log", "Fetching url: " + url);
             DataFetcher df = new DataFetcher();
 
             try
@@ -92,6 +93,7 @@ public class Utility
         // If no result, fetch local data, otherwise return result
         if (result == null || result.equals(""))
         {
+            Log.d("LOG", "Result is null. Fetching offline data");
             return fetchOfflineData(command);
         } else
         {

@@ -43,6 +43,8 @@ public class SummaryViewController extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        Log.d("Log", "IN SUMMARY VIEW CONTROLLER");
+
         ((MainActivity) getActivity()).setActionBarTitle("Summary");
         rootView = inflater.inflate(R.layout.view_summary, container, false);
 
@@ -87,6 +89,8 @@ public class SummaryViewController extends Fragment{
 
     private void parseZonesResult(String result)
     {
+        Log.d("LOG", "Parsing zones result: " + result);
+
         try
         {
             JSONArray JSONZones = new JSONArray(result);
@@ -106,6 +110,7 @@ public class SummaryViewController extends Fragment{
 
     private void parseEventsResult(String result)
     {
+        Log.d("LOG", "Parsing events result: " + result);
         try
         {
             JSONArray JSONEvents = new JSONArray(result);

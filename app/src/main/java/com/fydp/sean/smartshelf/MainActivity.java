@@ -141,15 +141,15 @@ public class MainActivity extends ActionBarActivity
         {
             case 0:
                 fragment = new SummaryViewController();
-                mTitle = "Summary";
+                mTitle = getString(R.string.title_section1);
                 break;
             case 1:
                 fragment = new ZonesViewController();
-                mTitle = "Zones";
+                mTitle = getString(R.string.title_section2);
                 break;
             case 2:
                 fragment = new EventsViewController();
-                mTitle = "Events";
+                mTitle = getString(R.string.title_section3);
                 break;
         }
 
