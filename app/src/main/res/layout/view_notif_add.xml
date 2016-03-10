@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="10dp">
+
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="SAVE"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp">
+
+
+
+        <TextView
+            android:id="@+id/zoneNumberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="Zone Number: "/>
+
+        <TextView
+            android:id="@+id/notifDateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="Date: "/>
+        <TextView
+            android:id="@+id/notifTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="Time: "/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- MONITOR STOCK LEVELS CARD -->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ff434343">
+
+                    <CheckBox
+                        android:id="@+id/monitorStockCheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Monitor Stock Levels"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:checked="false" />
+
+                    <LinearLayout
+                        android:id="@+id/monitorStockOptionsLayout"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="32dp"
+                        android:paddingRight="20dp"
+                        android:visibility="visible">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/initWeightText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Initial Weight: "/>
+
+                            <EditText
+                                android:id="@+id/initWeightEdit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toLeftOf="@+id/initWeightGramsText"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="200" />
+
+                            <TextView
+                                android:id="@+id/initWeightGramsText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentRight="true"
+                                android:text="kg"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/threshholdText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Notification Threshold: "/>
+
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toLeftOf="@+id/percentText"
+                                android:id="@+id/thresholdEdit"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="90" />
+
+                            <TextView
+                                android:id="@+id/percentText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:text="%"/>
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+                <!-- WEATHER CARD -->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="#ff434343">
+
+                    <CheckBox
+                        android:id="@+id/customEventCheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Set Reminder"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:checked="false" />
+
+                    <LinearLayout
+                        android:id="@+id/eventOptionsLayout"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="32dp"
+                        android:paddingRight="20dp"
+                        android:visibility="visible">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="description"/>
+
+
+
+                        <!--
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/eventRepeatText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Repeat: "/>
+
+                            <Spinner
+                                android:id="@+id/eventRepeatSpinner"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                android:layout_alignParentRight="true"/>
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/sunBtn"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:textAllCaps="false"
+                                android:text="S"/>
+                            <Button
+                                android:id="@+id/monBtn"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:textAllCaps="false"
+                                android:text="M"/>
+                            <Button
+                                android:id="@+id/tuesBtn"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:textAllCaps="false"
+                                android:text="T"/>
+                            <Button
+                                android:id="@+id/wedBtn"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:textAllCaps="false"
+                                android:text="W"/>
+                            <Button
+                                android:id="@+id/thrusBtn"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:textAllCaps="false"
+                                android:text="T"/>
+                            <Button
+                                android:id="@+id/friBtn"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:textAllCaps="false"
+                                android:text="F"/>
+                            <Button
+                                android:id="@+id/satBtn"
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:textAllCaps="false"
+                                android:text="S"/>
+
+                        </LinearLayout>
+
+                        -->
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- WEATHER CARD -->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="#ff434343">
+
+                    <CheckBox
+                        android:id="@+id/weatherCheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Weather Notifications"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:checked="false" />
+
+                    <LinearLayout
+                        android:id="@+id/weatherOptionsLayout"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="32dp"
+                        android:paddingRight="20dp"
+                        android:visibility="visible">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/weatherTypeText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Weather Type: "/>
+
+                            <Spinner
+                                android:id="@+id/weatherTypeSpinner"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                android:layout_alignParentRight="true"/>
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Operator: "/>
+
+                            <Spinner
+                                android:id="@+id/operatorSpinner"
+                                android:layout_width="100dp"
+                                android:layout_height="40dp"
+                                android:layout_alignParentRight="true">
+
+                            </Spinner>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Value: "/>
+
+                            <EditText
+                                android:id="@+id/valueEdit"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"/>
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>
