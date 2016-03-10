@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.fydp.sean.smartshelf.Models.EventModel;
-import com.fydp.sean.smartshelf.Models.ZoneModel;
 import com.fydp.sean.smartshelf.R;
 
 import java.util.ArrayList;
@@ -48,14 +47,14 @@ public class EventAdaptor extends ArrayAdapter
         if (convertView == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.event, parent, false);
+            row = inflater.inflate(R.layout.subview_reminder, parent, false);
         }
         else
         {
             row = convertView;
         }
 
-        // Set content of event item
+        // Set content of subview_reminder item
         EventModel event = (EventModel)list.get(position);
         ((TextView)row.findViewById(R.id.eventDate)).setText(event.getDate());
         ((TextView)row.findViewById(R.id.eventDescription)).setText(event.getDesc());

@@ -51,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:text="UPCOMING EVENTS"
+                    android:text="UPCOMING REMINDERS"
                     android:textSize="20dp"/>
 
                 <View
@@ -130,12 +130,17 @@
                         android:layout_marginRight="10dp"
                         android:background="#FF777777"/>
 
-                    <TextView
+
+
+
+                    <ListView
+                        android:id="@+id/weatherListView"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Take sunglasses"
-                        android:layout_gravity="center_vertical"
-                        android:textSize="20dp"/>
+                        android:layout_height="wrap_content"/>
+
+
+
+
 
                 </LinearLayout>
             </LinearLayout>

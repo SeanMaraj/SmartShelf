@@ -45,7 +45,7 @@ public class ZonesViewController extends Fragment
 
         zoneListView = (ListView) rootView.findViewById(R.id.zoneList);
         addZone = (Button) rootView.findViewById(R.id.addZoneBtn);
-        adaptor = new ZoneAdaptor(getActivity(), R.layout.row_zone);
+        adaptor = new ZoneAdaptor(getActivity(), R.layout.subview_zone);
         zoneListView.setAdapter(adaptor);
 
         zones.clear();

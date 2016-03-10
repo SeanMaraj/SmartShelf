@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fydp.sean.smartshelf.Models.ZoneModel;
@@ -49,7 +48,7 @@ public class ZoneAdaptor extends ArrayAdapter {
         if (convertView == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.row_zone, parent, false);
+            row = inflater.inflate(R.layout.subview_zone, parent, false);
         }
         else
         {
@@ -59,8 +58,8 @@ public class ZoneAdaptor extends ArrayAdapter {
         // Set content of row item
         ZoneModel zone = (ZoneModel)list.get(position);
         float percent = Math.round(100.0 * zone.getPercentage()) / 100;
-        ((TextView)row.findViewById(R.id.zoneNumberText)).setText("" + zone.getNumber());
-        ((TextView)row.findViewById(R.id.zoneNameText)).setText(zone.getName());
+        //((TextView)row.findViewById(R.id.zoneNumberText)).setText("" + zone.getNumber());
+        ((TextView)row.findViewById(R.id.zoneNameTxt)).setText(zone.getName());
         ((TextView)row.findViewById(R.id.initialWeightText)).setText("" + zone.getInitialWeight() + " kg");
         TextView percentTextView = ((TextView)row.findViewById(R.id.percentageText));
         percentTextView.setText("" + percent + " %");

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.fydp.sean.smartshelf.Adaptors.EventAdaptor;
@@ -25,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sean on 2015-07-12.
@@ -38,6 +40,8 @@ public class SummaryViewController extends Fragment{
     ListView eventListView;
     EventAdaptor eventAdaptor;
     ArrayList<EventModel> events = new ArrayList<EventModel>();
+    ListView weatherListView;
+    String[] weatherValues;
 
     @Nullable
     @Override
@@ -53,20 +57,26 @@ public class SummaryViewController extends Fragment{
 
         // Setup zones list
         zoneListView = (ListView) rootView.findViewById(R.id.lowStockList);
-        zoneAdaptor = new ZoneAdaptor(getActivity(), R.layout.row_zone);
+        zoneAdaptor = new ZoneAdaptor(getActivity(), R.layout.subview_zone);
         zoneListView.setAdapter(zoneAdaptor);
         zones.clear();
 
+        // Reminders
         eventListView = (ListView) rootView.findViewById(R.id.eventsSummaryList);
-        eventAdaptor = new EventAdaptor(getActivity(), R.layout.event);
+        eventAdaptor = new EventAdaptor(getActivity(), R.layout.subview_reminder);
         eventListView.setAdapter(eventAdaptor);
         events.clear();
+
+        //Weather
+        weatherListView = (ListView) rootView.findViewById(R.id.weatherListView);
+
 
 
         getData();
         setOnItemClick();
         populateZonesList();
         populateEventsList();
+        populateWeatherList();
 
 
         return rootView;
@@ -150,6 +160,24 @@ public class SummaryViewController extends Fragment{
         {
             eventAdaptor.add(events.get(i));
         }
+    }
+
+    private void populateWeatherList()
+    {
+        weatherValues = new String[] { "Android List View",
+                "Adapter implementation",
+                "Simple List View In Android",
+                "Create List View Android",
+                "Android Example",
+                "List View Source Code",
+                "List View Array Adapter",
+                "Android Example List View"
+        };
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_list_item_1, android.R.id.text1, weatherValues);
+
+        weatherListView.setAdapter(adapter);
     }
 
     private void setOnItemClick()

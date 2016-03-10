@@ -41,7 +41,7 @@ public class EventsViewController extends Fragment{
 
         rootView = inflater.inflate(R.layout.view_events, container, false);
         eventListView = (ListView) rootView.findViewById(R.id.eventList);
-        adaptor = new EventAdaptor(getActivity(), R.layout.event);
+        adaptor = new EventAdaptor(getActivity(), R.layout.subview_reminder);
         eventListView.setAdapter(adaptor);
 
         events.clear();

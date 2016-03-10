@@ -73,7 +73,15 @@
             android:textSize="15dp"
             android:text="Z: 1"/>
 
-
+        <Button
+            android:id="@+id/remindertBtn"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="DISMISS"
+            android:textSize="8dp"
+            />
 
 
     </RelativeLayout>
