@@ -7,14 +7,16 @@ public class StockNotifModel
 {
 
     private int notifId;
-    private float weight;
-    private float threshhold;
+    private float initialWeight;
+    private float percentage;
+    private String operator;
 
-    public StockNotifModel(int notifId, float threshhold, float weight)
+    public StockNotifModel(int notifId, float threshhold, float initialWeight, String operator)
     {
         this.notifId = notifId;
-        this.threshhold = threshhold;
-        this.weight = weight;
+        this.percentage = threshhold;
+        this.initialWeight = initialWeight;
+        this.operator = operator;
     }
 
     public int getNotifId()
@@ -27,23 +29,33 @@ public class StockNotifModel
         this.notifId = notifId;
     }
 
-    public float getWeight()
+    public float getInitialWeight()
     {
-        return weight;
+        return initialWeight;
     }
 
-    public void setWeight(float weight)
+    public void setInitalWeight(float weight)
     {
-        this.weight = weight;
+        this.initialWeight = weight;
     }
 
-    public float getThreshhold()
+    public float getPercentage()
     {
-        return threshhold;
+        return percentage;
     }
 
-    public void setThreshhold(float threshhold)
+    public void setPercentage(float percentage)
     {
-        this.threshhold = threshhold;
+        this.percentage = percentage;
+    }
+
+    public String getOperator()
+    {
+        return operator;
+    }
+
+    public void setOperator(String operator)
+    {
+        this.operator = operator;
     }
 }

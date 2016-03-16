@@ -4,12 +4,14 @@
                 android:layout_height="50dp">
 
     <TextView
+        android:id="@+id/weatherTypeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Temperature"
         android:textSize="20dp"/>
 
     <TextView
+        android:id="@+id/operatorText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -17,11 +19,12 @@
         android:textSize="20dp"/>
 
     <TextView
+        android:id="@+id/weatherValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:textSize="35dp"
+        android:textSize="30dp"
         android:text="20 °C"/>
 
 

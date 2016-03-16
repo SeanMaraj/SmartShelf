@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.fydp.sean.smartshelf.Models.EventModel;
+import com.fydp.sean.smartshelf.Models.ReminderModel;
 import com.fydp.sean.smartshelf.R;
 
 import java.util.ArrayList;
@@ -16,11 +16,11 @@ import java.util.List;
 /**
  * Created by seanm on 2016-02-02.
  */
-public class EventAdaptor extends ArrayAdapter
+public class ReminderListAdaptor extends ArrayAdapter
 {
     List list = new ArrayList();
 
-    public EventAdaptor(Context context, int resource) {
+    public ReminderListAdaptor(Context context, int resource) {
         super(context, resource);
     }
 
@@ -55,24 +55,11 @@ public class EventAdaptor extends ArrayAdapter
         }
 
         // Set content of subview_reminder item
-        EventModel event = (EventModel)list.get(position);
+        ReminderModel event = (ReminderModel)list.get(position);
         ((TextView)row.findViewById(R.id.eventDate)).setText(event.getDate());
         ((TextView)row.findViewById(R.id.eventDescription)).setText(event.getDesc());
         ((TextView)row.findViewById(R.id.eventZoneIdText)).setText("Zone: " + event.getZoneId());
         ((TextView)row.findViewById(R.id.eventTime)).setText(event.getTime());
-        /*((TextView)row.findViewById(R.id.zoneNumberText)).setText("" + zone.getNumber());
-        ((TextView)row.findViewById(R.id.zoneNameText)).setText(zone.getName());
-        ((TextView)row.findViewById(R.id.initialWeightText)).setText("" + zone.getInitialWeight() + "kg");
-        TextView currentWeightText = ((TextView)row.findViewById(R.id.currentWeightText));
-        currentWeightText.setText("" + zone.getCurrentWeight() + "kg");
-
-        float percent = zone.getPercentage();
-        setCurrentWeightColor(currentWeightText, percent);
-
-        */
-
-        //ViewGroup.LayoutParams layoutParams = ((RelativeLayout)row.findViewById(R.id.scheduleView)).getLayoutParams();
-        //layoutParams.width = 100;
 
         return row;
     }

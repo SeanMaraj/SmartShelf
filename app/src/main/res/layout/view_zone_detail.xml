@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="ADD NOTIFICATION"/>
+        android:text="+"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,14 +27,21 @@
             android:layout_height="wrap_content"
             android:text="Zone Name"
             android:textStyle="bold"
-            android:textSize="40dp"/>
+            android:textSize="30dp"/>
 
         <TextView
             android:id="@+id/zoneNumberText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Zone: "
-            android:textSize="25dp"/>
+            android:text="Zone Number: "
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/baseNumberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Base Number: "
+            android:textSize="20dp"/>
 
 
 
@@ -59,7 +66,7 @@
 
             <ListView
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
+                android:layout_height="70dp"
                 android:id="@+id/stockList"
                 android:layout_weight="1" />
 
@@ -87,7 +94,7 @@
 
             <ListView
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
+                android:layout_height="70dp"
                 android:id="@+id/reminderList"
                 android:layout_weight="1" />
 
@@ -114,7 +121,7 @@
 
             <ListView
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
+                android:layout_height="70dp"
                 android:id="@+id/weatherList"
                 android:layout_weight="1" />
 

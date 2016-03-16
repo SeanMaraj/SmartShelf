@@ -178,6 +178,60 @@ public class Utility
 
 
     }
+
+    public static String getDate(String date)
+    {
+        String[] parts = date.split("/");
+        String formatedDate = "";
+
+        switch (Integer.parseInt(parts[1]))
+        {
+            case 1:
+                formatedDate += "Jan";
+                break;
+            case 2:
+                formatedDate += "Feb";
+                break;
+            case 3:
+                formatedDate += "Mar";
+                break;
+            case 4:
+                formatedDate += "Apr";
+                break;
+            case 5:
+                formatedDate += "May";
+                break;
+            case 6:
+                formatedDate += "June";
+                break;
+            case 7:
+                formatedDate += "July";
+                break;
+            case 8:
+                formatedDate += "Aug";
+                break;
+            case 9:
+                formatedDate += "Sept";
+                break;
+            case 10:
+                formatedDate += "Oct";
+                break;
+            case 11:
+                formatedDate += "Nov";
+                break;
+            case 12:
+                formatedDate += "Dec";
+                break;
+        }
+
+        return formatedDate + " " + parts[0];
+    }
+
+    public static String capitalizeFirst(String s)
+    {
+        return s.substring(0,1).toUpperCase() + s.substring(1);
+    }
+
 }
 
 

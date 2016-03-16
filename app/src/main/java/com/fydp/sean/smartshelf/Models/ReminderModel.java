@@ -3,7 +3,7 @@ package com.fydp.sean.smartshelf.Models;
 /**
  * Created by seanm on 2016-02-03.
  */
-public class EventModel
+public class ReminderModel
 {
     private int id;
     private int notifId;
@@ -15,7 +15,7 @@ public class EventModel
     private int isActive;
 
     // Constructor
-    public EventModel(int id, int notifId, int zoneId, int baseId, String date, String time, String desc, int isActive)
+    public ReminderModel(int id, int notifId, int zoneId, int baseId, String date, String time, String desc, int isActive)
     {
         this.id = id;
         this.notifId = notifId;

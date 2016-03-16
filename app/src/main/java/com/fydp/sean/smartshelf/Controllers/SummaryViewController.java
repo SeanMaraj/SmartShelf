@@ -12,11 +12,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.fydp.sean.smartshelf.Adaptors.EventAdaptor;
+import com.fydp.sean.smartshelf.Adaptors.ReminderListAdaptor;
 import com.fydp.sean.smartshelf.Adaptors.ZoneAdaptor;
 import com.fydp.sean.smartshelf.Helpers.Utility;
 import com.fydp.sean.smartshelf.MainActivity;
-import com.fydp.sean.smartshelf.Models.EventModel;
+import com.fydp.sean.smartshelf.Models.ReminderModel;
 import com.fydp.sean.smartshelf.Models.ZoneModel;
 import com.fydp.sean.smartshelf.Helpers.OfflineData;
 import com.fydp.sean.smartshelf.R;
@@ -38,9 +38,9 @@ public class SummaryViewController extends Fragment{
     ListView zoneListView;
     ZoneAdaptor zoneAdaptor;
     ArrayList<ZoneModel> zones = new ArrayList<ZoneModel>();
-    ListView eventListView;
-    EventAdaptor eventAdaptor;
-    ArrayList<EventModel> events = new ArrayList<EventModel>();
+    ListView reminderListView;
+    ReminderListAdaptor reminderAdaptor;
+    ArrayList<ReminderModel> reminders = new ArrayList<ReminderModel>();
     ListView weatherListView;
     List<String> weatherValues = new Vector<String>();
 
@@ -63,10 +63,10 @@ public class SummaryViewController extends Fragment{
         zones.clear();
 
         // Reminders
-        eventListView = (ListView) rootView.findViewById(R.id.eventsSummaryList);
-        eventAdaptor = new EventAdaptor(getActivity(), R.layout.subview_reminder);
-        eventListView.setAdapter(eventAdaptor);
-        events.clear();
+        reminderListView = (ListView) rootView.findViewById(R.id.eventsSummaryList);
+        reminderAdaptor = new ReminderListAdaptor(getActivity(), R.layout.subview_reminder);
+        reminderListView.setAdapter(reminderAdaptor);
+        reminders.clear();
 
         // Weather
         weatherListView = (ListView) rootView.findViewById(R.id.weatherListView);
@@ -74,7 +74,7 @@ public class SummaryViewController extends Fragment{
         getData();
         setOnItemClick();
         populateZonesList();
-        populateEventsList();
+        populateRemindersList();
         populateWeatherList();
 
         return rootView;
@@ -92,7 +92,7 @@ public class SummaryViewController extends Fragment{
     public void getData()
     {
         parseZonesResult(Utility.fetchData("getlowstock"));
-        parseEventsResult(Utility.fetchData("getupcomingreminders"));
+        parseRemindersResult(Utility.fetchData("getupcomingreminders"));
         parseWeatherResult(Utility.fetchData("getactiveweather"));
     }
 
@@ -107,7 +107,7 @@ public class SummaryViewController extends Fragment{
             for (int i = 0; i < JSONZones.length(); i++)
             {
                 JSONObject JSONZone = JSONZones.getJSONObject(i);
-                ZoneModel zone = new ZoneModel(0, JSONZone.getString("message"), (float)(JSONZone.getDouble("weight")), (float)(JSONZone.getDouble("initialweight")), JSONZone.getInt("activenotificationid"));
+                ZoneModel zone = new ZoneModel(JSONZone.getInt("zoneid"), JSONZone.getString("message"), (float)(JSONZone.getDouble("weight")), (float)(JSONZone.getDouble("initialweight")), JSONZone.getInt("activenotificationid"), JSONZone.getInt("baseid"), JSONZone.getString("description"));
                 zones.add(zone);
             }
 
@@ -117,9 +117,9 @@ public class SummaryViewController extends Fragment{
         }
     }
 
-    private void parseEventsResult(String result)
+    private void parseRemindersResult(String result)
     {
-        Log.d("LOG", "Parsing events result: " + result);
+        Log.d("LOG", "Parsing reminders result: " + result);
         try
         {
             JSONArray JSONEvents = new JSONArray(result);
@@ -128,8 +128,8 @@ public class SummaryViewController extends Fragment{
             {
                 JSONObject JSONEvent = JSONEvents.getJSONObject(i);
                 String date = getDate(JSONEvent.getString("date"));
-                EventModel event = new EventModel(0, 0, JSONEvent.getInt("zoneid"), 0, date, JSONEvent.getString("time"), JSONEvent.getString("description"), JSONEvent.getInt(("isactive")));
-                events.add(event);
+                ReminderModel event = new ReminderModel(0, 0, JSONEvent.getInt("zoneid"), 0, date, JSONEvent.getString("time"), JSONEvent.getString("description"), JSONEvent.getInt(("isactive")));
+                reminders.add(event);
             }
 
         } catch (JSONException e)
@@ -170,15 +170,15 @@ public class SummaryViewController extends Fragment{
         }
     }
 
-    private void populateEventsList()
+    private void populateRemindersList()
     {
         Log.d("Log", "Populating list");
-        eventAdaptor.clear();
-        eventAdaptor.notifyDataSetChanged();
+        reminderAdaptor.clear();
+        reminderAdaptor.notifyDataSetChanged();
 
-        for (int i = 0; i < events.size(); i++)
+        for (int i = 0; i < reminders.size(); i++)
         {
-            eventAdaptor.add(events.get(i));
+            reminderAdaptor.add(reminders.get(i));
         }
     }
 
@@ -204,9 +204,9 @@ public class SummaryViewController extends Fragment{
                 Fragment fragment = new ZoneDetailController();
                 Bundle args = new Bundle();
 
-                args.putInt("position", position);
-                args.putString("itemName", zones.get(position).getName());
-                args.putFloat("initialWeight", zones.get(position).getInitialWeight());
+                args.putString("zoneName", zones.get(position).getDesc());
+                args.putInt("zoneId", zones.get(position).getZoneId());
+                args.putInt("baseId", zones.get(position).getBaseId());
 
                 fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -217,7 +217,7 @@ public class SummaryViewController extends Fragment{
             }
         });
 
-        eventListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        reminderListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
@@ -227,7 +227,7 @@ public class SummaryViewController extends Fragment{
                 Bundle args = new Bundle();
 
                 //args.putInt("position", position);
-                //args.putString("itemName", zones.get(position).getName());
+                //args.putString("itemName", zones.get(position).getMessage());
                 //args.putFloat("initialWeight", zones.get(position).getInitialWeight());
 
                 fragment.setArguments(args);

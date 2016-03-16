@@ -82,7 +82,7 @@ public class ZonesViewController extends Fragment
                 Bundle args = new Bundle();
 
                 args.putInt("position", position);
-                args.putString("itemName", zones.get(position).getName());
+                args.putString("itemName", zones.get(position).getMessage());
                 args.putFloat("initialWeight", zones.get(position).getInitialWeight());
 
                 fragment.setArguments(args);
@@ -109,7 +109,7 @@ public class ZonesViewController extends Fragment
             for (int i = 0; i < JSONZones.length(); i++)
             {
                 JSONObject JSONZone = JSONZones.getJSONObject(i);
-                ZoneModel zone = new ZoneModel(JSONZone.getInt("id"), JSONZone.getString("desc"), (float)(JSONZone.getDouble("weight")), (float)(JSONZone.getDouble("initialweight")), 0);
+                ZoneModel zone = new ZoneModel(JSONZone.getInt("id"), JSONZone.getString("desc"), (float)(JSONZone.getDouble("weight")), (float)(JSONZone.getDouble("initialweight")), 0, 0, "");
                 zones.add(zone);
             }
 

@@ -2,8 +2,6 @@ package com.fydp.sean.smartshelf.Adaptors;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fydp.sean.smartshelf.Models.ZoneModel;
 import com.fydp.sean.smartshelf.R;
@@ -63,7 +60,7 @@ public class ZoneAdaptor extends ArrayAdapter {
         // Set content of row item
         final ZoneModel zone = (ZoneModel)list.get(position);
         float percent = Math.round(100.0 * zone.getPercentage()) / 100;
-        ((TextView)row.findViewById(R.id.zoneNameTxt)).setText(zone.getName());
+        ((TextView)row.findViewById(R.id.zoneNameTxt)).setText(zone.getMessage());
         ((TextView)row.findViewById(R.id.initialWeightText)).setText("" + zone.getInitialWeight() + " kg");
         TextView percentTextView = ((TextView)row.findViewById(R.id.percentageText));
         percentTextView.setText("" + percent + " %");

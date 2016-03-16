@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.fydp.sean.smartshelf.Adaptors.EventAdaptor;
+import com.fydp.sean.smartshelf.Adaptors.ReminderListAdaptor;
 import com.fydp.sean.smartshelf.Helpers.Utility;
 import com.fydp.sean.smartshelf.MainActivity;
-import com.fydp.sean.smartshelf.Models.EventModel;
+import com.fydp.sean.smartshelf.Models.ReminderModel;
 import com.fydp.sean.smartshelf.R;
 
 import org.json.JSONArray;
@@ -30,8 +30,8 @@ public class EventsViewController extends Fragment{
 
     View rootView = null;
     ListView eventListView;
-    EventAdaptor adaptor;
-    ArrayList<EventModel> events = new ArrayList<EventModel>();
+    ReminderListAdaptor adaptor;
+    ArrayList<ReminderModel> events = new ArrayList<ReminderModel>();
 
     @Nullable
     @Override
@@ -41,7 +41,7 @@ public class EventsViewController extends Fragment{
 
         rootView = inflater.inflate(R.layout.view_events, container, false);
         eventListView = (ListView) rootView.findViewById(R.id.eventList);
-        adaptor = new EventAdaptor(getActivity(), R.layout.subview_reminder);
+        adaptor = new ReminderListAdaptor(getActivity(), R.layout.subview_reminder);
         eventListView.setAdapter(adaptor);
 
         events.clear();
@@ -67,7 +67,7 @@ public class EventsViewController extends Fragment{
             for (int i = 0; i < JSONEvents.length(); i++)
             {
                 JSONObject JSONEvent = JSONEvents.getJSONObject(i);
-                EventModel event = new EventModel(JSONEvent.getInt("id"), JSONEvent.getInt("notifId"), JSONEvent.getInt("zoneId"), JSONEvent.getInt("baseId"), JSONEvent.getString("date"), JSONEvent.getString("time"), JSONEvent.getString("description"), JSONEvent.getInt(("isactive")));
+                ReminderModel event = new ReminderModel(JSONEvent.getInt("id"), JSONEvent.getInt("notifId"), JSONEvent.getInt("zoneId"), JSONEvent.getInt("baseId"), JSONEvent.getString("date"), JSONEvent.getString("time"), JSONEvent.getString("description"), JSONEvent.getInt(("isactive")));
                 events.add(event);
             }
 
@@ -103,7 +103,7 @@ public class EventsViewController extends Fragment{
                 Bundle args = new Bundle();
 
                 //args.putInt("position", position);
-                //args.putString("itemName", zones.get(position).getName());
+                //args.putString("itemName", zones.get(position).getMessage());
                 //args.putFloat("initialWeight", zones.get(position).getInitialWeight());
 
                 fragment.setArguments(args);

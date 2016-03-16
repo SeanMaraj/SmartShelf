@@ -7,21 +7,22 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.fydp.sean.smartshelf.Helpers.Utility;
 import com.fydp.sean.smartshelf.Models.StockNotifModel;
+import com.fydp.sean.smartshelf.Models.WeatherNotifModel;
 import com.fydp.sean.smartshelf.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Sean on 2016-03-10.
+ * Created by Sean on 2016-03-16.
  */
-public class StockNotifListAdaptor extends ArrayAdapter
+public class WeatherNotifListAdaptor extends ArrayAdapter
 {
-
     List list = new ArrayList();
 
-    public StockNotifListAdaptor(Context context, int resource) {
+    public WeatherNotifListAdaptor(Context context, int resource) {
         super(context, resource);
     }
 
@@ -48,7 +49,7 @@ public class StockNotifListAdaptor extends ArrayAdapter
         if (convertView == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.subview_notif_stock, parent, false);
+            row = inflater.inflate(R.layout.subview_weather, parent, false);
         }
         else
         {
@@ -56,11 +57,13 @@ public class StockNotifListAdaptor extends ArrayAdapter
         }
 
         // Set content of row item
-        StockNotifModel snm = (StockNotifModel)list.get(position);
-        ((TextView)row.findViewById(R.id.operatorText)).setText(snm.getOperator());
-        ((TextView)row.findViewById(R.id.percentageText)).setText("" + snm.getPercentage() + "%");
-        ((TextView)row.findViewById(R.id.initialWeightText)).setText("" + snm.getInitialWeight() + " kg");
+        WeatherNotifModel wnm = (WeatherNotifModel)list.get(position);
+        ((TextView)row.findViewById(R.id.weatherTypeText)).setText(Utility.capitalizeFirst(wnm.getWeatherType()));
+        ((TextView)row.findViewById(R.id.operatorText)).setText("" + wnm.getOperator());
+        ((TextView)row.findViewById(R.id.weatherValue)).setText(Utility.capitalizeFirst("" + wnm.getValue()));
 
         return row;
     }
+
+
 }

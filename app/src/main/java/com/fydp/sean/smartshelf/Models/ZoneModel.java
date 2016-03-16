@@ -5,37 +5,41 @@ package com.fydp.sean.smartshelf.Models;
  */
 public class ZoneModel {
 
-    private int number;
-    private String name;
+    private int zoneId;
+    private String message;
     private float percentage;
     private float initialWeight;
     private float currentWeight;
     private String date;
     private int activeNotifId;
+    private int baseId;
+    private String desc;
 
-    public ZoneModel(int zoneNumber, String zoneName, float currentWeight, float initialWeight, int activeNotifId)
+    public ZoneModel(int zoneId, String zoneName, float currentWeight, float initialWeight, int activeNotifId, int baseId, String desc)
     {
-        setNumber(zoneNumber);
-        setName(zoneName);
+        setZoneId(zoneId);
+        setMessage(zoneName);
         setCurrentWeight(currentWeight);
         setInitialWeight(initialWeight);
         setActiveNotifId(activeNotifId);
+        this.baseId = baseId;
+        this.desc = desc;
     }
 
-    public int getNumber() {
-        return number;
+    public int getZoneId() {
+        return zoneId;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setZoneId(int zoneId) {
+        this.zoneId = zoneId;
     }
 
-    public String getName() {
-        return name;
+    public String getMessage() {
+        return message;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public float getInitialWeight() {
@@ -88,5 +92,25 @@ public class ZoneModel {
     public void setActiveNotifId(int activeNotifId)
     {
         this.activeNotifId = activeNotifId;
+    }
+
+    public int getBaseId()
+    {
+        return baseId;
+    }
+
+    public void setBaseId(int baseId)
+    {
+        this.baseId = baseId;
+    }
+
+    public String getDesc()
+    {
+        return desc;
+    }
+
+    public void setDesc(String desc)
+    {
+        this.desc = desc;
     }
 }
