@@ -27,6 +27,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * Created by Sean on 2015-07-12.
@@ -41,7 +42,7 @@ public class SummaryViewController extends Fragment{
     EventAdaptor eventAdaptor;
     ArrayList<EventModel> events = new ArrayList<EventModel>();
     ListView weatherListView;
-    String[] weatherValues;
+    List<String> weatherValues = new Vector<String>();
 
     @Nullable
     @Override
@@ -53,7 +54,7 @@ public class SummaryViewController extends Fragment{
         rootView = inflater.inflate(R.layout.view_summary, container, false);
 
         // Inital setup
-        setup();
+        setup(); //TODO: Move this!
 
         // Setup zones list
         zoneListView = (ListView) rootView.findViewById(R.id.lowStockList);
@@ -67,17 +68,14 @@ public class SummaryViewController extends Fragment{
         eventListView.setAdapter(eventAdaptor);
         events.clear();
 
-        //Weather
+        // Weather
         weatherListView = (ListView) rootView.findViewById(R.id.weatherListView);
-
-
 
         getData();
         setOnItemClick();
         populateZonesList();
         populateEventsList();
         populateWeatherList();
-
 
         return rootView;
     }
@@ -93,8 +91,9 @@ public class SummaryViewController extends Fragment{
 
     public void getData()
     {
-        parseZonesResult(Utility.fetchData("getzones/1"));
-        parseEventsResult(Utility.fetchData("getevents/1"));
+        parseZonesResult(Utility.fetchData("getlowstock"));
+        parseEventsResult(Utility.fetchData("getupcomingreminders"));
+        parseWeatherResult(Utility.fetchData("getactiveweather"));
     }
 
     private void parseZonesResult(String result)
@@ -108,7 +107,7 @@ public class SummaryViewController extends Fragment{
             for (int i = 0; i < JSONZones.length(); i++)
             {
                 JSONObject JSONZone = JSONZones.getJSONObject(i);
-                ZoneModel zone = new ZoneModel(JSONZone.getInt("id"), JSONZone.getString("desc"), (float)(JSONZone.getDouble("weight")), (float)(JSONZone.getDouble("initialweight")));
+                ZoneModel zone = new ZoneModel(0, JSONZone.getString("message"), (float)(JSONZone.getDouble("weight")), (float)(JSONZone.getDouble("initialweight")), JSONZone.getInt("activenotificationid"));
                 zones.add(zone);
             }
 
@@ -128,8 +127,29 @@ public class SummaryViewController extends Fragment{
             for (int i = 0; i < JSONEvents.length(); i++)
             {
                 JSONObject JSONEvent = JSONEvents.getJSONObject(i);
-                EventModel event = new EventModel(JSONEvent.getInt("id"), JSONEvent.getInt("notifId"), JSONEvent.getInt("zoneId"), JSONEvent.getInt("baseId"), JSONEvent.getString("date"), JSONEvent.getString("time"), JSONEvent.getString("desc"), JSONEvent.getBoolean("repeatWeekly"), JSONEvent.getBoolean("repeatMonthly"), JSONEvent.getBoolean("repeatDaily"));
+                String date = getDate(JSONEvent.getString("date"));
+                EventModel event = new EventModel(0, 0, JSONEvent.getInt("zoneid"), 0, date, JSONEvent.getString("time"), JSONEvent.getString("description"), JSONEvent.getInt(("isactive")));
                 events.add(event);
+            }
+
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void parseWeatherResult(String result)
+    {
+        Log.d("LOG", "Parsing weather result: " + result);
+
+        try
+        {
+            JSONArray JSONArray = new JSONArray(result);
+
+            for (int i = 0; i < JSONArray.length(); i++)
+            {
+                JSONObject JSONObject = JSONArray.getJSONObject(i);
+                weatherValues.add(JSONObject.getString("message"));
             }
 
         } catch (JSONException e)
@@ -164,16 +184,6 @@ public class SummaryViewController extends Fragment{
 
     private void populateWeatherList()
     {
-        weatherValues = new String[] { "Android List View",
-                "Adapter implementation",
-                "Simple List View In Android",
-                "Create List View Android",
-                "Android Example",
-                "List View Source Code",
-                "List View Array Adapter",
-                "Android Example List View"
-        };
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_1, android.R.id.text1, weatherValues);
 
@@ -189,8 +199,9 @@ public class SummaryViewController extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
+                Log.d("LOG", "Zone clicked: " + position);
 
-                Fragment fragment = new ZoneEditController();
+                Fragment fragment = new ZoneDetailController();
                 Bundle args = new Bundle();
 
                 args.putInt("position", position);
@@ -229,4 +240,53 @@ public class SummaryViewController extends Fragment{
         });
 
     }
+
+    private String getDate(String date)
+    {
+        String[] parts = date.split("/");
+        String formatedDate = "";
+
+        switch (Integer.parseInt(parts[1]))
+        {
+            case 1:
+                formatedDate += "Jan";
+                break;
+            case 2:
+                formatedDate += "Feb";
+                break;
+            case 3:
+                formatedDate += "Mar";
+                break;
+            case 4:
+                formatedDate += "Apr";
+                break;
+            case 5:
+                formatedDate += "May";
+                break;
+            case 6:
+                formatedDate += "June";
+                break;
+            case 7:
+                formatedDate += "July";
+                break;
+            case 8:
+                formatedDate += "Aug";
+                break;
+            case 9:
+                formatedDate += "Sept";
+                break;
+            case 10:
+                formatedDate += "Oct";
+                break;
+            case 11:
+                formatedDate += "Nov";
+                break;
+            case 12:
+                formatedDate += "Dec";
+                break;
+        }
+
+        return formatedDate + " " + parts[0];
+    }
+
 }

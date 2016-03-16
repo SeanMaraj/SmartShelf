@@ -109,7 +109,7 @@ public class ZonesViewController extends Fragment
             for (int i = 0; i < JSONZones.length(); i++)
             {
                 JSONObject JSONZone = JSONZones.getJSONObject(i);
-                ZoneModel zone = new ZoneModel(JSONZone.getInt("id"), JSONZone.getString("desc"), (float)(JSONZone.getDouble("weight")), (float)(JSONZone.getDouble("initialweight")));
+                ZoneModel zone = new ZoneModel(JSONZone.getInt("id"), JSONZone.getString("desc"), (float)(JSONZone.getDouble("weight")), (float)(JSONZone.getDouble("initialweight")), 0);
                 zones.add(zone);
             }
 

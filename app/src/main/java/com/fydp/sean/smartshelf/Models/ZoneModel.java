@@ -11,13 +11,15 @@ public class ZoneModel {
     private float initialWeight;
     private float currentWeight;
     private String date;
+    private int activeNotifId;
 
-    public ZoneModel(int zoneNumber, String zoneName, float currentWeight, float initialWeight)
+    public ZoneModel(int zoneNumber, String zoneName, float currentWeight, float initialWeight, int activeNotifId)
     {
         setNumber(zoneNumber);
         setName(zoneName);
         setCurrentWeight(currentWeight);
         setInitialWeight(initialWeight);
+        setActiveNotifId(activeNotifId);
     }
 
     public int getNumber() {
@@ -76,5 +78,15 @@ public class ZoneModel {
     public void setDate(String date)
     {
         this.date = date;
+    }
+
+    public int getActiveNotifId()
+    {
+        return activeNotifId;
+    }
+
+    public void setActiveNotifId(int activeNotifId)
+    {
+        this.activeNotifId = activeNotifId;
     }
 }

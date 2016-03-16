@@ -67,7 +67,7 @@ public class EventsViewController extends Fragment{
             for (int i = 0; i < JSONEvents.length(); i++)
             {
                 JSONObject JSONEvent = JSONEvents.getJSONObject(i);
-                EventModel event = new EventModel(JSONEvent.getInt("id"), JSONEvent.getInt("notifId"), JSONEvent.getInt("zoneId"), JSONEvent.getInt("baseId"), JSONEvent.getString("date"), JSONEvent.getString("time"), JSONEvent.getString("desc"), JSONEvent.getBoolean("repeatWeekly"), JSONEvent.getBoolean("repeatMonthly"), JSONEvent.getBoolean("repeatDaily"));
+                EventModel event = new EventModel(JSONEvent.getInt("id"), JSONEvent.getInt("notifId"), JSONEvent.getInt("zoneId"), JSONEvent.getInt("baseId"), JSONEvent.getString("date"), JSONEvent.getString("time"), JSONEvent.getString("description"), JSONEvent.getInt(("isactive")));
                 events.add(event);
             }
 

@@ -1,17 +1,11 @@
 package com.fydp.sean.smartshelf.Adaptors;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fydp.sean.smartshelf.Models.ZoneModel;
 import com.fydp.sean.smartshelf.R;
@@ -20,13 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Sean on 2015-07-19.
+ * Created by Sean on 2016-03-10.
  */
-public class ZoneAdaptor extends ArrayAdapter {
+public class StockNotifListAdaptor extends ArrayAdapter
+{
 
     List list = new ArrayList();
 
-    public ZoneAdaptor(Context context, int resource) {
+    public StockNotifListAdaptor(Context context, int resource) {
         super(context, resource);
     }
 
@@ -53,7 +48,7 @@ public class ZoneAdaptor extends ArrayAdapter {
         if (convertView == null)
         {
             LayoutInflater inflater = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.subview_zone, parent, false);
+            row = inflater.inflate(R.layout.subview_notif_stock, parent, false);
         }
         else
         {
@@ -61,41 +56,17 @@ public class ZoneAdaptor extends ArrayAdapter {
         }
 
         // Set content of row item
-        final ZoneModel zone = (ZoneModel)list.get(position);
+        /*
+        ZoneModel zone = (ZoneModel)list.get(position);
         float percent = Math.round(100.0 * zone.getPercentage()) / 100;
+        //((TextView)row.findViewById(R.id.zoneNumberText)).setText("" + zone.getNumber());
         ((TextView)row.findViewById(R.id.zoneNameTxt)).setText(zone.getName());
         ((TextView)row.findViewById(R.id.initialWeightText)).setText("" + zone.getInitialWeight() + " kg");
         TextView percentTextView = ((TextView)row.findViewById(R.id.percentageText));
         percentTextView.setText("" + percent + " %");
+        */
 
-        //Set on click listeners
-        ((Button)row.findViewById(R.id.dismissBtn)).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Log.d("LOG", "DISMISS: " + zone.getActiveNotifId());
-            }
-        });
-
-        setCurrentWeightColor(percentTextView, percent);
 
         return row;
-    }
-
-    //**HELPER METHODS**//
-
-    private void setCurrentWeightColor(TextView view, float percent)
-    {
-        if(percent <= 10)
-        {
-            view.setTextColor(Color.RED);
-        }else if (percent >10 && percent <50)
-        {
-            view.setTextColor(Color.YELLOW);
-        }else
-        {
-            view.setTextColor(Color.GREEN);
-        }
     }
 }

@@ -12,12 +12,10 @@ public class EventModel
     private String date;
     private String time;
     private String desc;
-    private boolean repeatWeekly;
-    private boolean reapeatMonthly;
-    private boolean reapeatDaily;
+    private int isActive;
 
     // Constructor
-    public EventModel(int id, int notifId, int zoneId, int baseId, String date, String time, String desc, boolean repeatWeekly, boolean reapeatMonthly, boolean reapeatDaily)
+    public EventModel(int id, int notifId, int zoneId, int baseId, String date, String time, String desc, int isActive)
     {
         this.id = id;
         this.notifId = notifId;
@@ -26,9 +24,7 @@ public class EventModel
         this.date = date;
         this.time = time;
         this.desc = desc;
-        this.repeatWeekly = repeatWeekly;
-        this.reapeatMonthly = reapeatMonthly;
-        this.reapeatDaily = reapeatDaily;
+        this.isActive = isActive;
     }
 
 
@@ -93,35 +89,6 @@ public class EventModel
         this.time = time;
     }
 
-    public boolean isRepeatWeekly()
-    {
-        return repeatWeekly;
-    }
-
-    public void setRepeatWeekly(boolean repeatWeekly)
-    {
-        this.repeatWeekly = repeatWeekly;
-    }
-
-    public boolean isReapeatMonthly()
-    {
-        return reapeatMonthly;
-    }
-
-    public void setReapeatMonthly(boolean reapeatMonthly)
-    {
-        this.reapeatMonthly = reapeatMonthly;
-    }
-
-    public boolean isReapeatDaily()
-    {
-        return reapeatDaily;
-    }
-
-    public void setReapeatDaily(boolean reapeatDaily)
-    {
-        this.reapeatDaily = reapeatDaily;
-    }
 
     public String getDesc()
     {
@@ -131,5 +98,15 @@ public class EventModel
     public void setDesc(String desc)
     {
         this.desc = desc;
+    }
+
+    public int getIsActive()
+    {
+        return isActive;
+    }
+
+    public void setIsActive(int isActive)
+    {
+        this.isActive = isActive;
     }
 }

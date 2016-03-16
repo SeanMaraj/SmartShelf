@@ -5,23 +5,21 @@
     android:padding="10dp"
     android:id="@+id/zoneItemLayout">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-
        <TextView
            android:id="@+id/zoneNameTxt"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_alignParentTop="true"
            android:text="Zone Name"
-           android:textSize="25dp"/>
+           android:textSize="25dp"
+           android:clickable="false"/>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:clickable="false">
 
             <TextView
                 android:id="@+id/percentageText"
@@ -30,7 +28,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:textSize="20dp"
-                android:text="100%"/>
+                android:text="100%"
+                android:clickable="false"/>
 
             <View
                 android:layout_width="2dp"
@@ -40,7 +39,8 @@
                 android:layout_toRightOf="@+id/percentageText"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp" />
+                android:layout_marginRight="5dp"
+                android:clickable="false"/>
 
             <TextView
                 android:id="@+id/initialWeightText"
@@ -50,19 +50,19 @@
                 android:layout_centerVertical="true"
                 android:textSize="20dp"
                 android:text="5000g"
-                />
+                android:clickable="false"/>
 
         </RelativeLayout>
 
         <Button
+            android:id="@+id/dismissBtn"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:text="DISMISS"
-            android:textSize="8dp"/>
+            android:textSize="8dp"
+            android:focusable="false"/>
 
-
-   </RelativeLayout>
 
 </RelativeLayout>
