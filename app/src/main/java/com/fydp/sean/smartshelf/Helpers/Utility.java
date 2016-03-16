@@ -48,6 +48,7 @@ public class Utility
         if (!offlineMode)
         {
             String url = serverAddress + command;
+            Log.d("Log", "Sending url: " + url);
             DataFetcher df = new DataFetcher();
 
             try

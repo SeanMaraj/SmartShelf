@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,13 +35,14 @@ public class ZoneDetailController extends Fragment
 {
     View rootView = null;
     Button addNotifBtn;
-    TextView zoneNameText;
+    EditText zoneNameEdit;
     TextView zoneIdText;
     TextView baseIdText;
     TextView zoneNumberText;
     ListView stockList;
     ListView reminderList;
     ListView weatherList;
+    Button saveBtn;
 
     ArrayList<StockNotifModel> stockNotifs = new ArrayList<StockNotifModel>();
     ArrayList<ReminderModel> reminders = new ArrayList<ReminderModel>();
@@ -58,18 +60,21 @@ public class ZoneDetailController extends Fragment
         rootView = inflater.inflate(R.layout.view_zone_detail, container, false);
 
         addNotifBtn = (Button)rootView.findViewById(R.id.addNotifBtn);
-        zoneNameText = (TextView)rootView.findViewById(R.id.zoneNameText);
+        zoneNameEdit = (EditText)rootView.findViewById(R.id.zoneNameEdit);
         zoneIdText = (TextView)rootView.findViewById(R.id.zoneNumberText);
         baseIdText = (TextView)rootView.findViewById(R.id.baseNumberText);
         zoneNumberText = (TextView)rootView.findViewById(R.id.zoneNumberText);
         stockList = (ListView)rootView.findViewById(R.id.stockList);
         reminderList = (ListView)rootView.findViewById(R.id.reminderList);
         weatherList = (ListView)rootView.findViewById(R.id.weatherList);
+        saveBtn = (Button)rootView.findViewById(R.id.saveBtn);
 
         //Set zone info
-        zoneNameText.setText("" + getArguments().get("zoneName"));
-        zoneIdText.setText("Zone Number: " + getArguments().get("zoneId"));
-        baseIdText.setText("Base Number: " + getArguments().get("baseId"));
+        baseId = Integer.parseInt(getArguments().get("baseId").toString());
+        zoneId = Integer.parseInt(getArguments().get("zoneId").toString());
+        zoneNameEdit.setText("" + getArguments().get("zoneName"));
+        zoneIdText.setText("Zone Number: " + zoneId);
+        baseIdText.setText("Base Number: " + baseId);
 
         // Setup stock notifications list
         stockList = (ListView) rootView.findViewById(R.id.stockList);
@@ -186,6 +191,19 @@ public class ZoneDetailController extends Fragment
                         .commit();
             }
         });
+
+        saveBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.d("Log", "Updating Name");
+
+                String newName = zoneNameEdit.getText().toString();
+                Utility.sendData("updatedescription/" + baseId + "/" + zoneId + "/" + newName);
+            }
+        });
+
     }
 
     private void populateLists()
