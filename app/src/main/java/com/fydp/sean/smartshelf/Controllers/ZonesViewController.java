@@ -142,6 +142,8 @@ public class ZonesViewController extends Fragment
                 args.putString("zoneName", base1Zones.get(position).getDesc());
                 args.putInt("zoneId", base1Zones.get(position).getZoneId());
                 args.putInt("baseId", base1Zones.get(position).getBaseId());
+                args.putFloat("initWeight", base1Zones.get(position).getInitialWeight());
+                args.putFloat("currentWeight", base1Zones.get(position).getCurrentWeight());
 
                 fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -165,6 +167,8 @@ public class ZonesViewController extends Fragment
                 args.putString("zoneName", base2Zones.get(position).getDesc());
                 args.putInt("zoneId", base2Zones.get(position).getZoneId());
                 args.putInt("baseId", base2Zones.get(position).getBaseId());
+                args.putFloat("initWeight", base2Zones.get(position).getInitialWeight());
+                args.putFloat("currentWeight", base2Zones.get(position).getCurrentWeight());
 
                 fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -188,6 +192,8 @@ public class ZonesViewController extends Fragment
                 args.putString("zoneName", base3Zones.get(position).getDesc());
                 args.putInt("zoneId", base3Zones.get(position).getZoneId());
                 args.putInt("baseId", base3Zones.get(position).getBaseId());
+                args.putFloat("initWeight", base3Zones.get(position).getInitialWeight());
+                args.putFloat("currentWeight", base3Zones.get(position).getCurrentWeight());
 
                 fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

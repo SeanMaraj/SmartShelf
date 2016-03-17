@@ -27,6 +27,7 @@
                 <ListView
                     android:id="@+id/base1List"
                     android:layout_width="wrap_content"
+                    android:fadeScrollbars="false"
                     android:layout_height="100dp"
                     android:layout_weight="1" />
 
@@ -58,6 +59,7 @@
                 android:id="@+id/base2List"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
+                android:fadeScrollbars="false"
                 android:layout_weight="1" />
 
         </LinearLayout>
@@ -87,6 +89,7 @@
                 android:id="@+id/base3List"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
+                android:fadeScrollbars="false"
                 android:layout_weight="1" />
 
         </LinearLayout>

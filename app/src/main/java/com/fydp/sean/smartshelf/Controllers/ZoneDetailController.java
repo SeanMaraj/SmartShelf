@@ -26,6 +26,7 @@ import com.fydp.sean.smartshelf.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -44,6 +45,9 @@ public class ZoneDetailController extends Fragment
     ListView reminderList;
     ListView weatherList;
     Button saveBtn;
+    Button setInitWeightBtn;
+    TextView initWeightText;
+    TextView currentWeightText;
 
     ArrayList<StockNotifModel> stockNotifs = new ArrayList<StockNotifModel>();
     ArrayList<ReminderModel> reminders = new ArrayList<ReminderModel>();
@@ -54,6 +58,8 @@ public class ZoneDetailController extends Fragment
 
     int zoneId = 1;
     int baseId = 1;
+    float initWeight;
+    float currentWeight;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -69,13 +75,20 @@ public class ZoneDetailController extends Fragment
         reminderList = (ListView)rootView.findViewById(R.id.reminderList);
         weatherList = (ListView)rootView.findViewById(R.id.weatherList);
         saveBtn = (Button)rootView.findViewById(R.id.saveBtn);
+        initWeightText = (TextView)rootView.findViewById(R.id.initialWeightText);
+        setInitWeightBtn = (Button)rootView.findViewById(R.id.setInitWeightBtn);
+        currentWeightText = (TextView)rootView.findViewById(R.id.currentWeightText);
 
         //Set zone info
         baseId = Integer.parseInt(getArguments().get("baseId").toString());
         zoneId = Integer.parseInt(getArguments().get("zoneId").toString());
+        initWeight = getArguments().getFloat("initWeight");
+        currentWeight = getArguments().getFloat("currentWeight");
         zoneNameEdit.setText("" + getArguments().get("zoneName"));
         zoneIdText.setText("Zone Number: " + zoneId);
         baseIdText.setText("Base Number: " + baseId);
+        initWeightText.setText("Initial Weight: " + initWeight + " kg");
+        currentWeightText.setText("Current Weight: " + currentWeight + " kg");
 
         // Setup stock notifications list
         stockList = (ListView) rootView.findViewById(R.id.stockList);
@@ -188,6 +201,7 @@ public class ZoneDetailController extends Fragment
                 Bundle args = new Bundle();
                 args.putInt("zoneId", zoneId);
                 args.putInt("baseId", baseId);
+                args.putFloat("initWeight", initWeight);
                 fragment.setArguments(args);
 
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -205,10 +219,24 @@ public class ZoneDetailController extends Fragment
             {
                 Log.d("Log", "Updating Name");
 
+                // Send name
                 String newName = zoneNameEdit.getText().toString();
                 Utility.sendData("updatedescription/" + baseId + "/" + zoneId + "/" + newName);
 
                 Toast.makeText(getActivity(), "Updated zone name to " + newName, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        setInitWeightBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.d("Log", "Setting Init Weight");
+
+                Utility.sendData("setinitialweight/" + baseId + "/" + zoneId);
+
+                Toast.makeText(getActivity(), "Initial weight set to " + currentWeight + " kg", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -252,11 +280,11 @@ public class ZoneDetailController extends Fragment
 
         switch (op)
         {
-            case "<":
-                op = "Falls Below: ";
+            case "l":
+                op = "Falls Below ";
                 break;
-            case ">":
-                op = "Is Above: ";
+            case "g":
+                op = "Is Above ";
                 break;
             default:
                 op = "Is";
@@ -268,14 +296,7 @@ public class ZoneDetailController extends Fragment
 
     private String getWeatherValue(String operator, String value)
     {
-        if (operator == "Is")
-        {
-            return value;
-        }
-        else
-        {
-            return value.substring(1, value.length());
-        }
+        return value.substring(1, value.length());
     }
 
 }

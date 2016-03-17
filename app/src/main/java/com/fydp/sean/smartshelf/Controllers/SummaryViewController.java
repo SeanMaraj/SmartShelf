@@ -236,6 +236,8 @@ public class SummaryViewController extends Fragment{
                 args.putString("zoneName", zones.get(position).getDesc());
                 args.putInt("zoneId", zones.get(position).getZoneId());
                 args.putInt("baseId", zones.get(position).getBaseId());
+                args.putFloat("initWeight", zones.get(position).getInitialWeight());
+                args.putFloat("currentWeight", zones.get(position).getCurrentWeight());
 
                 fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

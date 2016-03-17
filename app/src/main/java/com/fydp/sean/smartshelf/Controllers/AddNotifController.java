@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fydp.sean.smartshelf.Helpers.Utility;
 import com.fydp.sean.smartshelf.MainActivity;
@@ -39,7 +40,7 @@ public class AddNotifController extends Fragment
     LinearLayout monitorStockOptionsLayout;
     LinearLayout reminderOptionsLayout;
     LinearLayout weatherOptionsLayout;
-    EditText initWeightEdit;
+    TextView initWeightText;
     EditText thresholdEdit;
     EditText reminderDesc;
     Spinner weatherTypeSpinner;
@@ -50,6 +51,7 @@ public class AddNotifController extends Fragment
 
     int baseId;
     int zoneId;
+    float initWeight;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -67,7 +69,7 @@ public class AddNotifController extends Fragment
         monitorStockOptionsLayout = (LinearLayout)rootView.findViewById(R.id.monitorStockOptionsLayout);
         reminderOptionsLayout = (LinearLayout)rootView.findViewById(R.id.reminderOptionsLayout);
         weatherOptionsLayout = (LinearLayout)rootView.findViewById(R.id.weatherOptionsLayout);
-        initWeightEdit = (EditText)rootView.findViewById(R.id.initWeightEdit);
+        initWeightText = (TextView)rootView.findViewById(R.id.initWeightText);
         thresholdEdit = (EditText)rootView.findViewById(R.id.thresholdEdit);
         reminderDesc = (EditText)rootView.findViewById(R.id.reminderDesc);
         weatherTypeSpinner = (Spinner)rootView.findViewById(R.id.weatherTypeSpinner);
@@ -78,10 +80,12 @@ public class AddNotifController extends Fragment
 
 
         // Get arguments and set corresponding
-        baseId = getArguments().getInt("baseid");
-        zoneId = getArguments().getInt("zoneid");
+        baseId = getArguments().getInt("baseId");
+        zoneId = getArguments().getInt("zoneId");
+        initWeight = getArguments().getFloat("initWeight");
         zoneNumberText.setText("Zone Number: " + zoneId);
         baseNumberText.setText("Base Number: " + baseId);
+        initWeightText.setText("" + initWeight);
 
         // Set spinner content
         setSpinners();
@@ -161,12 +165,13 @@ public class AddNotifController extends Fragment
                 String notiftype = "";
                 String checktype = "";
                 String checkvalue = "";
-                String description = "";
+                String description = "none";
 
                 if (monitorStockCheck.isChecked())
                 {
                     notiftype = "weight";
                     checktype = "weight";
+                    checkvalue = "l" + thresholdEdit.getText().toString();
 
                     //newnotification/<int:baseid>/<int:zoneid>/<notiftype>/<checktype>/<checkvalue>/<description>/<pushflag>
                 }
@@ -180,6 +185,20 @@ public class AddNotifController extends Fragment
                 else if (weatherCheck.isChecked())
                 {
                     notiftype = "weather";
+                    checktype = weatherTypeSpinner.getSelectedItem().toString().toLowerCase();
+                    String operator = operatorSpinner.getSelectedItem().toString().toLowerCase();
+
+                    if (operator.equals("less than"))
+                    {
+                        checkvalue += "l";
+                    }
+                    else if (operator.equals("greater than"))
+                    {
+                        checkvalue += "g";
+                    }
+
+                    checkvalue += valueEdit.getText().toString();
+
                 }
 
                 url = "newnotification/" + baseId + "/" + zoneId + "/" + notiftype + "/" + checktype + "/" + checkvalue + "/" + description + "/1";
@@ -187,7 +206,7 @@ public class AddNotifController extends Fragment
                 Log.d("URL", url);
                 Utility.sendData(url);
 
-
+                Toast.makeText(getActivity(), "Notification created", Toast.LENGTH_SHORT).show();
             }
         });
     }
