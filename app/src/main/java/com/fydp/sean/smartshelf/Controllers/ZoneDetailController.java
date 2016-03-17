@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fydp.sean.smartshelf.Adaptors.ReminderListAdaptor;
 import com.fydp.sean.smartshelf.Adaptors.StockNotifListAdaptor;
@@ -184,6 +185,11 @@ public class ZoneDetailController extends Fragment
             {
                 Fragment fragment = new AddNotifController();
 
+                Bundle args = new Bundle();
+                args.putInt("zoneId", zoneId);
+                args.putInt("baseId", baseId);
+                fragment.setArguments(args);
+
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, fragment)
@@ -201,6 +207,8 @@ public class ZoneDetailController extends Fragment
 
                 String newName = zoneNameEdit.getText().toString();
                 Utility.sendData("updatedescription/" + baseId + "/" + zoneId + "/" + newName);
+
+                Toast.makeText(getActivity(), "Updated zone name to " + newName, Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.fydp.sean.smartshelf.Adaptors.ReminderListAdaptor;
 import com.fydp.sean.smartshelf.Adaptors.ZoneAdaptor;
@@ -43,6 +45,9 @@ public class SummaryViewController extends Fragment{
     ArrayList<ReminderModel> reminders = new ArrayList<ReminderModel>();
     ListView weatherListView;
     List<String> weatherValues = new Vector<String>();
+    ImageView weatherImg;
+    TextView tempText;
+    TextView forecastText;
 
     @Nullable
     @Override
@@ -70,6 +75,9 @@ public class SummaryViewController extends Fragment{
 
         // Weather
         weatherListView = (ListView) rootView.findViewById(R.id.weatherListView);
+        weatherImg = (ImageView)rootView.findViewById(R.id.weatherImg);
+        tempText = (TextView)rootView.findViewById(R.id.tempText);
+        forecastText = (TextView)rootView.findViewById(R.id.forecastText);
 
         getData();
         setOnItemClick();
@@ -93,7 +101,8 @@ public class SummaryViewController extends Fragment{
     {
         parseZonesResult(Utility.fetchData("getlowstock"));
         parseRemindersResult(Utility.fetchData("getupcomingreminders"));
-        parseWeatherResult(Utility.fetchData("getactiveweather"));
+        parseWeatherNotifsResult(Utility.fetchData("getactiveweather"));
+        parseWeatherResult(Utility.fetchData("getcurrentweather"));
     }
 
     private void parseZonesResult(String result)
@@ -127,7 +136,7 @@ public class SummaryViewController extends Fragment{
             for (int i = 0; i < JSONEvents.length(); i++)
             {
                 JSONObject JSONEvent = JSONEvents.getJSONObject(i);
-                String date = getDate(JSONEvent.getString("date"));
+                String date = Utility.getDate(JSONEvent.getString("date"));
                 ReminderModel event = new ReminderModel(0, 0, JSONEvent.getInt("zoneid"), 0, date, JSONEvent.getString("time"), JSONEvent.getString("description"), JSONEvent.getInt(("isactive")));
                 reminders.add(event);
             }
@@ -138,9 +147,9 @@ public class SummaryViewController extends Fragment{
         }
     }
 
-    private void parseWeatherResult(String result)
+    private void parseWeatherNotifsResult(String result)
     {
-        Log.d("LOG", "Parsing weather result: " + result);
+        Log.d("LOG", "Parsing weather notifications result: " + result);
 
         try
         {
@@ -150,6 +159,26 @@ public class SummaryViewController extends Fragment{
             {
                 JSONObject JSONObject = JSONArray.getJSONObject(i);
                 weatherValues.add(JSONObject.getString("message"));
+            }
+
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void parseWeatherResult(String result)
+    {
+        Log.d("LOG", "Parsing current weather result: " + result);
+
+        try
+        {
+            JSONArray a = new JSONArray(result);
+
+            for (int i = 0; i <= 1; i++)
+            {
+                JSONObject o = a.getJSONObject(i);
+                setCurrentWeather(o.getString("status"), o.getString("temperature"));
             }
 
         } catch (JSONException e)
@@ -241,52 +270,42 @@ public class SummaryViewController extends Fragment{
 
     }
 
-    private String getDate(String date)
+    private void setCurrentWeather(String status, String temp)
     {
-        String[] parts = date.split("/");
-        String formatedDate = "";
-
-        switch (Integer.parseInt(parts[1]))
+        switch (status)
         {
-            case 1:
-                formatedDate += "Jan";
+            case "clear":
+                weatherImg.setImageResource(R.drawable.sunny);
+                forecastText.setText("Clear");
                 break;
-            case 2:
-                formatedDate += "Feb";
+            case "clouds":
+                weatherImg.setImageResource(R.drawable.cloudy);
+                forecastText.setText("Cloudy");
                 break;
-            case 3:
-                formatedDate += "Mar";
+            case "sun":
+                weatherImg.setImageResource(R.drawable.sunny);
+                forecastText.setText("Sunny");
                 break;
-            case 4:
-                formatedDate += "Apr";
+            case "rain":
+                weatherImg.setImageResource(R.drawable.rainy);
+                forecastText.setText("Rainy");
                 break;
-            case 5:
-                formatedDate += "May";
+            case "fog":
+                weatherImg.setImageResource(R.drawable.fog);
+                forecastText.setText("Foggy");
                 break;
-            case 6:
-                formatedDate += "June";
+            case "snow":
+                weatherImg.setImageResource(R.drawable.snow);
+                forecastText.setText("Snowy");
                 break;
-            case 7:
-                formatedDate += "July";
-                break;
-            case 8:
-                formatedDate += "Aug";
-                break;
-            case 9:
-                formatedDate += "Sept";
-                break;
-            case 10:
-                formatedDate += "Oct";
-                break;
-            case 11:
-                formatedDate += "Nov";
-                break;
-            case 12:
-                formatedDate += "Dec";
-                break;
+            default:
+                weatherImg.setImageResource(R.drawable.sunny);
+                forecastText.setText("Clear");
         }
 
-        return formatedDate + " " + parts[0];
+        tempText.setText(temp + "°C");
     }
+
+
 
 }

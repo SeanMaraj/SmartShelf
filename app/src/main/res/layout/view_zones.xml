@@ -1,21 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
+              android:padding="10dp"
     android:orientation="vertical">
 
 
-    <ListView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/zoneList"
-        android:layout_weight="1" />
+        android:background="#ff434343">
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        <CheckBox
+            android:id="@+id/base1Check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Base 1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:checked="false" />
+
+            <LinearLayout
+                android:id="@+id/base1ListLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ListView
+                    android:id="@+id/base1List"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ADD ZONE"
-        android:id="@+id/addZoneBtn"
-        android:visibility="gone" />
+        android:layout_marginTop="10dp"
+        android:background="#ff434343">
+
+        <CheckBox
+            android:id="@+id/base2Check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Base 2"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:checked="false" />
+
+        <LinearLayout
+            android:id="@+id/base2ListLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ListView
+                android:id="@+id/base2List"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#ff434343">
+
+        <CheckBox
+            android:id="@+id/base3Check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Base 3"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:checked="false" />
+
+        <LinearLayout
+            android:id="@+id/base3ListLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ListView
+                android:id="@+id/base3List"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
 
 </LinearLayout>

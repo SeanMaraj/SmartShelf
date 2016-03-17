@@ -6,6 +6,7 @@
               android:padding="10dp">
 
     <Button
+        android:id="@+id/saveBtn"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -22,6 +23,13 @@
         android:layout_marginTop="0dp">
 
 
+        <TextView
+            android:id="@+id/baseNumberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="Base Number: "/>
 
         <TextView
             android:id="@+id/zoneNumberText"
@@ -31,20 +39,10 @@
             android:textStyle="bold"
             android:text="Zone Number: "/>
 
-        <TextView
-            android:id="@+id/notifDateText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:text="Date: "/>
-        <TextView
-            android:id="@+id/notifTimeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:text="Time: "/>
+
+
+
+
 
         <ScrollView
             android:layout_width="match_parent"
@@ -157,7 +155,7 @@
                     android:background="#ff434343">
 
                     <CheckBox
-                        android:id="@+id/customEventCheck"
+                        android:id="@+id/reminderCheck"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Set Reminder"
@@ -165,7 +163,7 @@
                         android:checked="false" />
 
                     <LinearLayout
-                        android:id="@+id/eventOptionsLayout"
+                        android:id="@+id/reminderOptionsLayout"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -174,88 +172,59 @@
                         android:visibility="visible">
 
                         <EditText
+                            android:id="@+id/reminderDesc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:hint="description"/>
 
-
-
-                        <!--
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
+                        <LinearLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/eventRepeatText"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentLeft="true"
-                                android:layout_centerVertical="true"
-                                android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:text="Repeat: "/>
+                                android:textSize="20dp"
+                                android:textStyle="bold"
+                                android:text="Date: "/>
 
-                            <Spinner
-                                android:id="@+id/eventRepeatSpinner"
-                                android:layout_width="100dp"
-                                android:layout_height="40dp"
-                                android:layout_alignParentRight="true"/>
-
-                        </RelativeLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal">
-
-                            <Button
-                                android:id="@+id/sunBtn"
-                                android:layout_width="40dp"
+                            <EditText
+                                android:id="@+id/dateEdt"
+                                android:layout_width="60dp"
                                 android:layout_height="wrap_content"
-                                android:textAllCaps="false"
-                                android:text="S"/>
-                            <Button
-                                android:id="@+id/monBtn"
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:textAllCaps="false"
-                                android:text="M"/>
-                            <Button
-                                android:id="@+id/tuesBtn"
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:textAllCaps="false"
-                                android:text="T"/>
-                            <Button
-                                android:id="@+id/wedBtn"
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:textAllCaps="false"
-                                android:text="W"/>
-                            <Button
-                                android:id="@+id/thrusBtn"
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:textAllCaps="false"
-                                android:text="T"/>
-                            <Button
-                                android:id="@+id/friBtn"
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:textAllCaps="false"
-                                android:text="F"/>
-                            <Button
-                                android:id="@+id/satBtn"
-                                android:layout_width="40dp"
-                                android:layout_height="wrap_content"
-                                android:textAllCaps="false"
-                                android:text="S"/>
+                                android:text="0315"
+                                android:hint="mmdd"/>
 
                         </LinearLayout>
 
-                        -->
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="20dp"
+                                android:textStyle="bold"
+                                android:text="Time: "/>
+
+                            <EditText
+                                android:id="@+id/timeEdt"
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:text="0820"
+                                android:hint="hhmm"/>
+
+
+                        </LinearLayout>
+
+                        <Spinner
+                            android:id="@+id/repeatSpinner"
+                            android:layout_width="120dp"
+                            android:layout_height="40dp"/>
+
 
                     </LinearLayout>
                 </LinearLayout>
@@ -301,7 +270,7 @@
 
                             <Spinner
                                 android:id="@+id/weatherTypeSpinner"
-                                android:layout_width="100dp"
+                                android:layout_width="120dp"
                                 android:layout_height="40dp"
                                 android:layout_alignParentRight="true"/>
 
@@ -323,7 +292,7 @@
 
                             <Spinner
                                 android:id="@+id/operatorSpinner"
-                                android:layout_width="100dp"
+                                android:layout_width="120dp"
                                 android:layout_height="40dp"
                                 android:layout_alignParentRight="true">
 

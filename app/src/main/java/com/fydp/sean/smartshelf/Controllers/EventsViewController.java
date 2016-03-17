@@ -55,7 +55,7 @@ public class EventsViewController extends Fragment{
 
     private void getData()
     {
-        parseResult(Utility.fetchData("getevents/1"));
+        parseResult(Utility.fetchData("getallreminders"));
     }
 
     private void parseResult(String result)
@@ -67,7 +67,8 @@ public class EventsViewController extends Fragment{
             for (int i = 0; i < JSONEvents.length(); i++)
             {
                 JSONObject JSONEvent = JSONEvents.getJSONObject(i);
-                ReminderModel event = new ReminderModel(JSONEvent.getInt("id"), JSONEvent.getInt("notifId"), JSONEvent.getInt("zoneId"), JSONEvent.getInt("baseId"), JSONEvent.getString("date"), JSONEvent.getString("time"), JSONEvent.getString("description"), JSONEvent.getInt(("isactive")));
+                String date = Utility.getDate(JSONEvent.getString("date"));
+                ReminderModel event = new ReminderModel(0, JSONEvent.getInt("notificationid"), JSONEvent.getInt("zoneid"), JSONEvent.getInt("baseid"), date, JSONEvent.getString("time"), JSONEvent.getString("description"), 0);
                 events.add(event);
             }
 
