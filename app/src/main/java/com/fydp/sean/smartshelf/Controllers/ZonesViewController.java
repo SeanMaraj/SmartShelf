@@ -92,9 +92,9 @@ public class ZonesViewController extends Fragment
 
 
         getData();
+        setBaseChecks();
         setOnItemClick();
         populateList();
-        setBaseChecks();
 
         return rootView;
     }
@@ -308,8 +308,34 @@ public class ZonesViewController extends Fragment
 
     private void setBaseChecks()
     {
-        base1Check.setChecked( activeBases[0] == 0 ? false : true);
-        base2Check.setChecked( activeBases[1] == 0 ? false : true);
-        base3Check.setChecked( activeBases[2] == 0 ? false : true);
+        if (activeBases[0] == 1)
+        {
+            base1Check.setChecked(true);
+            base1ListLayout.setVisibility(View.VISIBLE);
+        }else
+        {
+            base1Check.setChecked(false);
+            base1ListLayout.setVisibility(View.GONE);
+        }
+
+        if (activeBases[1] == 1)
+        {
+            base2Check.setChecked(true);
+            base2ListLayout.setVisibility(View.VISIBLE);
+        }else
+        {
+            base2Check.setChecked(false);
+            base2ListLayout.setVisibility(View.GONE);
+        }
+
+        if (activeBases[2] == 1)
+        {
+            base3Check.setChecked(true);
+            base3ListLayout.setVisibility(View.VISIBLE);
+        }else
+        {
+            base3Check.setChecked(false);
+            base3ListLayout.setVisibility(View.GONE);
+        }
     }
 }
