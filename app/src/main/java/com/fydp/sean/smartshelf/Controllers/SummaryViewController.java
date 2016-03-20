@@ -5,14 +5,19 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fydp.sean.smartshelf.Adaptors.ReminderListAdaptor;
 import com.fydp.sean.smartshelf.Adaptors.ZoneAdaptor;
@@ -48,6 +53,18 @@ public class SummaryViewController extends Fragment{
     ImageView weatherImg;
     TextView tempText;
     TextView forecastText;
+    List<Integer> activeWeatherNotifs = new ArrayList<Integer>();
+
+    int listItemNumber;
+    SelectedList selectedList;
+
+    public enum SelectedList {
+        ZONES,
+        REMINDERS,
+        WEATHER
+    }
+
+
 
     @Nullable
     @Override
@@ -79,11 +96,19 @@ public class SummaryViewController extends Fragment{
         tempText = (TextView)rootView.findViewById(R.id.tempText);
         forecastText = (TextView)rootView.findViewById(R.id.forecastText);
 
+
+        // Register for context menus
+        registerForContextMenu(zoneListView);
+        registerForContextMenu(weatherListView);
+
         getData();
         setOnItemClick();
+        setLongClick();
         populateZonesList();
         populateRemindersList();
         populateWeatherList();
+
+
 
         return rootView;
     }
@@ -157,8 +182,9 @@ public class SummaryViewController extends Fragment{
 
             for (int i = 0; i < JSONArray.length(); i++)
             {
-                JSONObject JSONObject = JSONArray.getJSONObject(i);
-                weatherValues.add(JSONObject.getString("message"));
+                JSONObject o = JSONArray.getJSONObject(i);
+                activeWeatherNotifs.add(o.getInt("id"));
+                weatherValues.add(o.getString("message"));
             }
 
         } catch (JSONException e)
@@ -245,8 +271,11 @@ public class SummaryViewController extends Fragment{
                         .replace(R.id.container, fragment)
                         .addToBackStack(null)
                         .commit();
+
+
             }
         });
+
 
         reminderListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -270,6 +299,31 @@ public class SummaryViewController extends Fragment{
             }
         });
 
+    }
+
+    private void setLongClick()
+    {
+        zoneListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                listItemNumber = position;
+                selectedList = SelectedList.ZONES;
+                return false;
+            }
+        });
+
+        weatherListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                listItemNumber = position;
+                selectedList = SelectedList.WEATHER;
+                return false;
+            }
+        });
     }
 
     private void setCurrentWeather(String status, String temp)
@@ -309,5 +363,70 @@ public class SummaryViewController extends Fragment{
     }
 
 
+    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, view, menuInfo);
 
+        menu.setHeaderTitle("Options");
+        menu.add(Menu.NONE, 0, menu.NONE, "Dismiss Notification");
+    }
+
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        if (selectedList == SelectedList.ZONES)
+        {
+            switch (item.getItemId()) {
+                case 0:
+                    Log.d("LOG", "Dismiss Notification");
+                    dismissZoneNotification(listItemNumber);
+                    break;
+                case 1:
+                    Log.d("LOG", "Case 1");
+                    break;
+            }
+        }
+
+        else if (selectedList == SelectedList.WEATHER)
+        {
+            switch (item.getItemId()) {
+                case 0:
+                    Log.d("LOG", "Dismiss Notification");
+                    dismissWeatherNotification(listItemNumber);
+                    break;
+                case 1:
+                    Log.d("LOG", "Case 1");
+                    break;
+            }
+        }
+
+
+
+        return super.onContextItemSelected(item);
+    }
+
+    private void dismissZoneNotification(int n)
+    {
+
+        int activeNotifId = zones.get(n).getActiveNotifId();
+        Utility.sendData("deleteactivenotification/" + activeNotifId);
+
+        zones.remove(n);
+        zoneAdaptor = new ZoneAdaptor(getActivity(), R.layout.subview_zone);
+        zoneListView.setAdapter(zoneAdaptor);
+        populateZonesList();
+
+        Toast.makeText(getActivity(), "Notification Dismissed", Toast.LENGTH_SHORT).show();
+    }
+
+    private void dismissWeatherNotification(int n)
+    {
+
+        int activeNotifId = activeWeatherNotifs.get(n);
+        Log.d("LOG", "" + activeNotifId);
+        Utility.sendData("deleteactivenotification/" + activeNotifId);
+
+        weatherValues.remove(n);
+        populateWeatherList();
+
+        Toast.makeText(getActivity(), "Notification Dismissed", Toast.LENGTH_SHORT).show();
+    }
 }

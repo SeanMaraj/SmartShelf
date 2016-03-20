@@ -179,7 +179,7 @@ public class ZoneDetailController extends Fragment
                 String weatherType = o.getString("checktype");
                 String operator = getOperator(o.getString("checkvalue"));
                 String value = getWeatherValue(operator, o.getString("checkvalue"));
-                WeatherNotifModel weatherNotif = new WeatherNotifModel(o.getInt("notificationid"), weatherType, operator, value);
+                WeatherNotifModel weatherNotif = new WeatherNotifModel(o.getInt("notificationid"), weatherType, operator, value, 0, "");
                 weatherNotifs.add(weatherNotif);
             }
 

@@ -9,13 +9,17 @@ public class WeatherNotifModel
     private String weatherType;
     private String operator;
     private String value;
+    private int activeNotifId;
+    private String message;
 
-    public WeatherNotifModel(int notifId, String weatherType, String operator, String value)
+    public WeatherNotifModel(int notifId, String weatherType, String operator, String value, int activeNotifId, String message)
     {
         this.notifId = notifId;
         this.weatherType = weatherType;
         this.operator = operator;
         this.value = value;
+        this.activeNotifId = activeNotifId;
+        this.message = message;
     }
 
     public String getWeatherType()
@@ -56,5 +60,25 @@ public class WeatherNotifModel
     public void setNotifId(int notifId)
     {
         this.notifId = notifId;
+    }
+
+    public String getMessage()
+    {
+        return message;
+    }
+
+    public void setMessage(String message)
+    {
+        this.message = message;
+    }
+
+    public int getActiveNotifId()
+    {
+        return activeNotifId;
+    }
+
+    public void setActiveNotifId(int activeNotifId)
+    {
+        this.activeNotifId = activeNotifId;
     }
 }
