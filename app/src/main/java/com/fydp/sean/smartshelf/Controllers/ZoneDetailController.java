@@ -4,9 +4,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -61,6 +65,15 @@ public class ZoneDetailController extends Fragment
     float initWeight;
     float currentWeight;
 
+    int listItemNumber;
+    SelectedList selectedList;
+
+    public enum SelectedList {
+        STOCK,
+        REMINDERS,
+        WEATHER
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         ((MainActivity) getActivity()).setActionBarTitle("Zone Detail");
@@ -108,9 +121,17 @@ public class ZoneDetailController extends Fragment
         weatherList.setAdapter(weatherNotifAdaptor);
         weatherNotifs.clear();
 
+        // Register for context menus
+        registerForContextMenu(stockList);
+        registerForContextMenu(reminderList);
+        registerForContextMenu(weatherList);
+
         getData();
         setOnItemClicks();
-        populateLists();
+        setOnLongItemClicks();
+        populateStockList();
+        populateReminderList();
+        populateWeatherList();
 
         return rootView;
     }
@@ -242,7 +263,44 @@ public class ZoneDetailController extends Fragment
 
     }
 
-    private void populateLists()
+    private void setOnLongItemClicks()
+    {
+        stockList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                listItemNumber = position;
+                selectedList = SelectedList.STOCK;
+                return false;
+            }
+        });
+
+        reminderList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                listItemNumber = position;
+                selectedList = SelectedList.REMINDERS;
+                return false;
+            }
+        });
+
+        weatherList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                listItemNumber = position;
+                selectedList = SelectedList.WEATHER;
+                return false;
+            }
+        });
+
+    }
+
+    private void populateStockList()
     {
         Log.d("Log", "Populating zone detail lists");
         stockNotifAdaptor.clear();
@@ -252,8 +310,10 @@ public class ZoneDetailController extends Fragment
         {
             stockNotifAdaptor.add(stockNotifs.get(i));
         }
+    }
 
-
+    private void populateReminderList()
+    {
         Log.d("Log", "Populating reminders list");
         reminderAdaptor.clear();
         reminderAdaptor.notifyDataSetChanged();
@@ -262,8 +322,11 @@ public class ZoneDetailController extends Fragment
         {
             reminderAdaptor.add(reminders.get(i));
         }
+    }
 
 
+    private void populateWeatherList()
+    {
         Log.d("Log", "Populating weather list");
         weatherNotifAdaptor.clear();
         weatherNotifAdaptor.notifyDataSetChanged();
@@ -273,6 +336,8 @@ public class ZoneDetailController extends Fragment
             weatherNotifAdaptor.add(weatherNotifs.get(i));
         }
     }
+
+
 
     private String getOperator(String threshold)
     {
@@ -299,4 +364,91 @@ public class ZoneDetailController extends Fragment
         return value.substring(1, value.length());
     }
 
+    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, view, menuInfo);
+
+        menu.setHeaderTitle("Options");
+        menu.add(Menu.NONE, 0, menu.NONE, "Delete Notification");
+    }
+
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        if (selectedList == SelectedList.STOCK)
+        {
+            switch (item.getItemId()) {
+                case 0:
+                    Log.d("LOG", "Dismiss Notification");
+                    deleteStockNotification(listItemNumber);
+                    break;
+                case 1:
+                    Log.d("LOG", "Case 1");
+                    break;
+            }
+        }
+
+        else if (selectedList == SelectedList.REMINDERS)
+        {
+            switch (item.getItemId()) {
+                case 0:
+                    Log.d("LOG", "Dismiss Notification");
+                    deleteReminderNotification(listItemNumber);
+                    break;
+                case 1:
+                    Log.d("LOG", "Case 1");
+                    break;
+            }
+        }
+
+        else if (selectedList == SelectedList.WEATHER)
+        {
+            switch (item.getItemId()) {
+                case 0:
+                    Log.d("LOG", "Dismiss Notification");
+                    deleteWeatherNotification(listItemNumber);
+                    break;
+                case 1:
+                    Log.d("LOG", "Case 1");
+                    break;
+            }
+        }
+
+        return super.onContextItemSelected(item);
+    }
+
+    private void deleteStockNotification(int n)
+    {
+        int notifId = stockNotifs.get(n).getNotifId();
+        stockNotifs.remove(n);
+        stockNotifAdaptor = new StockNotifListAdaptor(getActivity(), R.layout.subview_notif_stock);
+        stockList.setAdapter(stockNotifAdaptor);
+
+        Utility.sendData("deletenotification/" + notifId);
+        populateStockList();
+        Toast.makeText(getActivity(), "Stock Notification Deleted", Toast.LENGTH_SHORT).show();
+    }
+
+    private void deleteReminderNotification(int n)
+    {
+        int notifId = reminders.get(n).getNotifId();
+        reminders.remove(n);
+        reminderAdaptor = new ReminderListAdaptor(getActivity(), R.layout.subview_reminder);
+        reminderList.setAdapter(reminderAdaptor);
+
+        Utility.sendData("deletenotification/" + notifId);
+        populateReminderList();
+        Toast.makeText(getActivity(), "Reminder Notification Deleted", Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void deleteWeatherNotification(int n)
+    {
+        int notifId = weatherNotifs.get(n).getNotifId();
+        weatherNotifs.remove(n);
+        weatherNotifAdaptor = new WeatherNotifListAdaptor(getActivity(), R.layout.subview_weather);
+        weatherList.setAdapter(weatherNotifAdaptor);
+
+        Utility.sendData("deletenotification/" + notifId);
+        populateWeatherList();
+        Toast.makeText(getActivity(), "Weather Notification Deleted", Toast.LENGTH_SHORT).show();
+    }
 }
