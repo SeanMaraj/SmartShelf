@@ -101,15 +101,13 @@ public class ZoneDetailController extends Fragment
         setInitWeightBtn = (Button)rootView.findViewById(R.id.setInitWeightBtn);
         currentWeightText = (TextView)rootView.findViewById(R.id.currentWeightText);
 
-        //Tabs
+        // Setup tabs
         stockTab = (TextView)rootView.findViewById(R.id.stockTab);
         reminderTab = (TextView)rootView.findViewById(R.id.reminderTab);
         weatherTab = (TextView)rootView.findViewById(R.id.weatherTab);
         stockNotifLayout = (LinearLayout)rootView.findViewById(R.id.stockNotifLayout);
         reminderNotifLayout = (LinearLayout)rootView.findViewById(R.id.reminderNotifLayout);
         weatherNotifLayout = (LinearLayout)rootView.findViewById(R.id.weatherNotifLayout);
-
-        // Only stock layout visible by default
         stockNotifLayout.setVisibility(View.VISIBLE);
         reminderNotifLayout.setVisibility(View.INVISIBLE);
         weatherNotifLayout.setVisibility(View.INVISIBLE);

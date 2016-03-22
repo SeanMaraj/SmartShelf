@@ -2,8 +2,9 @@
 <resources>
 
     <color name="layout">#FF444444</color>
-    <color name="tabinactive">#50444444</color>
+    <color name="tabinactive">#60444444</color>
     <color name="transparent">#00000000</color>
+    <color name="separator1">#20FFFFFF</color>
 
 
 </resources>

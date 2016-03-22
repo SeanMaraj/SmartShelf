@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.fydp.sean.smartshelf.Adaptors.ZoneAdaptor;
 import com.fydp.sean.smartshelf.Helpers.Utility;
@@ -44,6 +45,13 @@ public class ZonesViewController extends Fragment
     ListView base1List;
     ListView base2List;
     ListView base3List;
+
+    TextView base1Tab;
+    TextView base2Tab;
+    TextView base3Tab;
+    LinearLayout base1Layout;
+    LinearLayout base2Layout;
+    LinearLayout base3Layout;
 
     ZoneAdaptor base1Adaptor;
     ZoneAdaptor base2Adaptor;
@@ -90,9 +98,21 @@ public class ZonesViewController extends Fragment
         base3List.setAdapter(base3Adaptor);
         base3Zones.clear();
 
+        // Setup tabs
+        base1Tab = (TextView)rootView.findViewById(R.id.base1Tab);
+        base2Tab = (TextView)rootView.findViewById(R.id.base2Tab);
+        base3Tab = (TextView)rootView.findViewById(R.id.base3Tab);
+        base1Layout = (LinearLayout)rootView.findViewById(R.id.base1ListLayout);
+        base2Layout = (LinearLayout)rootView.findViewById(R.id.base2Layout);
+        base3Layout = (LinearLayout)rootView.findViewById(R.id.base3Layout);
+        base1Layout.setVisibility(View.VISIBLE);
+        base2Layout.setVisibility(View.INVISIBLE);
+        base3Layout.setVisibility(View.INVISIBLE);
+
 
         getData();
         setBaseChecks();
+        setOnClicks();
         setOnItemClick();
         populateList();
 
@@ -123,6 +143,56 @@ public class ZonesViewController extends Fragment
         {
             base3Adaptor.add(base3Zones.get(i));
         }
+    }
+
+    private void setOnClicks()
+    {
+        base1Tab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                base1Layout.setVisibility(View.VISIBLE);
+                base2Layout.setVisibility(View.INVISIBLE);
+                base3Layout.setVisibility(View.INVISIBLE);
+
+                base1Tab.setBackgroundColor(getResources().getColor(R.color.layout));
+                base2Tab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
+                base3Tab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
+            }
+        });
+
+        base2Tab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                base1Layout.setVisibility(View.INVISIBLE);
+                base2Layout.setVisibility(View.VISIBLE);
+                base3Layout.setVisibility(View.INVISIBLE);
+
+                base1Tab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
+                base2Tab.setBackgroundColor(getResources().getColor(R.color.layout));
+                base3Tab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
+
+
+            }
+        });
+
+        base3Tab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                base1Layout.setVisibility(View.INVISIBLE);
+                base2Layout.setVisibility(View.INVISIBLE);
+                base3Layout.setVisibility(View.VISIBLE);
+
+                base1Tab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
+                base2Tab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
+                base3Tab.setBackgroundColor(getResources().getColor(R.color.layout));
+            }
+        });
     }
 
     private void setOnItemClick()
@@ -212,12 +282,10 @@ public class ZonesViewController extends Fragment
             {
                 if (!isChecked)
                 {
-                    base1ListLayout.setVisibility(View.GONE);
                     Utility.sendData("activatebase/1/0");
                 } else if (isChecked)
                 {
                     Utility.sendData("activatebase/1/1");
-                    base1ListLayout.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -229,12 +297,10 @@ public class ZonesViewController extends Fragment
             {
                 if (!isChecked)
                 {
-                    base2ListLayout.setVisibility(View.GONE);
                     Utility.sendData("activatebase/2/0");
                 } else if (isChecked)
                 {
                     Utility.sendData("activatebase/2/1");
-                    base2ListLayout.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -246,19 +312,13 @@ public class ZonesViewController extends Fragment
             {
                 if (!isChecked)
                 {
-                    base3ListLayout.setVisibility(View.GONE);
                     Utility.sendData("activatebase/3/0");
                 } else if (isChecked)
                 {
                     Utility.sendData("activatebase/3/1");
-                    base3ListLayout.setVisibility(View.VISIBLE);
                 }
             }
         });
-
-
-
-
     }
 
     private void getData()
@@ -278,7 +338,7 @@ public class ZonesViewController extends Fragment
             for (int i = 0; i < JSONZones.length(); i++)
             {
                 JSONObject JSONZone = JSONZones.getJSONObject(i);
-                ZoneModel zone = new ZoneModel(JSONZone.getInt("id"), JSONZone.getString("description"), (float)(JSONZone.getDouble("weight")), (float)(JSONZone.getDouble("initialweight")), 0, JSONZone.getInt("baseid"), JSONZone.getString("description"));
+                ZoneModel zone = new ZoneModel(JSONZone.getInt("id"), JSONZone.getString("description"), (float)(JSONZone.getDouble("weight")), (float)(JSONZone.getDouble("initialweight")), 0, JSONZone.getInt("baseid"), JSONZone.getString("description"), false);
                 list.add(zone);
             }
 

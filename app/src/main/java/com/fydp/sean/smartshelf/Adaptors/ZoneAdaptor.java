@@ -62,20 +62,25 @@ public class ZoneAdaptor extends ArrayAdapter {
         float percent = Math.round(100.0 * zone.getPercentage()) / 100;
         ((TextView)row.findViewById(R.id.zoneNameTxt)).setText(zone.getMessage());
         ((TextView)row.findViewById(R.id.initialWeightText)).setText("" + zone.getInitialWeight() + " kg");
+        ((TextView)row.findViewById(R.id.currentWeightText)).setText("" + zone.getCurrentWeight() + " kg");
         TextView percentTextView = ((TextView)row.findViewById(R.id.percentageText));
         percentTextView.setText("" + percent + " %");
 
-        //Set on click listeners
-        ((Button)row.findViewById(R.id.dismissBtn)).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Log.d("LOG", "DISMISS: " + zone.getActiveNotifId());
-            }
-        });
-
         setCurrentWeightColor(percentTextView, percent);
+
+        if (zone.getIsNotif())
+        {
+            ((TextView)row.findViewById(R.id.zoneNumberTxt)).setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            ((TextView)row.findViewById(R.id.zoneNumberTxt)).setText("Zone " + zone.getZoneId());
+        }
+
+        if (zone.getMessage().equals("Enter Description Here"))
+        {
+            ((TextView)row.findViewById(R.id.zoneNameTxt)).setText("EMPTY");
+        }
 
         return row;
     }

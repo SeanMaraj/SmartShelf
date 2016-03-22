@@ -141,7 +141,7 @@ public class SummaryViewController extends Fragment{
             for (int i = 0; i < JSONZones.length(); i++)
             {
                 JSONObject JSONZone = JSONZones.getJSONObject(i);
-                ZoneModel zone = new ZoneModel(JSONZone.getInt("zoneid"), JSONZone.getString("message"), (float)(JSONZone.getDouble("weight")), (float)(JSONZone.getDouble("initialweight")), JSONZone.getInt("activenotificationid"), JSONZone.getInt("baseid"), JSONZone.getString("description"));
+                ZoneModel zone = new ZoneModel(JSONZone.getInt("zoneid"), JSONZone.getString("message"), (float)(JSONZone.getDouble("weight")), (float)(JSONZone.getDouble("initialweight")), JSONZone.getInt("activenotificationid"), JSONZone.getInt("baseid"), JSONZone.getString("description"), true);
                 zones.add(zone);
             }
 

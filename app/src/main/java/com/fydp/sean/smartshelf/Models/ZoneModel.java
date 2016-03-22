@@ -14,8 +14,9 @@ public class ZoneModel {
     private int activeNotifId;
     private int baseId;
     private String desc;
+    private boolean isNotif;
 
-    public ZoneModel(int zoneId, String zoneName, float currentWeight, float initialWeight, int activeNotifId, int baseId, String desc)
+    public ZoneModel(int zoneId, String zoneName, float currentWeight, float initialWeight, int activeNotifId, int baseId, String desc, boolean isNotif)
     {
         setZoneId(zoneId);
         setMessage(zoneName);
@@ -24,6 +25,7 @@ public class ZoneModel {
         setActiveNotifId(activeNotifId);
         this.baseId = baseId;
         this.desc = desc;
+        this.isNotif = isNotif;
     }
 
     public int getZoneId() {
@@ -112,5 +114,15 @@ public class ZoneModel {
     public void setDesc(String desc)
     {
         this.desc = desc;
+    }
+
+    public boolean getIsNotif()
+    {
+        return isNotif;
+    }
+
+    public void setIsNotif(boolean isNotif)
+    {
+        this.isNotif = isNotif;
     }
 }
