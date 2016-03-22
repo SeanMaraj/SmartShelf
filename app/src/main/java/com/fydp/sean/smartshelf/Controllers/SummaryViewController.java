@@ -200,12 +200,8 @@ public class SummaryViewController extends Fragment{
         try
         {
             JSONArray a = new JSONArray(result);
-
-            for (int i = 0; i <= 1; i++)
-            {
-                JSONObject o = a.getJSONObject(i);
-                setCurrentWeather(o.getString("status"), o.getString("temperature"));
-            }
+            JSONObject o = a.getJSONObject(0);
+            setCurrentWeather(o.getString("status"), o.getString("temperature"));
 
         } catch (JSONException e)
         {
