@@ -359,7 +359,8 @@ public class SummaryViewController extends Fragment{
                 forecastText.setText("Clear");
         }
 
-        tempText.setText(temp + "°C");
+        ;
+        tempText.setText(Math.round(Double.parseDouble(temp)) + "°C");
     }
 
 

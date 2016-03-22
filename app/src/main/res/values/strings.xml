@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">SHELF-M8</string>
+    <string name="app_name">Shelf-M8</string>
 
     <string name="title_section1">Summary</string>
-    <string name="title_section2">Zone Stock Levels</string>
+    <string name="title_section2">Zones</string>
     <string name="title_section3">Reminders</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

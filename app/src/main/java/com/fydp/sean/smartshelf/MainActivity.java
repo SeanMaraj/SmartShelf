@@ -93,6 +93,8 @@ public class MainActivity extends ActionBarActivity
 
         // Network test
         //Utility.create().testNetwork();
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_menu);
+
     }
 
     @Override
