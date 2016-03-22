@@ -97,6 +97,7 @@ public class AddNotifController extends Fragment
         weatherOptionsLayout.setVisibility(View.GONE);
 
         setOnClickListenrs();
+        setNotifType();
 
         return rootView;
     }
@@ -243,5 +244,23 @@ public class AddNotifController extends Fragment
         if (selected.equals("what ever the option was")) {
         }
         */
+    }
+
+    private void setNotifType()
+    {
+        String type = getArguments().getString("notifType");
+
+        if (type.equals("weight"))
+        {
+            monitorStockCheck.setChecked(true);
+        }
+        else if (type.equals("reminder"))
+        {
+            reminderCheck.setChecked(true);
+        }
+        else if (type.equals("weather"))
+        {
+            weatherCheck.setChecked(true);
+        }
     }
 }

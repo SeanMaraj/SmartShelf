@@ -1,5 +1,6 @@
 package com.fydp.sean.smartshelf.Controllers;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -53,6 +55,12 @@ public class ZoneDetailController extends Fragment
     Button setInitWeightBtn;
     TextView initWeightText;
     TextView currentWeightText;
+    TextView weightTitleText;
+    TextView reminderTitleText;
+    TextView weatherTitleText;
+    ImageView addWeightBtn;
+    ImageView addReminderBtn;
+    ImageView addWeatherBtn;
 
     TextView stockTab;
     TextView reminderTab;
@@ -88,7 +96,6 @@ public class ZoneDetailController extends Fragment
         ((MainActivity) getActivity()).setActionBarTitle("Zone Detail");
         rootView = inflater.inflate(R.layout.view_zone_detail, container, false);
 
-        addNotifBtn = (Button)rootView.findViewById(R.id.addNotifBtn);
         zoneNameEdit = (EditText)rootView.findViewById(R.id.zoneNameEdit);
         zoneIdText = (TextView)rootView.findViewById(R.id.zoneNumberText);
         baseIdText = (TextView)rootView.findViewById(R.id.baseNumberText);
@@ -100,6 +107,12 @@ public class ZoneDetailController extends Fragment
         initWeightText = (TextView)rootView.findViewById(R.id.initialWeightText);
         setInitWeightBtn = (Button)rootView.findViewById(R.id.setInitWeightBtn);
         currentWeightText = (TextView)rootView.findViewById(R.id.currentWeightText);
+        weightTitleText = (TextView)rootView.findViewById(R.id.weightTitleText);
+        reminderTitleText = (TextView)rootView.findViewById(R.id.reminderTitleText);
+        weatherTitleText = (TextView)rootView.findViewById(R.id.weatherTitleText);
+        addWeightBtn = (ImageView)rootView.findViewById(R.id.addWeightBtn);
+        addReminderBtn = (ImageView)rootView.findViewById(R.id.addReminderBtn);
+        addWeatherBtn = (ImageView)rootView.findViewById(R.id.addWeatherBtn);
 
         // Setup tabs
         stockTab = (TextView)rootView.findViewById(R.id.stockTab);
@@ -148,7 +161,7 @@ public class ZoneDetailController extends Fragment
         registerForContextMenu(weatherList);
 
         getData();
-        setOnItemClicks();
+        setOnClicks();
         setOnLongItemClicks();
         populateStockList();
         populateReminderList();
@@ -231,9 +244,10 @@ public class ZoneDetailController extends Fragment
         }
     }
 
-    private void setOnItemClicks()
+
+    private void setOnClicks()
     {
-        addNotifBtn.setOnClickListener(new View.OnClickListener()
+        addWeightBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -244,6 +258,51 @@ public class ZoneDetailController extends Fragment
                 args.putInt("zoneId", zoneId);
                 args.putInt("baseId", baseId);
                 args.putFloat("initWeight", initWeight);
+                args.putString("notifType", "weight");
+                fragment.setArguments(args);
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, fragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+        addReminderBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Fragment fragment = new AddNotifController();
+
+                Bundle args = new Bundle();
+                args.putInt("zoneId", zoneId);
+                args.putInt("baseId", baseId);
+                args.putFloat("initWeight", initWeight);
+                args.putString("notifType", "reminder");
+                fragment.setArguments(args);
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, fragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+        addWeatherBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Fragment fragment = new AddNotifController();
+
+                Bundle args = new Bundle();
+                args.putInt("zoneId", zoneId);
+                args.putInt("baseId", baseId);
+                args.putFloat("initWeight", initWeight);
+                args.putString("notifType", "weather");
                 fragment.setArguments(args);
 
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -375,10 +434,21 @@ public class ZoneDetailController extends Fragment
         stockNotifAdaptor.clear();
         stockNotifAdaptor.notifyDataSetChanged();
 
-        for (int i = 0; i < stockNotifs.size(); i++)
+        if (stockNotifs.size() > 0)
         {
-            stockNotifAdaptor.add(stockNotifs.get(i));
+            for (int i = 0; i < stockNotifs.size(); i++)
+            {
+                stockNotifAdaptor.add(stockNotifs.get(i));
+            }
         }
+        else
+        {
+            weightTitleText.setText("NO WEIGHT NOTIFICATIONS");
+        }
+
+
+
+
     }
 
     private void populateReminderList()
@@ -387,10 +457,18 @@ public class ZoneDetailController extends Fragment
         reminderAdaptor.clear();
         reminderAdaptor.notifyDataSetChanged();
 
-        for (int i = 0; i < reminders.size(); i++)
+        if (reminders.size() > 0)
         {
-            reminderAdaptor.add(reminders.get(i));
+            for (int i = 0; i < reminders.size(); i++)
+            {
+                reminderAdaptor.add(reminders.get(i));
+            }
         }
+        else
+        {
+            reminderTitleText.setText("NO CUSTOM REMINDERS");
+        }
+
     }
 
 
@@ -400,10 +478,18 @@ public class ZoneDetailController extends Fragment
         weatherNotifAdaptor.clear();
         weatherNotifAdaptor.notifyDataSetChanged();
 
-        for (int i = 0; i < weatherNotifs.size(); i++)
+        if (weatherNotifs.size() > 0)
         {
-            weatherNotifAdaptor.add(weatherNotifs.get(i));
+            for (int i = 0; i < weatherNotifs.size(); i++)
+            {
+                weatherNotifAdaptor.add(weatherNotifs.get(i));
+            }
         }
+        else
+        {
+            weatherTitleText.setText("NO WEATHER NOTIFICATIONS");
+        }
+
     }
 
 
