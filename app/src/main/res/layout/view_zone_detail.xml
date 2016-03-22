@@ -89,93 +89,132 @@
 
 
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            android:background="#FF444444">
+            android:layout_height="fill_parent"
+            android:layout_marginTop="20dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="STOCK NOTIFICATIONS"
-                android:textSize="20dp"/>
-
-            <View
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#FFFFFFFF"/>
+                android:layout_height="50dp"
+                android:orientation="horizontal">
 
-            <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:fadeScrollbars="false"
-                android:id="@+id/stockList"
-                android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/stockTab"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="15dp"
+                    android:background="#FF444444"
+                    android:text="STOCK"/>
+                <TextView
+                    android:id="@+id/reminderTab"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="15dp"
+                    android:text="REMINDERS"/>
+                <TextView
+                    android:id="@+id/weatherTab"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="15dp"
+                    android:text="WEATHER"/>
 
-        </LinearLayout>
+
+            </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:background="#FF444444">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="REMINDERS"
-                android:textSize="20dp"/>
-
-            <View
+            <LinearLayout
+                android:id="@+id/stockNotifLayout"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#FFFFFFFF"/>
-
-            <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:fadeScrollbars="false"
-                android:id="@+id/reminderList"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:background="#FF444444">
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="WEATHER REMINDERS"
-                android:textSize="20dp"/>
+                android:layout_marginTop="50dp"
+                android:orientation="vertical"
+                android:background="#FF444444">
 
-            <View
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="STOCK NOTIFICATIONS"
+                    android:textSize="20dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFFFF"/>
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:fadeScrollbars="false"
+                    android:id="@+id/stockList"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/reminderNotifLayout"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#FFFFFFFF"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:orientation="vertical"
+                android:background="#FF444444">
 
-            <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:fadeScrollbars="false"
-                android:id="@+id/weatherList"
-                android:layout_weight="1" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="REMINDERS"
+                    android:textSize="20dp"/>
 
-        </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFFFF"/>
 
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:fadeScrollbars="false"
+                    android:id="@+id/reminderList"
+                    android:layout_weight="1" />
 
+            </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/weatherNotifLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:orientation="vertical"
+                android:background="#FF444444">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="WEATHER REMINDERS"
+                    android:textSize="20dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFFFF"/>
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:fadeScrollbars="false"
+                    android:id="@+id/weatherList"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
     </LinearLayout>
 

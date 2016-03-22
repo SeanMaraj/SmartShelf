@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +54,14 @@ public class ZoneDetailController extends Fragment
     TextView initWeightText;
     TextView currentWeightText;
 
+    TextView stockTab;
+    TextView reminderTab;
+    TextView weatherTab;
+    LinearLayout stockNotifLayout;
+    LinearLayout reminderNotifLayout;
+    LinearLayout weatherNotifLayout;
+
+
     ArrayList<StockNotifModel> stockNotifs = new ArrayList<StockNotifModel>();
     ArrayList<ReminderModel> reminders = new ArrayList<ReminderModel>();
     ArrayList<WeatherNotifModel> weatherNotifs = new ArrayList<WeatherNotifModel>();
@@ -91,6 +100,20 @@ public class ZoneDetailController extends Fragment
         initWeightText = (TextView)rootView.findViewById(R.id.initialWeightText);
         setInitWeightBtn = (Button)rootView.findViewById(R.id.setInitWeightBtn);
         currentWeightText = (TextView)rootView.findViewById(R.id.currentWeightText);
+
+        //Tabs
+        stockTab = (TextView)rootView.findViewById(R.id.stockTab);
+        reminderTab = (TextView)rootView.findViewById(R.id.reminderTab);
+        weatherTab = (TextView)rootView.findViewById(R.id.weatherTab);
+        stockNotifLayout = (LinearLayout)rootView.findViewById(R.id.stockNotifLayout);
+        reminderNotifLayout = (LinearLayout)rootView.findViewById(R.id.reminderNotifLayout);
+        weatherNotifLayout = (LinearLayout)rootView.findViewById(R.id.weatherNotifLayout);
+
+        // Only stock layout visible by default
+        stockNotifLayout.setVisibility(View.VISIBLE);
+        reminderNotifLayout.setVisibility(View.INVISIBLE);
+        weatherNotifLayout.setVisibility(View.INVISIBLE);
+
 
         //Set zone info
         baseId = Integer.parseInt(getArguments().get("baseId").toString());
@@ -258,6 +281,46 @@ public class ZoneDetailController extends Fragment
                 Utility.sendData("setinitialweight/" + baseId + "/" + zoneId);
 
                 Toast.makeText(getActivity(), "Initial weight set to " + currentWeight + " kg", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        stockTab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                stockNotifLayout.setVisibility(View.VISIBLE);
+                reminderNotifLayout.setVisibility(View.INVISIBLE);
+                weatherNotifLayout.setVisibility(View.INVISIBLE);
+
+
+            }
+        });
+
+        reminderTab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                stockNotifLayout.setVisibility(View.INVISIBLE);
+                reminderNotifLayout.setVisibility(View.VISIBLE);
+                weatherNotifLayout.setVisibility(View.INVISIBLE);
+
+
+            }
+        });
+
+        weatherTab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                stockNotifLayout.setVisibility(View.INVISIBLE);
+                reminderNotifLayout.setVisibility(View.INVISIBLE);
+                weatherNotifLayout.setVisibility(View.VISIBLE);
+
+
             }
         });
 
