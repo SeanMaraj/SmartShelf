@@ -294,7 +294,9 @@ public class ZoneDetailController extends Fragment
                 reminderNotifLayout.setVisibility(View.INVISIBLE);
                 weatherNotifLayout.setVisibility(View.INVISIBLE);
 
-
+                stockTab.setBackgroundColor(getResources().getColor(R.color.layout));
+                reminderTab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
+                weatherTab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
             }
         });
 
@@ -306,6 +308,10 @@ public class ZoneDetailController extends Fragment
                 stockNotifLayout.setVisibility(View.INVISIBLE);
                 reminderNotifLayout.setVisibility(View.VISIBLE);
                 weatherNotifLayout.setVisibility(View.INVISIBLE);
+
+                stockTab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
+                reminderTab.setBackgroundColor(getResources().getColor(R.color.layout));
+                weatherTab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
 
 
             }
@@ -320,7 +326,9 @@ public class ZoneDetailController extends Fragment
                 reminderNotifLayout.setVisibility(View.INVISIBLE);
                 weatherNotifLayout.setVisibility(View.VISIBLE);
 
-
+                stockTab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
+                reminderTab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
+                weatherTab.setBackgroundColor(getResources().getColor(R.color.layout));
             }
         });
 
