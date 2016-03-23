@@ -26,7 +26,7 @@ public class Utility
 
     //-- GLOBAL VARIABLES --//
 
-    private static boolean offlineMode = true;
+    private static boolean offlineMode = false;
     private static String serverAddress = "http://99.235.222.196:5001//";
 
 

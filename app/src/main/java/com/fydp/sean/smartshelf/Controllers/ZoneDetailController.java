@@ -1,9 +1,13 @@
 package com.fydp.sean.smartshelf.Controllers;
 
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -162,7 +166,6 @@ public class ZoneDetailController extends Fragment
 
         getData();
         setOnClicks();
-        setOnLongItemClicks();
         populateStockList();
         populateReminderList();
         populateWeatherList();
@@ -313,18 +316,48 @@ public class ZoneDetailController extends Fragment
             }
         });
 
-        saveBtn.setOnClickListener(new View.OnClickListener()
+
+        zoneNameEdit.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Log.d("Log", "Updating Name");
 
-                // Send name
-                String newName = zoneNameEdit.getText().toString();
-                Utility.sendData("updatedescription/" + baseId + "/" + zoneId + "/" + newName);
 
-                Toast.makeText(getActivity(), "Updated zone name to " + newName, Toast.LENGTH_SHORT).show();
+                LayoutInflater inflater = getActivity().getLayoutInflater();
+
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                alertDialog.setTitle("Set Name");
+
+                final View layout = inflater.inflate(R.layout.dialog_edittext,null);
+                alertDialog.setView(layout);
+                final EditText e = (EditText)(layout.findViewById(R.id.dialogEdit));
+                e.setText(zoneNameEdit.getText());
+
+                alertDialog.setPositiveButton("SET", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        Log.d("Log", "Updating Name");
+
+                        // Send name
+                        String newName = e.getText().toString();
+
+                        Utility.sendData("updatedescription/" + baseId + "/" + zoneId + "/" + newName);
+                        zoneNameEdit.setText(newName);
+                        Toast.makeText(getActivity(), "Updated zone name to " + newName, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                alertDialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        Log.d("LOG", "CANCEL");
+                    }
+                });
+                alertDialog.show();
             }
         });
 
@@ -389,44 +422,41 @@ public class ZoneDetailController extends Fragment
             }
         });
 
-    }
-
-    private void setOnLongItemClicks()
-    {
-        stockList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        stockList.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 listItemNumber = position;
                 selectedList = SelectedList.STOCK;
-                return false;
+                stockList.showContextMenu();
             }
         });
 
-        reminderList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        reminderList.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 listItemNumber = position;
                 selectedList = SelectedList.REMINDERS;
-                return false;
+                reminderList.showContextMenu();
             }
         });
 
-        weatherList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        weatherList.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 listItemNumber = position;
                 selectedList = SelectedList.WEATHER;
-                return false;
+                weatherList.showContextMenu();
             }
         });
 
     }
+
 
     private void populateStockList()
     {

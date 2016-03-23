@@ -66,7 +66,7 @@ public class ZonesViewController extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        ((MainActivity) getActivity()).setActionBarTitle("Zone Stock Levels");
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.title_section2));
         rootView = inflater.inflate(R.layout.view_zones, container, false);
 
 

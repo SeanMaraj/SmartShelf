@@ -1,6 +1,8 @@
 package com.fydp.sean.smartshelf.Controllers;
 
+import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,13 +16,16 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.fydp.sean.smartshelf.Dialogs.SelectDateFragment;
 import com.fydp.sean.smartshelf.Helpers.Utility;
 import com.fydp.sean.smartshelf.MainActivity;
 import com.fydp.sean.smartshelf.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -90,6 +95,8 @@ public class AddNotifController extends Fragment
         // Set spinner content
         setSpinners();
 
+        // Set default date and time
+        setDateAndTime();
 
         // Set checked values to false by default
         monitorStockOptionsLayout.setVisibility(View.GONE);
@@ -166,7 +173,7 @@ public class AddNotifController extends Fragment
                 String notiftype = "";
                 String checktype = "";
                 String checkvalue = "";
-                String description = "none";
+                String description = "";
 
                 if (monitorStockCheck.isChecked())
                 {
@@ -175,15 +182,16 @@ public class AddNotifController extends Fragment
                     checkvalue = "l" + thresholdEdit.getText().toString();
 
                     //newnotification/<int:baseid>/<int:zoneid>/<notiftype>/<checktype>/<checkvalue>/<description>/<pushflag>
-                }
-                else if (reminderCheck.isChecked())
+                } else if (reminderCheck.isChecked())
                 {
                     notiftype = "time";
-                    checktype = repeatSpinner.getSelectedItem().toString();
-                    checkvalue = "2016" + dateEdt.getText().toString() + timeEdt.getText().toString();
+                    checktype = getRepeatValue(repeatSpinner.getSelectedItem().toString());
+                    String[] date = dateEdt.getText().toString().split("/");
+                    String[] time = timeEdt.getText().toString().split(":");
+                    checkvalue = date[2] + date[0] + date[1] + time[0] + time[1];
                     description = reminderDesc.getText().toString().replaceAll(" ", "%20");
-                }
-                else if (weatherCheck.isChecked())
+
+                } else if (weatherCheck.isChecked())
                 {
                     notiftype = "weather";
                     checktype = weatherTypeSpinner.getSelectedItem().toString().toLowerCase();
@@ -192,8 +200,7 @@ public class AddNotifController extends Fragment
                     if (operator.equals("less than"))
                     {
                         checkvalue += "l";
-                    }
-                    else if (operator.equals("greater than"))
+                    } else if (operator.equals("greater than"))
                     {
                         checkvalue += "g";
                     }
@@ -202,12 +209,50 @@ public class AddNotifController extends Fragment
 
                 }
 
+                if (description.equals(""))
+                {
+                    description = "none";
+                }
+
                 url = "newnotification/" + baseId + "/" + zoneId + "/" + notiftype + "/" + checktype + "/" + checkvalue + "/" + description + "/1";
 
                 Log.d("URL", url);
                 Utility.sendData(url);
 
                 Toast.makeText(getActivity(), "Notification created", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dateEdt.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.d("LOG", "DATE");
+                DialogFragment newFragment = new SelectDateFragment();
+                newFragment.show(getFragmentManager(), "DatePicker");
+            }
+        });
+
+        timeEdt.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.d("LOG", "TIME");
+
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        timeEdt.setText( String.format("%02d", selectedHour) + ":" + String.format("%02d", selectedMinute));
+                    }
+                }, hour, minute, true);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
             }
         });
     }
@@ -231,19 +276,13 @@ public class AddNotifController extends Fragment
         operatorSpinner.setAdapter(operatorAdapter);
 
         List<String> repeatArray =  new ArrayList<String>();
-        repeatArray.add("repeatonce");
-        repeatArray.add("repeatdaily");
-        repeatArray.add("repeatweekly");
-        repeatArray.add("repeatmonthly");
+        repeatArray.add("Repeat Once");
+        repeatArray.add("Repeat Daily");
+        repeatArray.add("Repeat Weekly");
+        repeatArray.add("Repeat Monthly");
         ArrayAdapter<String> repeatAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, repeatArray);
         repeatAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         repeatSpinner.setAdapter(repeatAdapter);
-
-        /* Get spinner item
-        String selected = sItems.getSelectedItem().toString();
-        if (selected.equals("what ever the option was")) {
-        }
-        */
     }
 
     private void setNotifType()
@@ -261,6 +300,42 @@ public class AddNotifController extends Fragment
         else if (type.equals("weather"))
         {
             weatherCheck.setChecked(true);
+        }
+    }
+
+    private void setDateAndTime()
+    {
+        // Date
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        String date = String.format("%02d", month) + "/" + String.format("%02d", day) + "/" + String.format("%02d", year);
+        dateEdt.setText(date);
+
+        // Time
+        Calendar mcurrentTime = Calendar.getInstance();
+        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = mcurrentTime.get(Calendar.MINUTE);
+        timeEdt.setText( String.format("%02d", hour) + ":" + String.format("%02d", minute));
+
+    }
+
+    private String getRepeatValue(String value)
+    {
+
+        switch (value)
+        {
+            case "Repeat Once":
+                return "repeatonce";
+            case "Repeat Daily":
+                return "repeatdaily";
+            case "Repeat Weekly":
+                return "repeatweekly";
+            case "Repeat Monthly":
+                return "repeatmonthly";
+            default:
+                return "repeatonce";
         }
     }
 }

@@ -5,35 +5,6 @@
                 android:layout_marginTop="10dp"
                 android:padding="10dp">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp">
-
-        <Button
-            android:id="@+id/saveBtn"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            android:layout_alignParentRight="true"
-            android:text="SAVE NAME"
-            android:textSize="10dp"/>
-
-
-        <Button
-            android:id="@+id/setInitWeightBtn"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="60dp"
-            android:layout_alignParentRight="true"
-            android:text="Set initial weight"
-            android:textSize="10dp"/>
-
-
-    </RelativeLayout>
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,41 +15,81 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp">
 
-        <EditText
-            android:id="@+id/zoneNameEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Zone Name"
-            android:textStyle="bold"
-            android:textSize="20dp"/>
 
-        <TextView
-            android:id="@+id/zoneNumberText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Zone Number: "
-            android:textSize="15dp"/>
+            <LinearLayout
+                android:id="@+id/stats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/baseNumberText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Base Number: "
-            android:textSize="15dp"/>
+                <EditText
+                    android:id="@+id/zoneNameEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Zone Name"
+                    android:focusable="false"
+                    android:cursorVisible="false"
+                    android:textStyle="bold"
+                    android:textSize="25dp"/>
 
-        <TextView
-            android:id="@+id/currentWeightText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Current weight: 10kg"
-            android:textSize="15dp"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/initialWeightText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Initial Weight: 10kg"
-            android:textSize="15dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/zoneNumberText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Zone Number: "
+                            android:textSize="15dp"/>
+
+                        <TextView
+                            android:id="@+id/baseNumberText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Base Number: "
+                            android:textSize="15dp"/>
+
+                        <TextView
+                            android:id="@+id/currentWeightText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Current weight: 10kg"
+                            android:textSize="15dp"/>
+
+                        <TextView
+                            android:id="@+id/initialWeightText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Initial Weight: 10kg"
+                            android:textSize="15dp"/>
+
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/setInitWeightBtn"
+                        android:layout_width="110dp"
+                        android:layout_height="60dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="Set initial weight"
+                        android:textSize="12dp"/>
+
+
+                </RelativeLayout>
+
+
+
+
+            </LinearLayout>
+
+
 
 
 
