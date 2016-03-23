@@ -143,14 +143,17 @@ public class MainActivity extends ActionBarActivity
         {
             case 0:
                 fragment = new SummaryViewController();
+                Utility.setCurrentFragment("summaryFragment");
                 mTitle = getString(R.string.title_section1);
                 break;
             case 1:
                 fragment = new ZonesViewController();
+                Utility.setCurrentFragment("zonesFragment");
                 mTitle = getString(R.string.title_section2);
                 break;
             case 2:
                 fragment = new EventsViewController();
+                Utility.setCurrentFragment("remindersFragment");
                 mTitle = getString(R.string.title_section3);
                 break;
         }
@@ -163,7 +166,7 @@ public class MainActivity extends ActionBarActivity
     private void setFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment, "currentFragment")
+                .replace(R.id.container, fragment, Utility.getCurrentFragment())
                 .addToBackStack(null)
                 .commit();
     }
@@ -227,15 +230,15 @@ public class MainActivity extends ActionBarActivity
 
     private void refreshFragment()
     {
-        Fragment f = getSupportFragmentManager().findFragmentByTag("currentFragment");
+        Fragment f = getSupportFragmentManager().findFragmentByTag(Utility.getCurrentFragment());
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.detach(f);
         ft.attach(f);
         ft.commit();
 
-        Utility.sendData("updatestatus");
+        Toast.makeText(getApplicationContext(), "Refreshing " + Utility.getCurrentFragment() + " Complete", Toast.LENGTH_SHORT).show();
 
-        Toast.makeText(getApplicationContext(), "Refresh Complete", Toast.LENGTH_SHORT).show();
+        Utility.sendData("updatestatus");
     }
 
     /**

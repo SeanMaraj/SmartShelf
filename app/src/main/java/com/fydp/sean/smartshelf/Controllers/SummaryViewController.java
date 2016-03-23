@@ -73,6 +73,7 @@ public class SummaryViewController extends Fragment{
         Log.d("Log", "IN SUMMARY VIEW CONTROLLER");
 
         ((MainActivity) getActivity()).setActionBarTitle("Summary");
+        Utility.setCurrentFragment("summaryFragment");
         rootView = inflater.inflate(R.layout.view_summary, container, false);
 
         // Inital setup
@@ -261,10 +262,12 @@ public class SummaryViewController extends Fragment{
                 args.putFloat("initWeight", zones.get(position).getInitialWeight());
                 args.putFloat("currentWeight", zones.get(position).getCurrentWeight());
 
+                Utility.setCurrentFragment("zoneDetailFragment");
+
                 fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, fragment)
+                        .replace(R.id.container, fragment, "zoneDetailFragment")
                         .addToBackStack(null)
                         .commit();
 

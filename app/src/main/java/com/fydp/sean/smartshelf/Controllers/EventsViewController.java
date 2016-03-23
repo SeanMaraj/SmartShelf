@@ -38,6 +38,7 @@ public class EventsViewController extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         ((MainActivity) getActivity()).setActionBarTitle("Reminders");
+        Utility.setCurrentFragment("remindersFragment");
 
         rootView = inflater.inflate(R.layout.view_events, container, false);
         eventListView = (ListView) rootView.findViewById(R.id.eventList);
@@ -92,6 +93,7 @@ public class EventsViewController extends Fragment{
 
     private void setOnItemClick()
     {
+        /*
         Log.d("Log", "Setting item click");
 
         eventListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -117,5 +119,7 @@ public class EventsViewController extends Fragment{
                 ((MainActivity) getActivity()).setActionBarTitle("Edit Event");
             }
         });
+
+        */
     }
 }

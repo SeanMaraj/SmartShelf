@@ -61,6 +61,7 @@ public class AddNotifController extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         ((MainActivity) getActivity()).setActionBarTitle("Add Notification");
+        Utility.setCurrentFragment("addNotifFragment");
         rootView = inflater.inflate(R.layout.view_notif_add, container, false);
 
         // Get views
@@ -276,10 +277,10 @@ public class AddNotifController extends Fragment
         operatorSpinner.setAdapter(operatorAdapter);
 
         List<String> repeatArray =  new ArrayList<String>();
-        repeatArray.add("Repeat Once");
-        repeatArray.add("Repeat Daily");
-        repeatArray.add("Repeat Weekly");
-        repeatArray.add("Repeat Monthly");
+        repeatArray.add("Remind Once");
+        repeatArray.add("Remind Daily");
+        repeatArray.add("Remind Weekly");
+        repeatArray.add("Remind Monthly");
         ArrayAdapter<String> repeatAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, repeatArray);
         repeatAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         repeatSpinner.setAdapter(repeatAdapter);
@@ -326,13 +327,13 @@ public class AddNotifController extends Fragment
 
         switch (value)
         {
-            case "Repeat Once":
+            case "Remind Once":
                 return "repeatonce";
-            case "Repeat Daily":
+            case "Remind Daily":
                 return "repeatdaily";
-            case "Repeat Weekly":
+            case "Remind Weekly":
                 return "repeatweekly";
-            case "Repeat Monthly":
+            case "Remind Monthly":
                 return "repeatmonthly";
             default:
                 return "repeatonce";

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -98,6 +99,7 @@ public class ZoneDetailController extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         ((MainActivity) getActivity()).setActionBarTitle("Zone Detail");
+        Utility.setCurrentFragment("zoneDetailFragment");
         rootView = inflater.inflate(R.layout.view_zone_detail, container, false);
 
         zoneNameEdit = (EditText)rootView.findViewById(R.id.zoneNameEdit);
@@ -178,6 +180,8 @@ public class ZoneDetailController extends Fragment
         parseStockNotifsResult(Utility.fetchData("getstocknotifications/" + baseId + "/" + zoneId));
         parseRemindersResult(Utility.fetchData("getreminders/" + baseId + "/" + zoneId));
         parseWeatherResult(Utility.fetchData(("getweathernotifications/" + baseId + "/" + zoneId)));
+        setCurrentWeight(Utility.fetchData("getweight/" + baseId + "/" + zoneId));
+        setInitialWeight(Utility.fetchData("getinitialweight/" + baseId + "/" + zoneId));
     }
 
     private void parseStockNotifsResult(String result)
@@ -264,9 +268,11 @@ public class ZoneDetailController extends Fragment
                 args.putString("notifType", "weight");
                 fragment.setArguments(args);
 
+                Utility.setCurrentFragment("addNotifFragment");
+
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, fragment)
+                        .replace(R.id.container, fragment, "addNotifFragment")
                         .addToBackStack(null)
                         .commit();
             }
@@ -286,9 +292,11 @@ public class ZoneDetailController extends Fragment
                 args.putString("notifType", "reminder");
                 fragment.setArguments(args);
 
+                Utility.setCurrentFragment("addNotifFragment");
+
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, fragment)
+                        .replace(R.id.container, fragment, "addNotifFragment")
                         .addToBackStack(null)
                         .commit();
             }
@@ -308,9 +316,11 @@ public class ZoneDetailController extends Fragment
                 args.putString("notifType", "weather");
                 fragment.setArguments(args);
 
+                Utility.setCurrentFragment("addNotifFragment");
+
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, fragment)
+                        .replace(R.id.container, fragment, "addNotifFragment")
                         .addToBackStack(null)
                         .commit();
             }
@@ -370,6 +380,8 @@ public class ZoneDetailController extends Fragment
 
                 Utility.sendData("setinitialweight/" + baseId + "/" + zoneId);
 
+                refresh();
+
                 Toast.makeText(getActivity(), "Initial weight set to " + currentWeight + " kg", Toast.LENGTH_SHORT).show();
             }
         });
@@ -402,8 +414,6 @@ public class ZoneDetailController extends Fragment
                 stockTab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
                 reminderTab.setBackgroundColor(getResources().getColor(R.color.layout));
                 weatherTab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
-
-
             }
         });
 
@@ -476,9 +486,6 @@ public class ZoneDetailController extends Fragment
             weightTitleText.setText("NO WEIGHT NOTIFICATIONS");
         }
 
-
-
-
     }
 
     private void populateReminderList()
@@ -522,7 +529,38 @@ public class ZoneDetailController extends Fragment
 
     }
 
+    private void setCurrentWeight(String result)
+    {
+        Log.d("LOG", "Parsing current weight: " + result);
+        try
+        {
+            JSONArray a = new JSONArray(result);
+            JSONObject o = a.getJSONObject(0);
+            String currentWeight = "" + o.getDouble("weight");
+            currentWeightText.setText("Current Weight: " + currentWeight + " kg");
 
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void setInitialWeight(String result)
+    {
+        Log.d("LOG", "Parsing initial weight: " + result);
+        try
+        {
+            JSONArray a = new JSONArray(result);
+            JSONObject o = a.getJSONObject(0);
+            String initialWeight = "" + o.getDouble("initialweight");
+            initWeightText.setText("Initial Weight: " + initialWeight + " kg");
+
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
 
     private String getOperator(String threshold)
     {
@@ -635,5 +673,16 @@ public class ZoneDetailController extends Fragment
         Utility.sendData("deletenotification/" + notifId);
         populateWeatherList();
         Toast.makeText(getActivity(), "Weather Notification Deleted", Toast.LENGTH_SHORT).show();
+    }
+
+    private void refresh()
+    {
+        Log.d("LOG", "Refresh");
+
+        Fragment f = getActivity().getSupportFragmentManager().findFragmentByTag("zoneDetailFragment");
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.detach(f);
+        ft.attach(f);
+        ft.commit();
     }
 }

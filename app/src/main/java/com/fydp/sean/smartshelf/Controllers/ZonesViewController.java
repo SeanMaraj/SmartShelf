@@ -67,6 +67,7 @@ public class ZonesViewController extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.title_section2));
+        Utility.setCurrentFragment("zonesFragment");
         rootView = inflater.inflate(R.layout.view_zones, container, false);
 
 
@@ -215,10 +216,12 @@ public class ZonesViewController extends Fragment
                 args.putFloat("initWeight", base1Zones.get(position).getInitialWeight());
                 args.putFloat("currentWeight", base1Zones.get(position).getCurrentWeight());
 
+                Utility.setCurrentFragment("zoneDetailFragment");
+
                 fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, fragment)
+                        .replace(R.id.container, fragment, "zoneDetailFragment")
                         .addToBackStack(null)
                         .commit();
             }
@@ -240,10 +243,12 @@ public class ZonesViewController extends Fragment
                 args.putFloat("initWeight", base2Zones.get(position).getInitialWeight());
                 args.putFloat("currentWeight", base2Zones.get(position).getCurrentWeight());
 
+                Utility.setCurrentFragment("zoneDetailFragment");
+
                 fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, fragment)
+                        .replace(R.id.container, fragment, "zoneDetailFragment")
                         .addToBackStack(null)
                         .commit();
             }
@@ -265,10 +270,12 @@ public class ZonesViewController extends Fragment
                 args.putFloat("initWeight", base3Zones.get(position).getInitialWeight());
                 args.putFloat("currentWeight", base3Zones.get(position).getCurrentWeight());
 
+                Utility.setCurrentFragment("zoneDetailFragment");
+
                 fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, fragment)
+                        .replace(R.id.container, fragment, "zoneDetailFragment")
                         .addToBackStack(null)
                         .commit();
             }

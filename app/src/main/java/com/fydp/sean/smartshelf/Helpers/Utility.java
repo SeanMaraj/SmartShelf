@@ -28,6 +28,7 @@ public class Utility
 
     private static boolean offlineMode = false;
     private static String serverAddress = "http://99.235.222.196:5001//";
+    private static String currentFragment = "";
 
 
     //-- GLOBAL METHODS --//
@@ -232,6 +233,16 @@ public class Utility
     public static String capitalizeFirst(String s)
     {
         return s.substring(0,1).toUpperCase() + s.substring(1);
+    }
+
+    public static String getCurrentFragment()
+    {
+        return currentFragment;
+    }
+
+    public static void setCurrentFragment(String value)
+    {
+        currentFragment = value;
     }
 
 }
