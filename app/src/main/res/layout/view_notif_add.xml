@@ -168,6 +168,7 @@
                         <EditText
                             android:id="@+id/reminderDesc"
                             android:layout_width="wrap_content"
+                            android:inputType="text"
                             android:layout_height="wrap_content"
                             android:hint="Enter Description"/>
 
@@ -313,7 +314,8 @@
 
                             <EditText
                                 android:id="@+id/valueEdit"
-                                android:layout_width="100dp"
+                                android:layout_width="50dp"
+                                android:inputType="number"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"/>
 

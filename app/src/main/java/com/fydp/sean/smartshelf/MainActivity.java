@@ -236,7 +236,7 @@ public class MainActivity extends ActionBarActivity
         ft.attach(f);
         ft.commit();
 
-        Toast.makeText(getApplicationContext(), "Refreshing " + Utility.getCurrentFragment() + " Complete", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Refresh Complete!", Toast.LENGTH_SHORT).show();
 
         Utility.sendData("updatestatus");
     }

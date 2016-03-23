@@ -60,22 +60,18 @@ public class ZoneAdaptor extends ArrayAdapter {
         // Set content of row item
         final ZoneModel zone = (ZoneModel)list.get(position);
         float percent = Math.round(100.0 * zone.getPercentage()) / 100;
-        ((TextView)row.findViewById(R.id.zoneNameTxt)).setText(zone.getMessage());
+        ((TextView)row.findViewById(R.id.zoneNameTxt)).setText(zone.getDesc());
         ((TextView)row.findViewById(R.id.initialWeightText)).setText("" + zone.getInitialWeight() + " kg");
         ((TextView)row.findViewById(R.id.currentWeightText)).setText("" + zone.getCurrentWeight() + " kg");
+        ((TextView)row.findViewById(R.id.zoneNumberTxt)).setText("Zone: " + zone.getZoneId());
         TextView percentTextView = ((TextView)row.findViewById(R.id.percentageText));
         percentTextView.setText("" + percent + " %");
 
         setCurrentWeightColor(percentTextView, percent);
 
-        if (zone.getIsNotif())
-        {
-            ((TextView)row.findViewById(R.id.zoneNumberTxt)).setVisibility(View.INVISIBLE);
-        }
-        else
-        {
-            ((TextView)row.findViewById(R.id.zoneNumberTxt)).setText("Zone " + zone.getZoneId());
-        }
+
+
+
 
         if (zone.getMessage().equals("Enter Description Here"))
         {
@@ -89,15 +85,19 @@ public class ZoneAdaptor extends ArrayAdapter {
 
     private void setCurrentWeightColor(TextView view, float percent)
     {
-        if(percent <= 10)
+        if(percent <= 10 && percent > 0)
         {
             view.setTextColor(Color.RED);
         }else if (percent >10 && percent <50)
         {
             view.setTextColor(Color.YELLOW);
-        }else
+        }else if (percent >= 50)
         {
             view.setTextColor(Color.GREEN);
+        }
+        else
+        {
+            view.setTextColor(Color.GRAY);
         }
     }
 }

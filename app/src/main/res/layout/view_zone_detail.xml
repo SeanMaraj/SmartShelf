@@ -36,7 +36,8 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -92,7 +93,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="40dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -156,7 +157,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="8dp"
                         android:background="@drawable/plus"/>
 
                 </LinearLayout>
@@ -204,7 +205,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="8dp"
                         android:background="@drawable/plus"/>
 
                 </LinearLayout>
@@ -249,7 +250,7 @@
                     <ImageView
                         android:id="@+id/addWeatherBtn"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="8dp"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:background="@drawable/plus"/>

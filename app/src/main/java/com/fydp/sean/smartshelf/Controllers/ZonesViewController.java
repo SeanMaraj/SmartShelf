@@ -60,6 +60,7 @@ public class ZonesViewController extends Fragment
     ArrayList<ZoneModel> base2Zones = new ArrayList<ZoneModel>();
     ArrayList<ZoneModel> base3Zones = new ArrayList<ZoneModel>();
     int[] activeBases = new int[3];
+    int currentTab = 1;
 
 
     @Nullable
@@ -115,6 +116,7 @@ public class ZonesViewController extends Fragment
         setBaseChecks();
         setOnClicks();
         setOnItemClick();
+        setCurrentTab();
         populateList();
 
         return rootView;
@@ -153,6 +155,9 @@ public class ZonesViewController extends Fragment
             @Override
             public void onClick(View v)
             {
+
+                currentTab = 1;
+
                 base1Layout.setVisibility(View.VISIBLE);
                 base2Layout.setVisibility(View.INVISIBLE);
                 base3Layout.setVisibility(View.INVISIBLE);
@@ -168,6 +173,8 @@ public class ZonesViewController extends Fragment
             @Override
             public void onClick(View v)
             {
+                currentTab = 2;
+
                 base1Layout.setVisibility(View.INVISIBLE);
                 base2Layout.setVisibility(View.VISIBLE);
                 base3Layout.setVisibility(View.INVISIBLE);
@@ -185,6 +192,8 @@ public class ZonesViewController extends Fragment
             @Override
             public void onClick(View v)
             {
+                currentTab = 3;
+
                 base1Layout.setVisibility(View.INVISIBLE);
                 base2Layout.setVisibility(View.INVISIBLE);
                 base3Layout.setVisibility(View.VISIBLE);
@@ -378,21 +387,21 @@ public class ZonesViewController extends Fragment
         if (activeBases[0] == 1)
         {
             base1Check.setChecked(true);
-            base1ListLayout.setVisibility(View.VISIBLE);
+            //base1ListLayout.setVisibility(View.VISIBLE);
         }else
         {
             base1Check.setChecked(false);
-            base1ListLayout.setVisibility(View.GONE);
+            //base1ListLayout.setVisibility(View.GONE);
         }
 
         if (activeBases[1] == 1)
         {
             base2Check.setChecked(true);
-            base2ListLayout.setVisibility(View.VISIBLE);
+            //base2ListLayout.setVisibility(View.VISIBLE);
         }else
         {
             base2Check.setChecked(false);
-            base2ListLayout.setVisibility(View.GONE);
+            //base2ListLayout.setVisibility(View.GONE);
         }
 
         if (activeBases[2] == 1)
@@ -402,7 +411,23 @@ public class ZonesViewController extends Fragment
         }else
         {
             base3Check.setChecked(false);
-            base3ListLayout.setVisibility(View.GONE);
+            //base3ListLayout.setVisibility(View.GONE);
+        }
+    }
+
+    private void setCurrentTab()
+    {
+        if (currentTab == 1)
+        {
+            base1Tab.performClick();
+        }
+        else if (currentTab == 2)
+        {
+            base2Tab.performClick();
+        }
+        else if (currentTab == 3)
+        {
+            base3Tab.performClick();
         }
     }
 }
