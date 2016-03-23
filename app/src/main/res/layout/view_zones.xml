@@ -23,13 +23,13 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textSize="15dp"
-                android:background="#FF444444"
+                android:background="@color/background2"
                 android:text="BASE 1"/>
             <TextView
                 android:id="@+id/base2Tab"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:background="@color/tabinactive"
+                android:background="@color/background3"
                 android:gravity="center"
                 android:textSize="15dp"
                 android:text="BASE 2"/>
@@ -37,7 +37,7 @@
                 android:id="@+id/base3Tab"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:background="@color/tabinactive"
+                android:background="@color/background3"
                 android:gravity="center"
                 android:textSize="15dp"
                 android:text="BASE 3"/>
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:background="#ff434343">
+            android:background="@color/background2">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -93,6 +93,7 @@
                     android:id="@+id/base1List"
                     android:layout_width="wrap_content"
                     android:fadeScrollbars="false"
+                    android:background="@color/listItem"
                     android:layout_height="fill_parent"
                     android:layout_weight="1" />
 
@@ -106,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:background="#ff434343">
+            android:background="@color/background2">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -147,6 +148,7 @@
                     android:id="@+id/base2List"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
+                    android:background="@color/listItem"
                     android:fadeScrollbars="false"
                     android:layout_weight="1" />
 
@@ -159,7 +161,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:background="#ff434343">
+            android:background="@color/background2">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -200,6 +202,7 @@
                 <ListView
                     android:id="@+id/base3List"
                     android:layout_width="wrap_content"
+                    android:background="@color/listItem"
                     android:layout_height="fill_parent"
                     android:fadeScrollbars="false"
                     android:layout_weight="1" />

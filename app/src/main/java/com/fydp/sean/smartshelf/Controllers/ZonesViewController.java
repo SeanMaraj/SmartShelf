@@ -157,9 +157,9 @@ public class ZonesViewController extends Fragment
                 base2Layout.setVisibility(View.INVISIBLE);
                 base3Layout.setVisibility(View.INVISIBLE);
 
-                base1Tab.setBackgroundColor(getResources().getColor(R.color.layout));
-                base2Tab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
-                base3Tab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
+                base1Tab.setBackgroundColor(getResources().getColor(R.color.background2));
+                base2Tab.setBackgroundColor(getResources().getColor(R.color.background3));
+                base3Tab.setBackgroundColor(getResources().getColor(R.color.background3));
             }
         });
 
@@ -172,9 +172,9 @@ public class ZonesViewController extends Fragment
                 base2Layout.setVisibility(View.VISIBLE);
                 base3Layout.setVisibility(View.INVISIBLE);
 
-                base1Tab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
-                base2Tab.setBackgroundColor(getResources().getColor(R.color.layout));
-                base3Tab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
+                base1Tab.setBackgroundColor(getResources().getColor(R.color.background3));
+                base2Tab.setBackgroundColor(getResources().getColor(R.color.background2));
+                base3Tab.setBackgroundColor(getResources().getColor(R.color.background3));
 
 
             }
@@ -189,9 +189,9 @@ public class ZonesViewController extends Fragment
                 base2Layout.setVisibility(View.INVISIBLE);
                 base3Layout.setVisibility(View.VISIBLE);
 
-                base1Tab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
-                base2Tab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
-                base3Tab.setBackgroundColor(getResources().getColor(R.color.layout));
+                base1Tab.setBackgroundColor(getResources().getColor(R.color.background3));
+                base2Tab.setBackgroundColor(getResources().getColor(R.color.background3));
+                base3Tab.setBackgroundColor(getResources().getColor(R.color.background2));
             }
         });
     }

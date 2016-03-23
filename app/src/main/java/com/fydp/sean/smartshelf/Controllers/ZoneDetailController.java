@@ -396,9 +396,9 @@ public class ZoneDetailController extends Fragment
                 reminderNotifLayout.setVisibility(View.INVISIBLE);
                 weatherNotifLayout.setVisibility(View.INVISIBLE);
 
-                stockTab.setBackgroundColor(getResources().getColor(R.color.layout));
-                reminderTab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
-                weatherTab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
+                stockTab.setBackgroundColor(getResources().getColor(R.color.background2));
+                reminderTab.setBackgroundColor(getResources().getColor(R.color.background3));
+                weatherTab.setBackgroundColor(getResources().getColor(R.color.background3));
             }
         });
 
@@ -411,9 +411,9 @@ public class ZoneDetailController extends Fragment
                 reminderNotifLayout.setVisibility(View.VISIBLE);
                 weatherNotifLayout.setVisibility(View.INVISIBLE);
 
-                stockTab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
-                reminderTab.setBackgroundColor(getResources().getColor(R.color.layout));
-                weatherTab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
+                stockTab.setBackgroundColor(getResources().getColor(R.color.background3));
+                reminderTab.setBackgroundColor(getResources().getColor(R.color.background2));
+                weatherTab.setBackgroundColor(getResources().getColor(R.color.background3));
             }
         });
 
@@ -426,9 +426,9 @@ public class ZoneDetailController extends Fragment
                 reminderNotifLayout.setVisibility(View.INVISIBLE);
                 weatherNotifLayout.setVisibility(View.VISIBLE);
 
-                stockTab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
-                reminderTab.setBackgroundColor(getResources().getColor(R.color.tabinactive));
-                weatherTab.setBackgroundColor(getResources().getColor(R.color.layout));
+                stockTab.setBackgroundColor(getResources().getColor(R.color.background3));
+                reminderTab.setBackgroundColor(getResources().getColor(R.color.background3));
+                weatherTab.setBackgroundColor(getResources().getColor(R.color.background2));
             }
         });
 

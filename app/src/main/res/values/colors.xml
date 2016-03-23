@@ -5,6 +5,19 @@
     <color name="tabinactive">#60444444</color>
     <color name="transparent">#00000000</color>
     <color name="separator1">#20FFFFFF</color>
+    <color name="separator2">#FFFFFFFF</color>
+    <color name="separator3">#FF777777</color>
+    <color name="navigationDrawer">#FF212121</color>
+
+
+
+    <color name="background1">#60000000</color>
+    <color name="background2">#FF333333</color>
+    <color name="background3">#40444444</color>
+    <color name="listItem">#99444444</color>
+
+
+
 
 
 </resources>

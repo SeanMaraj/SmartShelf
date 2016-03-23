@@ -252,19 +252,18 @@ public class SummaryViewController extends Fragment{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 Log.d("LOG", "Zone clicked: " + position);
+                Utility.setCurrentFragment("zoneDetailFragment");
 
                 Fragment fragment = new ZoneDetailController();
                 Bundle args = new Bundle();
-
                 args.putString("zoneName", zones.get(position).getDesc());
                 args.putInt("zoneId", zones.get(position).getZoneId());
                 args.putInt("baseId", zones.get(position).getBaseId());
                 args.putFloat("initWeight", zones.get(position).getInitialWeight());
                 args.putFloat("currentWeight", zones.get(position).getCurrentWeight());
-
-                Utility.setCurrentFragment("zoneDetailFragment");
-
                 fragment.setArguments(args);
+
+
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, fragment, "zoneDetailFragment")
@@ -276,23 +275,30 @@ public class SummaryViewController extends Fragment{
         });
 
 
+        weatherListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                listItemNumber = position;
+                selectedList = SelectedList.WEATHER;
+                weatherListView.showContextMenu();
+            }
+        });
+
         reminderListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
+                Log.d("LOG", "Reminder clicked: " + position);
+                Utility.setCurrentFragment("remindersFragment");
 
-                Fragment fragment = new EventEditController();
-                Bundle args = new Bundle();
+                Fragment fragment = new EventsViewController();
 
-                //args.putInt("position", position);
-                //args.putString("itemName", zones.get(position).getMessage());
-                //args.putFloat("initialWeight", zones.get(position).getInitialWeight());
-
-                fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, fragment)
+                        .replace(R.id.container, fragment, "remindersFragment")
                         .addToBackStack(null)
                         .commit();
             }
@@ -313,16 +319,7 @@ public class SummaryViewController extends Fragment{
             }
         });
 
-        weatherListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
-        {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                listItemNumber = position;
-                selectedList = SelectedList.WEATHER;
-                return false;
-            }
-        });
+
     }
 
     private void setCurrentWeather(String status, String temp)

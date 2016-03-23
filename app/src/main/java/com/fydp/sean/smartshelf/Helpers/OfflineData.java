@@ -163,29 +163,6 @@ public class OfflineData
     {
         String result = "";
 
-
-        /*
-
-        if (command.equals("getzones/1"))
-        {
-            result =  offlineZones;
-        }
-        else if (command.equals("getevents/1"))
-        {
-            result =  offlineEvents;
-        }
-
-        if (result != "")
-        {
-            Log.d("Log", "Offline result is not null");
-        }
-        else
-        {
-            Log.d("Log", "Offline result is null");
-        }
-
-        */
-
         switch (command)
         {
             case "getlowstock":
@@ -224,6 +201,8 @@ public class OfflineData
             case "getallreminders":
                 result = "[{\"notificationid\": 11, \"date\": \"17/03/2016\", \"time\": \"13:18\", \"description\": \"Teeest \", \"baseid\": 3, \"zoneid\": 9}, {\"notificationid\": 13, \"date\": \"17/03/2016\", \"time\": \"13:32\", \"description\": \"Demo \", \"baseid\": 3, \"zoneid\": 9}, {\"notificationid\": 43, \"date\": \"21/03/2016\", \"time\": \"10:00\", \"description\": \"Des \", \"baseid\": 1, \"zoneid\": 1}, {\"notificationid\": 44, \"date\": \"21/03/2016\", \"time\": \"22:00\", \"description\": \"Hello my \", \"baseid\": 1, \"zoneid\": 1}]";
                 break;
+            default:
+                Log.d("Log", "No offline command set");
 
         }
 
@@ -233,11 +212,9 @@ public class OfflineData
 
     public static void setData(String command)
     {
+
         Log.d("Log", "Setting data");
         String[] s = command.split("/");
-
-        Utility.log(s[0]);
-        Utility.log(s[1]);
 
         switch(s[0])
         {
