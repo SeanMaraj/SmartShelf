@@ -180,6 +180,7 @@ public class SummaryViewController extends Fragment{
         try
         {
             JSONArray JSONArray = new JSONArray(result);
+            weatherValues.clear();
 
             for (int i = 0; i < JSONArray.length(); i++)
             {
@@ -236,8 +237,10 @@ public class SummaryViewController extends Fragment{
 
     private void populateWeatherList()
     {
+        weatherListView.setAdapter(null);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, weatherValues);
+                R.layout.subview_notif_weather, R.id.weatherNotifText, weatherValues);
 
         weatherListView.setAdapter(adapter);
     }

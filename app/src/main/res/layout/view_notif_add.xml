@@ -11,7 +11,7 @@
         android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:text="CREATE"/>
 
     <LinearLayout
@@ -316,6 +316,7 @@
                                 android:id="@+id/valueEdit"
                                 android:layout_width="50dp"
                                 android:inputType="number"
+                                android:gravity="right"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"/>
 

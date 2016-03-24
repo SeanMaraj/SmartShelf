@@ -212,7 +212,7 @@ public class AddNotifController extends Fragment
 
                 if (description.equals(""))
                 {
-                    description = "No Description";
+                    description = "No%20Description";
                 }
 
                 url = "newnotification/" + baseId + "/" + zoneId + "/" + notiftype + "/" + checktype + "/" + checkvalue + "/" + description + "/1";

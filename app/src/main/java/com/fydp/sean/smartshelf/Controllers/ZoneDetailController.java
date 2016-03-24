@@ -66,6 +66,7 @@ public class ZoneDetailController extends Fragment
     ImageView addWeightBtn;
     ImageView addReminderBtn;
     ImageView addWeatherBtn;
+    Button resetZoneBtn;
 
     TextView stockTab;
     TextView reminderTab;
@@ -98,7 +99,7 @@ public class ZoneDetailController extends Fragment
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        ((MainActivity) getActivity()).setActionBarTitle("Zone Detail");
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.title_zone_details));
         Utility.setCurrentFragment("zoneDetailFragment");
         rootView = inflater.inflate(R.layout.view_zone_detail, container, false);
 
@@ -119,6 +120,7 @@ public class ZoneDetailController extends Fragment
         addWeightBtn = (ImageView)rootView.findViewById(R.id.addWeightBtn);
         addReminderBtn = (ImageView)rootView.findViewById(R.id.addReminderBtn);
         addWeatherBtn = (ImageView)rootView.findViewById(R.id.addWeatherBtn);
+        resetZoneBtn = (Button)rootView.findViewById(R.id.resetZoneBtn);
 
         // Setup tabs
         stockTab = (TextView)rootView.findViewById(R.id.stockTab);
@@ -354,6 +356,13 @@ public class ZoneDetailController extends Fragment
                         // Send name
                         String newName = e.getText().toString();
 
+                        if (newName.equals("") || newName.equals(" ") || newName.equals("  "))
+                        {
+                            newName = "EMPTY";
+                        }
+
+                        newName.replaceAll(" ", "%20");
+
                         Utility.sendData("updatedescription/" + baseId + "/" + zoneId + "/" + newName);
                         zoneNameEdit.setText(newName);
                         Toast.makeText(getActivity(), "Updated zone name to " + newName, Toast.LENGTH_SHORT).show();
@@ -465,6 +474,17 @@ public class ZoneDetailController extends Fragment
             }
         });
 
+        resetZoneBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Utility.sendData("resetzone/" + zoneId);
+                refresh();
+                zoneNameEdit.setText("EMPTY");
+            }
+        });
+
     }
 
 
@@ -536,8 +556,10 @@ public class ZoneDetailController extends Fragment
         {
             JSONArray a = new JSONArray(result);
             JSONObject o = a.getJSONObject(0);
-            String currentWeight = "" + o.getDouble("weight");
-            currentWeightText.setText("Current Weight: " + currentWeight + " kg");
+            currentWeight = (float)o.getDouble("weight");
+            String currentWeightString = "" + currentWeight;
+            currentWeightText.setText("Current Weight: " + currentWeightString + " kg");
+
 
         } catch (JSONException e)
         {
@@ -552,8 +574,10 @@ public class ZoneDetailController extends Fragment
         {
             JSONArray a = new JSONArray(result);
             JSONObject o = a.getJSONObject(0);
-            String initialWeight = "" + o.getDouble("initialweight");
+            initWeight = (float) o.getDouble("initialweight");
+            String initialWeight = "" + initWeight;
             initWeightText.setText("Initial Weight: " + initialWeight + " kg");
+
 
         } catch (JSONException e)
         {

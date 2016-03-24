@@ -4,6 +4,7 @@
     <string name="title_section1">Summary</string>
     <string name="title_section2">Zones</string>
     <string name="title_section3">Reminders</string>
+    <string name="title_zone_details">Zone Details</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
